@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="dataSourceMySQL" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/pay6?useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="dlwodlr1234" />
+	</bean>
+
+	<!-- [ Database Mapper ] -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceMySQL" />
+		<property name="mapperLocations" value="/WEB-INF/sqlmap/mappers/*.xml" />
+		<property name="configLocation" value="/WEB-INF/spring/mybatis/mybatis-config.xml" />
+	</bean>
+
+
+	<!-- [ Database Connection ] -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+</beans>

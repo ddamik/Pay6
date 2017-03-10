@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+
+	<!-- 
+		1. 인기메뉴 Top3 
+		2. Top3 제외한 메뉴
+		3. 메뉴 상세보기
+		4. 주문 수 올리기
+		5. 조회 수 올리기 
+	-->
+
+
+	<!-- 1. 인기메뉴 Top3 -->
+	<select id="popular_list" parameterType="int" resultType="ProductVO">
+		select
+			pid,
+			pname,
+			pimgurl,
+			pcount,
+			rcount
+		from
+			productinfo
+		where
+			sid = #{sid}
+		order by
+			pcount ASC
+		limit 3
+	</select>
+
+
+
+	<!-- 2. 모든메뉴(Front에서 Top3 메뉴 제외하기) -->
+	<select id="all_list" parameterType="int" resultType="ProductVO">
+		select
+			pid,
+			pname,
+			pimgurl,
+			pcount,
+			rcount
+		from
+			productinfo
+		where
+			sid = #{sid}
+		order by
+			pcount ASC
+	</select>
+
+
+
+
+	<!-- 3. 메뉴 상세보기 -->
+	<select id="detail" parameterType="String" resultType="ProductVO">
+		select
+			pid,
+			pname,
+			pprice,
+			pimgurl,
+			vcount,
+			pcount
+		from
+			productinfo
+		where
+			pid = #{pid}
+	</select>
+	
+	
+	
+	
+	<!-- 4. 주문 수 올리기  -->
+	<update id="pcount_up" parameterType="String">
+		update
+			productinfo
+		set
+			pcount = pcount + 1
+		where
+			pid = #{pid}
+	</update>
+	
+	
+	
+	
+	<!-- 5. 조회 수 올리기 -->
+	<update id="vcount_up" parameterType="String">
+		update
+			productinfo
+		set
+			vcount = vcount + 1
+		where
+			pid = #{pid}
+	</update>	
+</mapper>
