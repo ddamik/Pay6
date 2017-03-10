@@ -27,13 +27,13 @@ public class ProductDao {
 	
 	
 	// 1. 인기메뉴 Top3
-	public List<ProductVO> popular_list(int sid) throws SQLException {
+	public List<ProductVO> popular_list(String sid) throws SQLException {
 		return session.selectList("ProductMapper.popular_list", sid);
 	}
 	
 	
 	// 2. Top3 제외 메뉴
-	public List<ProductVO> all_list(int sid) throws SQLException {
+	public List<ProductVO> all_list(String sid) throws SQLException {
 		return session.selectList("ProductMapper.all_list", sid);
 	}
 	

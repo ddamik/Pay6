@@ -14,5 +14,11 @@ public class ExceptionNumber {
 	public static final int SQL_INSERT_SUCCESS = 10000;
 	public static final int SQL_UPDATE_SUCCESS = 10001;
 	public static final int SQL_SELECT_SUCCESS = 10002;
+
 	
+	
+	
+	//	update status
+	public static final int UPDATE_STATUS_SUCCESS = 10100;
+	public static final int UPDATE_STATUS_FAIL = 10101;
 }

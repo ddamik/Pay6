@@ -12,7 +12,7 @@
 
 
 	<!-- 1. 인기메뉴 Top3 -->
-	<select id="popular_list" parameterType="int" resultType="ProductVO">
+	<select id="popular_list" parameterType="String" resultType="ProductVO">
 		select
 			pid,
 			pname,
@@ -31,7 +31,7 @@
 
 
 	<!-- 2. 모든메뉴(Front에서 Top3 메뉴 제외하기) -->
-	<select id="all_list" parameterType="int" resultType="ProductVO">
+	<select id="all_list" parameterType="String" resultType="ProductVO">
 		select
 			pid,
 			pname,

@@ -27,13 +27,13 @@ public class ProductService {
 	 */
 	
 	//	1. 인기메뉴 Top3
-	public List<ProductVO> popular_list(int sid) throws SQLException{
+	public List<ProductVO> popular_list(String sid) throws SQLException{
 		return productDao.popular_list(sid);
 	}
 	
 	
 	//	2. Top3 제외 메뉴
-	public List<ProductVO> all_list(int sid) throws SQLException{
+	public List<ProductVO> all_list(String sid) throws SQLException{
 		return productDao.all_list(sid);
 	}
 	

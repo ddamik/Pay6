@@ -31,7 +31,7 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value="/product/popular_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
 	public String popular_menu(
-			@RequestParam("sid") int sid) throws SQLException {
+			@RequestParam("sid") String sid) throws SQLException {
 		return gson.toJson(productService.popular_list(sid));
 	}
 	
@@ -41,7 +41,7 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value="/product/all_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
 	public String menu_list(
-			@RequestParam("sid") int sid) throws SQLException {
+			@RequestParam("sid") String sid) throws SQLException {
 		return gson.toJson(productService.all_list(sid));
 	}
 	
