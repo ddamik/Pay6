@@ -24,7 +24,7 @@
 		where
 			sid = #{sid}
 		order by
-			pcount ASC
+			pcount DESC
 		limit 3
 	</select>
 
@@ -43,7 +43,7 @@
 		where
 			sid = #{sid}
 		order by
-			pcount ASC
+			pcount DESC
 	</select>
 
 
@@ -56,6 +56,7 @@
 			pname,
 			pprice,
 			pimgurl,
+			rcount,
 			vcount,
 			pcount
 		from
@@ -89,4 +90,15 @@
 		where
 			pid = #{pid}
 	</update>	
+	
+	
+	<!-- 6. 리뷰 수 올리기 -->
+	<update id="rcount_up" parameterType="String">
+		update
+			productinfo
+		set
+			rcount = rcount + 1
+		where
+			pid = #{pid}
+	</update>		
 </mapper>

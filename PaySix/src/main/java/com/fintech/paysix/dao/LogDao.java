@@ -56,11 +56,13 @@ public class LogDao {
 	
 	
 	//	5. 어제 00시 ~ 현재시간까지 데이터
-	public List<LogVO> fromMidNight_salesData(HashMap<String, String> map){
-		return session.selectList("LogMapper.fromMidNight_salesData", map);
+	public List<LogVO> yesterday_fromMidNight_salesData(HashMap<String, String> map){
+		return session.selectList("LogMapper.yesterday_fromMidNight_salesData", map);
 	}
 	
-	
+	public List<LogVO> today_fromMidNight_salesData(HashMap<String, String> map){
+		return session.selectList("LogMapper.today_fromMidNight_salesData", map);
+	}	
 	
 	
 	

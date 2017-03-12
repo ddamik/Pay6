@@ -27,7 +27,7 @@ public class LogService {
 	
 	@Autowired
 	private ProductService productService;
-	
+	private CustomFunction custom = new CustomFunction();
 	/*
 	 * 	1. Log 데이터생성(주문)
 	 * 	2. Onwer Order List
@@ -59,7 +59,12 @@ public class LogService {
 	//	2. Onwer Order List
 	public List<OwnerOrderVO> owner_order_list(String sid) throws SQLException {
 		
-		List<OwnerOrderVO> result = new ArrayList<OwnerOrderVO>();
+		
+		/*
+		 * 	result
+		 * 		status 1, 2 합친 값	
+		 */
+		List<OwnerOrderVO> result = new ArrayList<OwnerOrderVO>();		
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("sid", sid);
@@ -108,8 +113,6 @@ public class LogService {
 		 */
 		
 		
-		CustomFunction custom = new CustomFunction();
-		
 		HashMap<String, String> today_map = new HashMap<String, String>();
 		String today_currentTime = custom.getToday_currentTime();
 		today_map.put("current_time", today_currentTime);		
@@ -139,32 +142,13 @@ public class LogService {
 		/*
 		 *	4번 sales_rate_currentTime과 동일하다.
 		 *	midnight: 00~현재 시간까지의 데이터를 구하기 위해 사용
-		 */
-		CustomFunction custom = new CustomFunction();
-		
-		
-		/*
-		 * 	Today
-		 */
-		String today_midNight = custom.getToday_midNight();
-		
-		HashMap<String, String> today_map = new HashMap<String, String>();
-		today_map.put("mid_night", today_midNight);
-		today_map.put("pid", String.valueOf(sid));
-		
-		
-		/*
-		 * 	Yesterday 
-		 */
-		String yesterday_midNight = custom.getYester_midNight();
-		
-		HashMap<String, String> yesterday_map = new HashMap<String, String>();
-		yesterday_map.put("mid_night", yesterday_midNight);
-		yesterday_map.put("pid", String.valueOf(sid));
-		
-		List<LogVO> today_data = logDao.fromMidNight_salesData(today_map);
-		List<LogVO> yesterday_data = logDao.fromMidNight_salesData(yesterday_map);
+		 */		
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("pid", String.valueOf(sid));
 				
+		List<LogVO> today_data = logDao.today_fromMidNight_salesData(map);
+		List<LogVO> yesterday_data = logDao.yesterday_fromMidNight_salesData(map); 
 		
 		/*
 		 * 	Result Data
@@ -175,9 +159,7 @@ public class LogService {
 		return result;	  
 
 	}
-	
-	
-	
+ 
 	
 	
 	
@@ -214,9 +196,6 @@ public class LogService {
 		
 
 		Random random = new Random();
-		random.nextInt(15);
-		
-		
 		
 		CustomFunction custom = new CustomFunction();
 		String yester = custom.getToday_currentTime();
@@ -255,10 +234,12 @@ public class LogService {
 			paymethod = arrPaymethod[random.nextInt(4)];			
 			
 			minute = random.nextInt(60);
+			System.out.println("minute:" + minute);
 			String strMinute = String.valueOf(minute);
 			yester += ":" + strMinute + ":00";
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date ordertime = transFormat.parse(yester);
+			Date ordertime = new Date();
+			ordertime = transFormat.parse(yester);			
 			 
 			 
 			vo = new LogVO(tno, orderno, status, pid, userid, paymethod, ordertime, null);

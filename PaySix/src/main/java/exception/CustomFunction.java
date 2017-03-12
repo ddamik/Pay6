@@ -3,7 +3,6 @@ package exception;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.google.gson.JsonObject;
 
 public class CustomFunction {
 
@@ -62,7 +61,7 @@ public class CustomFunction {
 	    int month = cal.get(Calendar.MONTH) + 1;
 	    int day = cal.get(Calendar.DAY_OF_MONTH);	    	    
 	    
-		return year + "-" + month + "-" + day + " " + "00";
+		return year + "-" + month + "-" + day + " " + "00:00:00";
 	}
 	
 	
@@ -75,8 +74,11 @@ public class CustomFunction {
 	    int year = cal.get(Calendar.YEAR);
 	    int month = cal.get(Calendar.MONTH) + 1;
 	    int day = cal.get(Calendar.DAY_OF_MONTH);	    	    
+	    
 	    int hour = cal.get(Calendar.HOUR_OF_DAY);
 	    
 		return year + "-" + month + "-" + day + " " + hour;
 	}	
+	
+
 }

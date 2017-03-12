@@ -42,6 +42,7 @@
 			log.orderno as orderno,
 			log.tno as tno,        
 	        log.status as status,
+	        log.ordertime as ordertime,
 	        productinfo.pname as pname
 		from
 			log,
@@ -62,6 +63,7 @@
 		<result property="tno" column="tno"/>
 		<result property="orderno" column="orderno"/>
 		<result property="status" column="status"/>
+		<result property="ordertime" column="ordertime"/>
 		<result property="pname" column="pname"/>
 	</resultMap>
 	
@@ -74,7 +76,7 @@
 		update
 			log
 		set
-			status = 2
+			status = "2"
 		where
 			seqid = #{seqid}
 	</update>
@@ -107,37 +109,70 @@ group by
 	<!-- 현재 시간대 판매량 데이터 ( 오늘 / 어제 )-->	
 	<select id="currentTime_salesData" parameterType="hashmap" resultType="LogVO">
 		select
-			pid,
-			ordertime,
-			count(pid) as etc1
+			log.pid,
+			log.ordertime,
+			count(log.pid) as etc1,
+			productinfo.pprice as etc2
 		from
-			log
+			log,
+			productinfo
 		where
-			concat(year(ordertime), '-', month(ordertime), '-', day(ordertime), ' ', hour(ordertime)) = #{current_time}
+			concat(year(log.ordertime), '-', month(log.ordertime), '-', day(log.ordertime), ' ', hour(log.ordertime)) = #{current_time}
 		and
-			mid(pid, 1, 4) = #{pid}
+			log.pid = productinfo.pid
+		and
+			mid(log.pid, 1, 4) = #{pid}
 		group by
-			pid				
+			log.pid				
 	</select>
 	
 	
 	<!-- 현재 시간까지 판매량 데이터 ( 오늘 / 어제 ) -->
-	<select id="fromMidNight_salesData" parameterType="hashmap" resultType="LogVO">
+	<select id="yesterday_fromMidNight_salesData" parameterType="hashmap" resultType="LogVO">
 		select
-			pid,
-			count(pid) as etc1
+			log.pid,
+			count(log.pid) as etc1,
+			productinfo.pprice as etc2
 		from
-			log
+			log,
+			productinfo
 		where
-			ordertime between #{mid_night} and current_timestamp()
+			log.ordertime 
+		between 
+			concat(date_format(DATE_ADD(now(),interval -1 day),'%Y-%m-%d'), ' 00:00:00')
 		and
-			mid(pid, 1, 4) = #{pid}
+			concat(date_format(DATE_ADD(now(),interval -1 day),'%Y-%m-%d'), ' ', curtime())
+		and
+			log.pid = productinfo.pid
+		and
+			mid(log.pid, 1, 4) = #{pid}
 		group by
-			pid
+			log.pid;   
 	</select>
 	
 	
-	
+		<!-- 현재 시간까지 판매량 데이터 ( 오늘 / 어제 ) -->
+	<select id="today_fromMidNight_salesData" parameterType="hashmap" resultType="LogVO">
+		select
+			log.pid,
+			count(log.pid) as etc1,
+			productinfo.pprice as etc2
+		from
+			log,
+			productinfo
+		where
+			log.ordertime 
+		between 
+			concat(date_format(DATE_ADD(now(),interval 0 day),'%Y-%m-%d'), ' 00:00:00')
+		and
+			concat(date_format(DATE_ADD(now(),interval 0 day),'%Y-%m-%d'), ' ', curtime())
+		and
+			log.pid = productinfo.pid
+		and
+			mid(log.pid, 1, 4) = #{pid}
+		group by
+			log.pid;   
+	</select>
 	
 	
 	
