@@ -31,6 +31,20 @@ public class LogVO {
 		this.endtime = endtime;
 	}
 
+	
+	public LogVO(int tno, int orderno, String status, String pid, String userid, String paymethod, Date ordertime,
+			Date endtime) {
+		super();
+		this.tno = tno;
+		this.orderno = orderno;
+		this.status = status;
+		this.pid = pid;
+		this.userid = userid;
+		this.paymethod = paymethod;
+		this.ordertime = ordertime;
+		this.endtime = endtime;
+	}
+
 	public LogVO(int seqid, int tno, int orderno, String status, String pid, String userid, String paymethod,
 			Date ordertime, Date endtime, int etc1, int etc2) {
 		super();

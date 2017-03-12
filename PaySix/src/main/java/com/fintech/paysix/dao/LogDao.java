@@ -34,7 +34,7 @@ public class LogDao {
 	
 	//	2. order list
 	public List<OwnerOrderVO> owner_order_list(HashMap<String, String> map) throws SQLException {
-		return session.selectList("onwer_order_list", map);
+		return session.selectList("LogMapper.onwer_order_list", map);
 	}
 	
 	
@@ -42,5 +42,46 @@ public class LogDao {
 	//	3. update status
 	public int update_status(int seqid) throws SQLException {
 		return session.update("LogMapper.update_status", seqid);
+	}
+	
+	
+	
+	
+	//	4. 어제 00시 ~ 현재시간까지 데이터
+	public List<LogVO> currentTime_salesData(HashMap<String, String> map){
+		return session.selectList("LogMapper.currentTime_salesData", map);
+	}
+	
+	
+	
+	
+	//	5. 어제 00시 ~ 현재시간까지 데이터
+	public List<LogVO> fromMidNight_salesData(HashMap<String, String> map){
+		return session.selectList("LogMapper.fromMidNight_salesData", map);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//	Random
+	public int insert_random(LogVO vo){
+		return session.insert("LogMapper.insert_random_log", vo);
 	}
 }

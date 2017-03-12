@@ -80,4 +80,97 @@
 	</update>
 	
 	
+	
+	
+	
+	
+	
+			
+		
+		<!-- 
+		/*
+		 * select 
+	pid, 
+	count(pid) 
+from 
+	log 
+where
+	concat(year(ordertime), '-', month(ordertime), '-', day(ordertime)) = concat(year(current_timestamp()), '-', month(current_timestamp()), '-', day(current_timestamp()))
+group by 
+	pid;
+	
+	
+	created_date between '2013-10-10' and '2013-10-14';
+		 */
+	-->
+	
+	<!-- 현재 시간대 판매량 데이터 ( 오늘 / 어제 )-->	
+	<select id="currentTime_salesData" parameterType="hashmap" resultType="LogVO">
+		select
+			pid,
+			ordertime,
+			count(pid) as etc1
+		from
+			log
+		where
+			concat(year(ordertime), '-', month(ordertime), '-', day(ordertime), ' ', hour(ordertime)) = #{current_time}
+		and
+			mid(pid, 1, 4) = #{pid}
+		group by
+			pid				
+	</select>
+	
+	
+	<!-- 현재 시간까지 판매량 데이터 ( 오늘 / 어제 ) -->
+	<select id="fromMidNight_salesData" parameterType="hashmap" resultType="LogVO">
+		select
+			pid,
+			count(pid) as etc1
+		from
+			log
+		where
+			ordertime between #{mid_night} and current_timestamp()
+		and
+			mid(pid, 1, 4) = #{pid}
+		group by
+			pid
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- Random data -->
+		<insert id="insert_random_log" parameterType="LogVO">
+		insert
+			into
+		log(
+			tno,
+			orderno,
+			status,
+			pid,
+			userid,
+			paymethod,
+			ordertime
+		)
+		values(
+			#{tno},
+			#{orderno},
+			#{status},
+			#{pid},
+			#{userid},
+			#{paymethod},
+			#{ordertime}		
+		)		
+	</insert>
+	
+
 </mapper>

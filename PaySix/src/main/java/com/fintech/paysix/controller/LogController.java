@@ -1,6 +1,7 @@
 package com.fintech.paysix.controller;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -67,10 +68,45 @@ public class LogController {
 	
 	
 	
+	//	4. 어제, 오늘 현재 시간대 판매량
+	@ResponseBody
+	@RequestMapping(value="/log/sales_rate/current_time", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String salesRate_currentTime(
+			@RequestParam("sid") int sid) throws SQLException {
+		return gson.toJson(logService.sales_rate_currentTime(sid));
+	}
+	
+	
+	
+	//	5. 어제, 오늘 현재 시간까지 판매량
+	@ResponseBody
+	@RequestMapping(value="/log/sales_rate/total", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String salesRate_total(
+			@RequestParam("sid") int sid) throws SQLException{	
+		return gson.toJson(logService.sales_rate_fromMidNight(sid));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//	99. 랜덤 더미 데이터 생성
 	@ResponseBody
 	@RequestMapping(value="/log/create_data", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
-	public void creat_data() throws SQLException{
+	public void creat_data() throws SQLException, ParseException{
 		logService.randomData();
 	}
 }

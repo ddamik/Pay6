@@ -1,6 +1,8 @@
 package com.fintech.paysix.service;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fintech.paysix.dao.LogDao;
-import com.fintech.paysix.dao.ProductDao;
 import com.fintech.paysix.vo.LogVO;
 import com.fintech.paysix.vo.OwnerOrderVO;
 
+import exception.CustomFunction;
 import exception.ExceptionNumber;
 
 @Service
@@ -29,6 +31,8 @@ public class LogService {
 	/*
 	 * 	1. Log 데이터생성(주문)
 	 * 	2. Onwer Order List
+	 * 	3. update status
+	 * 	
 	 */
 	
 	
@@ -86,6 +90,99 @@ public class LogService {
 	
 	
 	
+	//	4. 통계 데이터( 현재 시간대 판매량 )
+	public HashMap<String, List<LogVO>> sales_rate_currentTime(int sid){
+		
+		/*
+		 * 	custom: 날짜 데이터를 가져오는 함수
+		 * 
+		 *	today_currentTime: 현재 시간을 가져옴.
+		 *
+		 * 	today_map: 오늘날짜에 관한 Hashmap
+		 * 		current_time: 현재 시간
+		 * 		pid: 받아온 sid(상점)별 판매 통계랑을 구하기 위한 값, log 테이블에는 sid 컬럼이 없어서 사용
+		 * 
+		 * 
+		 * 	yesterday_map: 어제날짜에 관한 Hashmap, today_map과 동일
+		 * 	result: 어제 데이터와 오늘 데이터를 합친 리스트
+		 */
+		
+		
+		CustomFunction custom = new CustomFunction();
+		
+		HashMap<String, String> today_map = new HashMap<String, String>();
+		String today_currentTime = custom.getToday_currentTime();
+		today_map.put("current_time", today_currentTime);		
+		today_map.put("pid", String.valueOf(sid));
+		
+		
+		HashMap<String, String> yesterday_map = new HashMap<String, String>();
+		String yesterday_currentTime = custom.getYester_currentTime();		
+		yesterday_map.put("current_time", yesterday_currentTime);		
+		yesterday_map.put("pid", String.valueOf(sid));
+			
+		
+		List<LogVO> yesterday_data = logDao.currentTime_salesData(yesterday_map);
+		List<LogVO> today_data = logDao.currentTime_salesData(today_map);
+		
+		HashMap<String, List<LogVO>> result = new HashMap<String, List<LogVO>>();
+		result.put("yesterday", yesterday_data);
+		result.put("today", today_data);
+		return result;	    
+	}
+	
+	
+	
+	//	5. 판매량( 현재시간 까지 )
+	public HashMap<String, List<LogVO>> sales_rate_fromMidNight(int sid){
+		
+		/*
+		 *	4번 sales_rate_currentTime과 동일하다.
+		 *	midnight: 00~현재 시간까지의 데이터를 구하기 위해 사용
+		 */
+		CustomFunction custom = new CustomFunction();
+		
+		
+		/*
+		 * 	Today
+		 */
+		String today_midNight = custom.getToday_midNight();
+		
+		HashMap<String, String> today_map = new HashMap<String, String>();
+		today_map.put("mid_night", today_midNight);
+		today_map.put("pid", String.valueOf(sid));
+		
+		
+		/*
+		 * 	Yesterday 
+		 */
+		String yesterday_midNight = custom.getYester_midNight();
+		
+		HashMap<String, String> yesterday_map = new HashMap<String, String>();
+		yesterday_map.put("mid_night", yesterday_midNight);
+		yesterday_map.put("pid", String.valueOf(sid));
+		
+		List<LogVO> today_data = logDao.fromMidNight_salesData(today_map);
+		List<LogVO> yesterday_data = logDao.fromMidNight_salesData(yesterday_map);
+				
+		
+		/*
+		 * 	Result Data
+		 */
+		HashMap<String, List<LogVO>> result = new HashMap<String, List<LogVO>>();
+		result.put("yesterday", yesterday_data);
+		result.put("today", today_data);
+		return result;	  
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -96,18 +193,18 @@ public class LogService {
 	
 	
 	//	Random Data
-	public void randomData() throws SQLException{
+	public void randomData() throws SQLException, ParseException{
 		
-		Random random = new Random();
-		random.nextInt(15);
+		String sid[] = new String[4];
+		sid[0] = "1001";
+		sid[1] = "1002";
+		sid[2] = "1003";
+		sid[3] = "1004";
 		
-		int tno;
-		int orderno = 0;
-		
-		String status;
-		String userid;
-		String paymethod;
-		String pid;		
+		String arrPid[] = new String[3];
+		arrPid[0] = "0001";
+		arrPid[1] = "0002";
+		arrPid[2] = "0003";
 		
 		String arrPaymethod[] = new String[4];
 		arrPaymethod[0] = "credit";
@@ -115,21 +212,57 @@ public class LogService {
 		arrPaymethod[2] = "bitcoin";
 		arrPaymethod[3] = "elc_code";	
 		
+
+		Random random = new Random();
+		random.nextInt(15);
+		
+		
+		
+		CustomFunction custom = new CustomFunction();
+		String yester = custom.getToday_currentTime();
+		
+
+		int minute;
+		
+		int tno;
+		int orderno = 0;
+		
+		String status;
+		String userid;
+		String paymethod;
+		
+		int ranSid;
+		int ranPid;
+		String pid;
 		
 		LogVO vo;
 		for(int i=1; i<101; i++){
+			
 			tno = random.nextInt(15);
-			orderno++;
-			pid = "1001000" + (random.nextInt(5)+1);
+			orderno++;			
+			
+			
+			ranSid = random.nextInt(4);
+			ranPid = random.nextInt(3);
+			pid = sid[ranSid] + arrPid[ranPid];
+			
+			
+			
 			if(tno%2==0) status = "1";
 			else status = "2";
 			
 			userid = "user_" + orderno;
-			paymethod = arrPaymethod[random.nextInt(4) + 1];
+			paymethod = arrPaymethod[random.nextInt(4)];			
 			
-			vo = new LogVO(tno, orderno, status, pid, userid, paymethod, null);
-			logDao.insert(vo);
-		}
-		
+			minute = random.nextInt(60);
+			String strMinute = String.valueOf(minute);
+			yester += ":" + strMinute + ":00";
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date ordertime = transFormat.parse(yester);
+			 
+			 
+			vo = new LogVO(tno, orderno, status, pid, userid, paymethod, ordertime, null);
+			logDao.insert_random(vo);
+		}		
 	}
 }
