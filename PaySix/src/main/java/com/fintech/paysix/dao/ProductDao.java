@@ -56,4 +56,9 @@ public class ProductDao {
 	public int vcount_up(String pid) throws SQLException {
 		return session.update("ProductMapper.vcount_up", pid);
 	}	
+	
+	// 6. 리뷰 수 올리기
+	public int rcount_up(String pid) throws SQLException {
+		return session.update("ProductMapper.rcount_up", pid);
+	}		
 }
