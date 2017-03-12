@@ -65,4 +65,11 @@ public class ProductService {
 		if( productDao.vcount_up(pid) > 0 ) return ExceptionNumber.SQL_UPDATE_SUCCESS;
 		else return ExceptionNumber.SQL_UPDATE_FAIL;
 	}
+	
+	
+	//	6. ¸®ºä ¼ö Áõ°¡
+	public int rcount_up(String pid) throws SQLException {
+		if( productDao.rcount_up(pid) > 0 ) return ExceptionNumber.REVIEW_COUNT_UP_SUCCESS;
+		else return ExceptionNumber.REVIEW_COUNT_UP_FAIL;
+	}
 }

@@ -1,5 +1,6 @@
 package com.fintech.paysix.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +20,13 @@ public class StoreDao {
 	 */
 	
 	// 1. store list
-	public List<StoreVO> store_list(){
+	public List<StoreVO> store_list() throws SQLException {
 		return session.selectList("StoreMapper.store_list");
+	}
+	
+	
+	
+	public int store_registe(StoreVO store) throws SQLException {
+		return session.insert("StoreMapper.registe_store", store);
 	}
 }

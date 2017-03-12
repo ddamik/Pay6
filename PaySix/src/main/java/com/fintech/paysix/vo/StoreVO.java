@@ -4,89 +4,105 @@ import java.util.Date;
 
 public class StoreVO {
 
-	private String sId;			//	업체번호
-	private String sName;		//	업체명
-	private String sAddr;		//	업체주소
-	private String sTel;		//	업체전화
-	private String sImgUrl;		//	업체대표이미지
-	private String rName;		//	등록자명
-	private Date inTime;		//	작성일시			default: current_timestamp
+	private String sid;			//	업체번호
+	private String sname;		//	업체명
+	private String saddr;		//	업체주소
+	private String stel;		//	업체전화
+	private String simgurl;		//	업체대표이미지
+	private String rname;		//	등록자명
+	private Date intime;		//	작성일시			default: current_timestamp
 
 	public StoreVO() {
 		super();
 	}
 
-	public StoreVO(String sId, String sName, String sAddr, String sTel, String sImgUrl, String rName, Date inTime) {
+
+
+	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname) {
 		super();
-		this.sId = sId;
-		this.sName = sName;
-		this.sAddr = sAddr;
-		this.sTel = sTel;
-		this.sImgUrl = sImgUrl;
-		this.rName = rName;
-		this.inTime = inTime;
+		this.sid = sid;
+		this.sname = sname;
+		this.saddr = saddr;
+		this.stel = stel;
+		this.simgurl = simgurl;
+		this.rname = rname;
 	}
 
-	public String getsId() {
-		return sId;
+
+
+	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.saddr = saddr;
+		this.stel = stel;
+		this.simgurl = simgurl;
+		this.rname = rname;
+		this.intime = intime;
 	}
 
-	public void setsId(String sId) {
-		this.sId = sId;
+	public String getSid() {
+		return sid;
 	}
 
-	public String getsName() {
-		return sName;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 
-	public void setsName(String sName) {
-		this.sName = sName;
+	public String getSname() {
+		return sname;
 	}
 
-	public String getsAddr() {
-		return sAddr;
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 
-	public void setsAddr(String sAddr) {
-		this.sAddr = sAddr;
+	public String getSaddr() {
+		return saddr;
 	}
 
-	public String getsTel() {
-		return sTel;
+	public void setSaddr(String saddr) {
+		this.saddr = saddr;
 	}
 
-	public void setsTel(String sTel) {
-		this.sTel = sTel;
+	public String getStel() {
+		return stel;
 	}
 
-	public String getsImgUrl() {
-		return sImgUrl;
+	public void setStel(String stel) {
+		this.stel = stel;
 	}
 
-	public void setsImgUrl(String sImgUrl) {
-		this.sImgUrl = sImgUrl;
+	public String getSimgurl() {
+		return simgurl;
 	}
 
-	public String getrName() {
-		return rName;
+	public void setSimgurl(String simgurl) {
+		this.simgurl = simgurl;
 	}
 
-	public void setrName(String rName) {
-		this.rName = rName;
+	public String getRname() {
+		return rname;
 	}
 
-	public Date getInTime() {
-		return inTime;
+	public void setRname(String rname) {
+		this.rname = rname;
 	}
 
-	public void setInTime(Date inTime) {
-		this.inTime = inTime;
+	public Date getIntime() {
+		return intime;
+	}
+
+	public void setIntime(Date intime) {
+		this.intime = intime;
 	}
 
 	@Override
 	public String toString() {
-		return "StoreVO [sId=" + sId + ", sName=" + sName + ", sAddr=" + sAddr + ", sTel=" + sTel + ", sImgUrl="
-				+ sImgUrl + ", rName=" + rName + ", inTime=" + inTime + "]";
+		return "StoreVO [sid=" + sid + ", sname=" + sname + ", saddr=" + saddr + ", stel=" + stel + ", simgurl="
+				+ simgurl + ", rname=" + rname + ", intime=" + intime + "]";
 	}
+
+
 
 }

@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StoreMapper">
-
-	<select id="select" resultType="TestVO">
-		select
-			_idx,
-			iValue
-		from
-			test_tb
-	</select>
-	
+ 
 	<!-- 
 		1. store list
 	-->
@@ -23,4 +15,27 @@
 			storeinfo
 			
 	</select>
+	
+	
+	
+	<insert id="registe_store" parameterType="StoreVO">
+		insert
+			into
+		storeinfo(
+			sid,
+			sname,
+			saddr,
+			stel,
+			simgurl,
+			rname
+		)
+		values(
+			#{sid},
+			#{sname},
+			#{saddr},
+			#{stel},
+			#{simgurl},
+			#{rname}
+		)
+	</insert>
 </mapper>

@@ -4,43 +4,51 @@ import java.util.Date;
 
 public class ReviewVO {
 
-	private int seqId;				//	일련번호
-	private String pId;				//	상품번호
-	private String title;			//	리뷰제목
-	private String contents;		//	리뷰내용
-	private String editor;			//	작성자
-	private Date inTime;			//	작성일시
-	private String expyn;			//	컨텐츠노출여뷰
+	private int seqid; // 일련번호
+	private String pid; // 상품번호
+	private String title; // 리뷰제목
+	private String contents; // 리뷰내용
+	private String editor; // 작성자
+	private Date intime; // 작성일시
+	private String expyn; // 컨텐츠노출여뷰
 
 	public ReviewVO() {
 		super();
 	}
 
-	public ReviewVO(int seqId, String pId, String title, String contents, String editor, Date inTime, String expyn) {
+	public ReviewVO(String pid, String title, String contents, String editor) {
 		super();
-		this.seqId = seqId;
-		this.pId = pId;
+		this.pid = pid;
 		this.title = title;
 		this.contents = contents;
 		this.editor = editor;
-		this.inTime = inTime;
+	}
+
+	public ReviewVO(int seqid, String pid, String title, String contents, String editor, Date intime, String expyn) {
+		super();
+		this.seqid = seqid;
+		this.pid = pid;
+		this.title = title;
+		this.contents = contents;
+		this.editor = editor;
+		this.intime = intime;
 		this.expyn = expyn;
 	}
 
-	public int getSeqId() {
-		return seqId;
+	public int getSeqid() {
+		return seqid;
 	}
 
-	public void setSeqId(int seqId) {
-		this.seqId = seqId;
+	public void setSeqid(int seqid) {
+		this.seqid = seqid;
 	}
 
-	public String getpId() {
-		return pId;
+	public String getPid() {
+		return pid;
 	}
 
-	public void setpId(String pId) {
-		this.pId = pId;
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
 	public String getTitle() {
@@ -67,12 +75,12 @@ public class ReviewVO {
 		this.editor = editor;
 	}
 
-	public Date getInTime() {
-		return inTime;
+	public Date getIntime() {
+		return intime;
 	}
 
-	public void setInTime(Date inTime) {
-		this.inTime = inTime;
+	public void setIntime(Date intime) {
+		this.intime = intime;
 	}
 
 	public String getExpyn() {
@@ -85,8 +93,8 @@ public class ReviewVO {
 
 	@Override
 	public String toString() {
-		return "ReviewVO [seqId=" + seqId + ", pId=" + pId + ", title=" + title + ", contents=" + contents + ", editor="
-				+ editor + ", inTime=" + inTime + ", expyn=" + expyn + "]";
+		return "ReviewVO [seqid=" + seqid + ", pid=" + pid + ", title=" + title + ", contents=" + contents + ", editor="
+				+ editor + ", intime=" + intime + ", expyn=" + expyn + "]";
 	}
 
 }

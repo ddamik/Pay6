@@ -1,11 +1,14 @@
 package com.fintech.paysix.vo;
 
+import java.util.Date;
+
 public class OwnerOrderVO {
 
 	private int seqid;
 	private int orderno;
 	private int tno;
 	private String status;
+	private Date ordertime;
 	private String pname;
 
 	public OwnerOrderVO() {
@@ -18,6 +21,16 @@ public class OwnerOrderVO {
 		this.orderno = orderno;
 		this.tno = tno;
 		this.status = status;
+		this.pname = pname;
+	}
+
+	public OwnerOrderVO(int seqid, int orderno, int tno, String status, Date ordertime, String pname) {
+		super();
+		this.seqid = seqid;
+		this.orderno = orderno;
+		this.tno = tno;
+		this.status = status;
+		this.ordertime = ordertime;
 		this.pname = pname;
 	}
 
@@ -61,10 +74,18 @@ public class OwnerOrderVO {
 		this.pname = pname;
 	}
 
+	public Date getOrdertime() {
+		return ordertime;
+	}
+
+	public void setOrdertime(Date ordertime) {
+		this.ordertime = ordertime;
+	}
+
 	@Override
 	public String toString() {
 		return "OwnerOrderVO [seqid=" + seqid + ", orderno=" + orderno + ", tno=" + tno + ", status=" + status
-				+ ", pname=" + pname + "]";
+				+ ", ordertime=" + ordertime + ", pname=" + pname + "]";
 	}
 
 }
