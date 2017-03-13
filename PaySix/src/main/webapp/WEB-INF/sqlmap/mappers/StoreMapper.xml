@@ -10,6 +10,7 @@
 		select
 			sid,
 			sname,
+			saddr,
 			simgurl
 		from
 			storeinfo

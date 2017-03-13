@@ -3,7 +3,12 @@ package com.fintech.paysix.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
 
@@ -13,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -24,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fintech.paysix.service.TestService;
 import com.google.gson.Gson;
@@ -63,27 +70,11 @@ public class TestController {
 		String api_key = "5592113990569795";
 		String api_secret = "i0txyjZ4RUm11IXWKxAGfudc5K0YtzyMz2j8ljccdzeeicb2JLJYgWbmHbkaKTWkVgshzFuMfI0xVcAF";
 
-		// IamportClient client = new IamportClient(api_key, api_secret);
-		// IamportResponse<AccessToken> auth_response = client.getAuth();
-		// assertNotNull(auth_response.getResponse());
-		// assertNotNull(auth_response.getResponse().getToken());
 
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.add("api_key", api_key);
-		parameters.add("api_secret", api_secret);
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		
-		
-		final String url = "https://api.iamport.kr";
-		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.getForObject(url + "/payment/imp_593292756753", String.class);
-		System.out.println(result);
-
-		
-
-		
+		String imp_uid = "imp_235149608823";
+		String tmpUrl = "https://api.iamport.kr/payments";
+	
 		return null;
 	}
+	
 }

@@ -40,6 +40,7 @@ public class ProductController {
 	@RequestMapping(value="/product/all_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
 	public String menu_list(
 			@RequestParam("sid") String sid) throws SQLException {
+		System.out.println("[ ProductController Sid ]: " + sid);
 		return gson.toJson(productService.all_list(sid));
 	}
 	
