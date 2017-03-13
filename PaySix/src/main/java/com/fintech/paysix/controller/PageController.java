@@ -43,4 +43,21 @@ public class PageController {
 	public ModelAndView owner(){
 		return new ModelAndView("/html/owner");
 	}
+	
+	
+	
+	  /*
+	    *    iamport
+	    */
+	   
+	   @RequestMapping(value="/kakao")
+	   public ModelAndView kakao(){
+	      return new ModelAndView("/html/kakao/kakao_iamport");
+	   }
+	   
+	   
+	   @RequestMapping(value="/kakao/complete")
+	   public ModelAndView kakao_complete(){
+	      return new ModelAndView("/html/kakao/kakao_complete");
+	   }
 }
