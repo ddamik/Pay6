@@ -123,8 +123,7 @@
 				buyer_tel : buyer_tel,
 				buyer_addr : buyer_addr,
 				buyer_postcode : buyer_postcode,
-				kakaoOpenApp : true,
-				m_redirect_url : 'http://localhost:8080/payments/complete'
+				m_redirect_url : 'http://localhost:8080/kakao/complete'
 			}, function(rsp) {
 				if (rsp.success) {
 					console.log("rsp.success");
@@ -136,7 +135,7 @@
 					msg += '카드 승인번호 : ' + rsp.apply_num;
 
 				} else {
-					var msg = '결제에 실패하였습니다.';
+					var msg = '결제에success 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
 				}
 				alert(msg);
