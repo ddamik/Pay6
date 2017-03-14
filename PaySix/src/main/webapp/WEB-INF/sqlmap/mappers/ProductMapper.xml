@@ -16,6 +16,7 @@
 		select
 			pid,
 			pname,
+			pprice,
 			pimgurl,
 			pcount,
 			rcount
@@ -35,6 +36,7 @@
 		select
 			pid,
 			pname,
+			pprice,
 			pimgurl,
 			pcount,
 			rcount

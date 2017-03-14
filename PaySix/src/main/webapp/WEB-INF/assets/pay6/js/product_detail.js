@@ -18,7 +18,7 @@ $(document).ready(function() {
 					+ "<article>"	
 						+ "<a href='/' class='image'><img src='" + url + "' alt='' /></a>"
 						+ "<div class='inner'>"	
-							+ "<h4>" + numberWithCommas(product.price) + "</h4>"
+							+ "<h4>" + numberWithCommas(product.pprice) + "</h4>"
 						+ "</div>"
 					+ "</article>"
 					+ "</div>"

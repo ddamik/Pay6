@@ -26,8 +26,8 @@ $(document).ready(function() {
 				 console.log('null product');
 			 }else{
 				 
-				 var price = product.price;
-				 price = numberWithCommas(price);
+				 var pprice = product.pprice;
+				 price = numberWithCommas(pprice);
 
 				 var url = "../images/productinfo/" + product.pid + ".jpg";
 				 var str = "<span class='image fit'><img src='" + url + "' alt=''/></span>"
@@ -50,25 +50,21 @@ $(document).ready(function() {
 function fun_pay(method) {
 
 	if (method == credit){
-		console.log("credit");
-		if( position == take_out_order ) console.log("테이크아웃 주문");
-		else console.log("테이블 주문");
+		if( position == take_out_order ) alert("Credit Card & Take out");
+		else alert("Credit Card & Table Order");
 	}
 		
 	else if (method == nh_api){
-		console.log("nh_api");
-		if( position == take_out_order ) console.log("테이크아웃 주문");
-		else console.log("테이블 주문");	
+		if( position == take_out_order ) alert("NH API & Take out");
+		else alert("NH API & Table Order");	
 	}
 	else if (method == bitcoin){
-		console.log("bitcoin");
-		if( position == take_out_order ) console.log("테이크아웃 주문");
-		else console.log("테이블 주문");		
+		if( position == take_out_order ) alert("Bitcoin & Take out");
+		else alert("Bitcoin & Table Order");		
 	}
 	else{
-		console.log("coupon");
-		if( position == take_out_order ) console.log("테이크아웃 주문");
-		else console.log("테이블 주문");
+		if( position == take_out_order ) alert("Coupon & Take out");
+		else alert("Coupon & Table Order");
 	}
 		
 }

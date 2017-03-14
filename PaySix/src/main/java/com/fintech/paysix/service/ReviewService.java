@@ -54,11 +54,19 @@ public class ReviewService {
 		arrContents[3] = "강력 추천합니다!";
 		arrContents[4] = "서비스가 정말 좋았어요!";		
 
+		String user[] = new String[6];
+		user[0] = "이승화";
+		user[1] = "이승준";
+		user[2] = "박조현";
+		user[3] = "이승호";
+		user[4] = "재영";
+		user[5] = "재익";
+		
 		
 		for(int i=0; i<10; i++) {
 			String title = arrContents[random.nextInt(5)];		
 			String contents = arrContents[random.nextInt(5)];
-			String editor = "user_" + random.nextInt(5);
+			String editor = user[random.nextInt(6)];
 			this.review_registe(pid, title, contents, editor);
 		}
 		return 0;

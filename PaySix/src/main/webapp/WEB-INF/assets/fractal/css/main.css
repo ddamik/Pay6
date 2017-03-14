@@ -3647,7 +3647,7 @@
 		background-attachment: fixed, fixed;
 		background-size: auto, cover;
 		height: 100vh;
-		min-height: 35em;
+		min-height: 40em;
 	}
 
 		#header input[type="submit"],
@@ -3909,11 +3909,11 @@
 
 			#header {
 				height: auto;
-				min-height: 0;
+				
 			}
 
 				#header .content {
-					margin: -2em 4em 0 0;
+					margin: 0em 4em 0 0;
 				}
 
 		}

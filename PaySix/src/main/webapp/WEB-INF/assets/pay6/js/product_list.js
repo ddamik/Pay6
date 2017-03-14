@@ -23,7 +23,7 @@ $(document).ready(function(){
 								+ "<a href='#' onclick='product_detail(" + product.pid + ");' class='image featured'><img src='../images/productinfo/" + product.pid + ".jpg' alt='' /></a>"
 							
 								+ "<h3><a href='#' onclick='product_detail(" + product.pid + ");'>" + product.pName + "</a></h3>"
-								+ "<p>" + product.price + " 원</p>"
+								+ "<p>" + numberWithCommas(product.pprice) + "</p>"
 								
 								+ "<div class='custom-height'>"
 									+ "<div class='6u float-left'>"
@@ -50,12 +50,12 @@ $(document).ready(function(){
 		}else{
 			$.each(data, function(index, product){
 				
-				var price = numberWithCommas(product.price);
+				var pprice = numberWithCommas(product.pprice);
 				
 				var str = "<a href='#' onclick='product_detail(" + product.pid + ");'>"
 						+ "<section class='box custom-height'>"
 						+ "<div class='8u text-left float-left'><span>" + product.pName + "</span></div>"
-						+ "<div class='4u text-right float-left'><span>" + price + "</span></div>"
+						+ "<div class='4u text-right float-left'><span>" + pprice + "</span></div>"
 						+ "</section>"
 						+ "</a>";
 				$("#all_list").append(str);

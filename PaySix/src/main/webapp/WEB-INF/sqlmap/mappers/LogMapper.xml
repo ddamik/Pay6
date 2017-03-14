@@ -167,7 +167,7 @@
 	
 	
 	<!-- Random data -->
-		<insert id="insert_random_zz" parameterType="LogVO">
+		<insert id="insert_random_log" parameterType="LogVO">
 		insert
 			into
 		log(
