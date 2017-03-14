@@ -4,7 +4,7 @@
 
 
 	<!-- 리뷰 등록 -->
-	<insert id="review_registe" parameterType="ReviewVO">
+	<insert id="review_registe" parameterType="REVIEWVO">
 		insert 
 			into
 		review(
@@ -27,7 +27,7 @@
 	
 	
 	<!-- 리뷰 리스트 -->
-	<select id="review_list" parameterType="String" resultType="ReviewVO">
+	<select id="review_list" parameterType="String" resultType="REVIEWVO">
 		select
 			seqid,
 			pid,

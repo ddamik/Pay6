@@ -87,24 +87,7 @@
 	
 	
 	
-			
-		
-		<!-- 
-		/*
-		 * select 
-	pid, 
-	count(pid) 
-from 
-	log 
-where
-	concat(year(ordertime), '-', month(ordertime), '-', day(ordertime)) = concat(year(current_timestamp()), '-', month(current_timestamp()), '-', day(current_timestamp()))
-group by 
-	pid;
-	
-	
-	created_date between '2013-10-10' and '2013-10-14';
-		 */
-	-->
+ 
 	
 	<!-- 현재 시간대 판매량 데이터 ( 오늘 / 어제 )-->	
 	<select id="currentTime_salesData" parameterType="hashmap" resultType="LogVO">
@@ -184,7 +167,7 @@ group by
 	
 	
 	<!-- Random data -->
-		<insert id="insert_random_log" parameterType="LogVO">
+		<insert id="insert_random_zz" parameterType="LogVO">
 		insert
 			into
 		log(

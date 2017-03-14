@@ -46,6 +46,14 @@ public class PageController {
 	
 	
 	
+	//	5. product detail 
+	@RequestMapping(value="/page/product_detail")
+	public ModelAndView product_detail(){
+		return new ModelAndView("/html/product_detail");
+	}
+	
+	
+	
 	  /*
 	    *    iamport
 	    */

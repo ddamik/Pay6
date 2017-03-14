@@ -5,7 +5,7 @@ public class ProductVO {
 	private String pid; // 상품번호 string 형태의 int / 1001 + 0001 / 앞에 숫자 4개는 store
 						// id + 뒤에 숫자 4개는 메뉴 id
 	private String pName; // 상품명
-	private int price; // 상품가격
+	private int pprice; // 상품가격
 	private String pImgUrl; // 상품이미지
 	private int rCount; // 리뷰수 default: 0
 	private int vCount; // 조회수 default: 0
@@ -20,12 +20,12 @@ public class ProductVO {
 		super();
 	}
 
-	public ProductVO(String pid, String pName, int price, String pImgUrl, int rCount, int vCount, int pCount,
+	public ProductVO(String pid, String pName, int pprice, String pImgUrl, int rCount, int vCount, int pCount,
 			String sId) {
 		super();
 		this.pid = pid;
 		this.pName = pName;
-		this.price = price;
+		this.pprice = pprice;
 		this.pImgUrl = pImgUrl;
 		this.rCount = rCount;
 		this.vCount = vCount;
@@ -49,12 +49,14 @@ public class ProductVO {
 		this.pName = pName;
 	}
 
-	public int getPrice() {
-		return price;
+	 
+
+	public int getPprice() {
+		return pprice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPprice(int pprice) {
+		this.pprice = pprice;
 	}
 
 	public String getpImgUrl() {
@@ -99,7 +101,7 @@ public class ProductVO {
 
 	@Override
 	public String toString() {
-		return "ProductVO [pid=" + pid + ", pName=" + pName + ", price=" + price + ", pImgUrl=" + pImgUrl + ", rCount="
+		return "ProductVO [pid=" + pid + ", pName=" + pName + ", pprice=" + pprice + ", pImgUrl=" + pImgUrl + ", rCount="
 				+ rCount + ", vCount=" + vCount + ", pCount=" + pCount + ", sId=" + sId + "]";
 	}
 
