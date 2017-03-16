@@ -29,4 +29,12 @@ public static final int REGISTE_STORE_SUCCESS = 12001;
 	//	update status
 	public static final int UPDATE_STATUS_SUCCESS = 10100;
 	public static final int UPDATE_STATUS_FAIL = 10101;
+	
+	
+	
+	
+	
+	//	blocko
+	public static final int BITCOIN_SEND_SUCCESS = 40000;
+	public static final int BITCOIN_SEND_fAIL = 40001;
 }

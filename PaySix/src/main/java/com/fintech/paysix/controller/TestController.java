@@ -32,8 +32,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fintech.paysix.payment.Blocko;
 import com.fintech.paysix.service.TestService;
 import com.google.gson.Gson;
+import com.siot.IamportRestClient.IamportClient;
 
 @Controller
 public class TestController {
@@ -65,13 +67,12 @@ public class TestController {
 	@RequestMapping(value = "/kakao/test", method = RequestMethod.GET)
 	public String kakao_test() throws Exception {
 		String api_key = "5592113990569795";
-		String api_secret = "i0txyjZ4RUm11IXWKxAGfudc5K0YtzyMz2j8ljccdzeeicb2JLJYgWbmHbkaKTWkVgshzFuMfI0xVcAF";
+		String api_secret = "qLigXLFBK44nVjwFKVGZVK1vpjMAdEGEqYVnJAZuF3SAnog7kX7fH8L7sxIFcojCne06PZBu3t4rSkyd";
 
-
-		String imp_uid = "imp_235149608823";
-		String tmpUrl = "https://api.iamport.kr/payments";
-	
-		return null;
+		Blocko client = new Blocko();
+		client.getMyBalance(Blocko.ADDRESS);
+		client.getTranscation(Blocko.ADDRESS);
+		return gson.toJson(client.create_key());
 	}
-	
+
 }
