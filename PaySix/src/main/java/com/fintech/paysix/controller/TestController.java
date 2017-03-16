@@ -34,9 +34,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fintech.paysix.service.TestService;
 import com.google.gson.Gson;
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.response.AccessToken;
-import com.siot.IamportRestClient.response.IamportResponse;
 
 @Controller
 public class TestController {

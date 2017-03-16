@@ -5,13 +5,19 @@
 <title>Insert title here</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"
-	type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 
 <script>
+
+
 	$(document).ready(function() {
 
-		IMP.init('imp96588755');
+		var merchant_idx = 'imp96588755';	// 가맹점 식별코드
+		
+		var IMP = window.IMP;
+		IMP.init(merchant_idx);
 
 		var buyer_tel;
 		var buyer_name;
