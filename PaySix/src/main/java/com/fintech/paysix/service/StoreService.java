@@ -1,6 +1,7 @@
 package com.fintech.paysix.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class StoreService {
 	private StoreDao storeDao;
 	
 	
+	@Autowired
+	private LogService logService;
+	
 	/*
 	 * 	1. store list
 	 */
@@ -25,7 +29,11 @@ public class StoreService {
 	
 	// 1. store list
 	public List<StoreVO> store_list() throws SQLException {
-		return storeDao.store_list();
+		List<StoreVO> list = storeDao.store_list();		
+		for (StoreVO vo : list) {
+			vo.setEtc1(logService.best_product(vo.getSid()).getPid());
+		}
+		return list;
 	}
 	
 	

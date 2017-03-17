@@ -152,6 +152,12 @@ public class LogService {
 
 	}
 
+	
+	public LogVO best_product(String sid){
+		return logDao.best_product(sid); 
+	}
+	
+	
 	// Random Data
 	public void randomData() throws SQLException, ParseException {
 

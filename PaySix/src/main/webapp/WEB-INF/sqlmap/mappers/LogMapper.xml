@@ -159,7 +159,19 @@
 	
 	
 	
-	
+	<select id="best_product" parameterType="String" resultType="LogVO">
+		select 
+			pid
+		from 
+			log 
+		where 
+			mid(log.pid, 1, 4) = #{sid}
+		group by 
+			pid 
+		order by 
+			count(pid) DESC 
+		limit 1;
+	</select>
 	
 	
 	

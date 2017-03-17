@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fintech.paysix.vo.LogVO;
 import com.fintech.paysix.vo.OwnerOrderVO;
+import com.fintech.paysix.vo.StoreVO;
 
 @Repository
 public class LogDao {
@@ -66,7 +67,9 @@ public class LogDao {
 	
 	
 	
-	
+	public LogVO best_product(String sid){
+		return session.selectOne("LogMapper.best_product", sid);
+	}
 	
 	
 	

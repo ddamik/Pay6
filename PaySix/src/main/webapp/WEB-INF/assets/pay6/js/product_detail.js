@@ -9,90 +9,114 @@ var only_take_out = "1";
 var only_table = "2";
 
 var seqid = 0;
+var sid = "";
+
+var amount = "";
+var strPaymethod = "";
 
 $(document).ready(function() {
-
+	
+	
 	var strPid = pid + "";
-	var sid = strPid.substr(0, 4);
+	sid = strPid.substr(0, 4);
+	amount = "";
 	
 	$.ajax({
 		url: '/product/detail?pid=' + pid
-	}).done(function(product){
-		var url = "../images/productinfo/" + pid + ".jpg";
-		var str = "<div class='container'>"
-					+ "<h3>" + product.pName + "</h3>"
-					+ "<p>product contents</p>"
-					+ "<div class='features'>"
-					+ "<article>"	
-						+ "<a href='#' class='image'><img src='" + url + "' alt='' /></a>"
-						+ "<div class='inner'>"	
-							+ "<h4>" + numberWithCommas(product.pprice) + "</h4>"
-						+ "</div>"
-					+ "</article>"
-					+ "</div>"
-					+ "</div>";
-			 $("#product_detail").append(str);
-	});
-	
-		
-	//	주문방법
-	$.ajax({
-		url: '/store/order_info',
-		type: 'get',
-		data: {
-			'sid': sid
-		},
-		success: function(store){
-			var data = store.order_method;
-			if( data == both_order ){
-				var str = "<li class='custom-margin'><input id='btn_table' type='button' class='special' value='테이블 주문'/></li>"
-					+ "<li class='custom-margin'><input id='btn_take_out' type='button' value='테이크아웃 주문' /></li>";
-				$("#order_method").append(str);
-				$("#btn_take_out").click(function(){ order_page(take_out_order); });
-				$("#btn_table").click(function(){ order_page(table_order); });	
-			}else if( data == only_take_out ){
-				var str = "<li class='custom-margin'><input id='btn_take_out' type='button' value='테이크아웃 주문' /></li>";
-				$("#order_method").append(str);
-				$("#btn_take_out").click(function(){ order_page(take_out_order); });
-			}else if( data == only_table ){
-				var str = "<li class='custom-margin'><input id='btn_table' type='button' class='special' value='테이블 주문'/></li>";
-				$("#order_method").append(str);
-				$("#btn_table").click(function(){ order_page(table_order); });	
-			}
-		},
-		error: function(xhr, status, error){
-			console.log("Product Detail StoreVO Error");
-		}
-	});
-	
-
-	//	리뷰 리스트
-	review_more(pid, seqid);
-	/*$.ajax({
-		url: '/review/list?pid=' + pid
 	}).done(function(data){
-		$.each(data, function(index, review){
-			var currDate = new Date(review.intime); // 현재 날짜 생성
-			currDate = dateToYYYYMMDD(currDate);
-			var str = "<div class=''>"
-							+ "<h5 class='tag-inline'>" + review.editor + "</h5>"
-							+ "<div class='tag-inline date-margin editor'><span>" + currDate + "</span></div>"
-							+ "<div><span>" + review.contents + "</span></div>"
-							+ "<hr>"
-							+ "</div>";
-			seqid = review.seqid;
-		 $("#reviews").append(str);
-		});
-	});*/
-
-	
-	
-	$("#btn_more_review").click(function(){
-		review_more();
+		amount = data.product.pprice;
+		var url = "../images/productinfo/" + data.product.pid + ".jpg";
+		var str = "<a href='#' class='image featured'>"
+					+ "<img src=" + url + " alt='' /></a>"
+					+ "<header>"
+						+ "<span class='product_title'>" + data.product.pName + "</span>"
+						+ "<span class='product_price'>&nbsp;&nbsp;[ " + numberWithCommas(data.product.pprice) + " ]</span>"
+					+ "</header>"
+					+ "<p></p>"
+					+ "<footer>"
+						+ "<ul class='actions'>";
+							if( data.sid.order_method == both_order ){
+								str += "<li><a id='btn_table_order' class='button'>Table 주문</a></li>"
+								+ "<li><a id='btn_takeout_order' class='button'>Take-out 주문</a></li>"
+								+ "<li><a href='#footer-wrapper' class='button alt icon fa-comment'>comments</a></li>"; 
+							}else if( data.sid.order_method == only_take_out ){
+								str += "<li><a id='btn_takeout_order' class='button'>Take-out 주문</a></li>"
+									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comment'>comments</a></li>";								
+							}else if( data.sid.order_method == only_table ){
+								str += "<li><a id='btn_table_order' class='button'>Table 주문</a></li>"
+									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comment'>comments</a></li>";
+							}
+					str += "</ul>"
+						+ "</footer>";
+			 $("#product_detail").append(str);
+			 $("#btn_table_order").click(function(){ strPaymethod="0"; paymethod("[ Table ]"); });
+			 $("#btn_takeout_order").click(function(){ strPaymethod="1"; paymethod("[ Take-Out ]"); });
+			 $("#btn_more_review").click(function(){ review_more(); });
 	});
+	
+
+	$("#credit-order").css('display', 'none');
+	$("#nh-order").css('display', 'none');
+	$("#bitcoin-order").css('display', 'none');
+	$("#coupon-order").css('display', 'none');
+	
+	$("#credit").click(function(){
+		$("#credit_amount").text("결제 금액: " + numberWithCommas(amount));
+		$("#credit-order").css('display', 'block');
+		$("#nh-order").css('display', 'none');
+		$("#bitcoin-order").css('display', 'none');
+		$("#coupon-order").css('display', 'none');
+	});
+	$("#nh-api").click(function(){
+		$("#nh_amount").text("결제 금액: " + numberWithCommas(amount));
+		$("#credit-order").css('display', 'none');
+		$("#nh-order").css('display', 'block');
+		$("#bitcoin-order").css('display', 'none');
+		$("#coupon-order").css('display', 'none');
+	});
+	$("#bitcoin").click(function(){
+		$("#bitcoin_amount").text("결제 금액: " + numberWithCommas(amount));
+		$("#credit-order").css('display', 'none');
+		$("#nh-order").css('display', 'none');
+		$("#bitcoin-order").css('display', 'block');
+		$("#coupon-order").css('display', 'none');
+	});
+	$("#coupon").click(function(){
+		alert("준비중입니다.");
+		/*
+		$("#coupon_amount").text("결제 금액: " + numberWithCommas(amount));
+		$("#pay_amount").text(amount);
+		$("#credit-order").css('display', 'none');
+		$("#nh-order").css('display', 'none');
+		$("#bitcoin-order").css('display', 'none');
+		$("#coupon-order").css('display', 'block');
+		*/
+	});
+	
+	$("#bitcoin_payment").click(function(){
+		bitcoin_payment();
+	});
+	
+	//	내 satoshi 잔액
+	$.ajax({
+		url: '/bitcoin/getBalance'
+	}).done(function(data){
+		$("#remain_btc").text(numberWithCommasSatoshi(data));
+	});
+	
+	
+	//	리뷰 리스트
+	init_review();
+
 });
 
+
+function init_review(){
+	review_more();
+}
+
 function review_more(){
+
 	pid = pid + "";
 	$.ajax({
 		url: '/review/more',
@@ -103,15 +127,13 @@ function review_more(){
 		},
 		success: function(data){
 			$.each(data, function(index, review){
-				console.log(review.editor);
 				var currDate = new Date(review.intime); // 현재 날짜 생성
 				currDate = dateToYYYYMMDD(currDate);
-				var str = "<div class=''>"
-								+ "<h5 class='tag-inline'>" + review.editor + "</h5>"
-								+ "<div class='tag-inline date-margin editor'><span>" + currDate + "</span></div>"
-								+ "<div><span>" + review.contents + "</span></div>"
-								+ "<hr>"
-								+ "</div>";
+				var str = "<li>"
+							+ "<span class='review-title'>" + review.editor + "</span>" 
+							+ "&nbsp;&nbsp;&nbsp;<span class='review-date'>" + dateToYYYYMMDD(review.intime) + "</span>"
+							+ "<span class='review-contents'>" + review.contents + "</span>"
+							+ "</li><hr class='review-hr'>";
 				seqid = review.seqid;
 				$("#reviews").append(str);
 			});
@@ -124,22 +146,59 @@ function review_more(){
 }
 
 
+function paymethod(method){
+	$("#paymethod").text(method);
+	$("#header-wrapper").css('display', 'block');
+	location.href="#header-wrapper";
+}
 
-
-
-
-function order_page(position){
-	location.href="/page/order?pid=" + pid + "?position=" + position;
+function order(position){
+	//	location.href="/page/order?pid=" + pid + "?position=" + position;
 }
 
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " won";
 }
 
-function dateToYYYYMMDD(date){
+function numberWithCommasSatoshi(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " satoshi";
+}
+
+function dateToYYYYMMDD(intime){
+	var date = new Date(intime);
    function pad(num) {
        num = num + '';
        return num.length < 2 ? '0' + num : num;
    }
    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+}
+
+
+function back(){
+	location.href = "/page/product_list?sid=" + sid;
+}
+
+function bitcoin_payment(){
+	
+	var tno = "0";
+	var userid = "이승호";
+	
+	$.ajax({
+		url: '/log/insert',
+		type: 'post',
+		data:{
+			'tno': tno, 
+			'pid': pid,
+			'userid': userid,
+			'paymethod': strPaymethod,
+			'amount': amount
+		},
+		success: function(data){
+			alert("결제가 완료되었습니다.");
+			location.reload();
+		},
+		error: function(xhr, status, error){
+			
+		}
+	});
 }

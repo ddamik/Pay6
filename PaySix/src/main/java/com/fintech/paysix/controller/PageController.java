@@ -17,6 +17,14 @@ public class PageController {
 		return new ModelAndView("/html/store_list");
 	}
 
+	
+	@RequestMapping(value = "/page/store_list2")
+	public ModelAndView store_list2() {
+		return new ModelAndView("/html/store_list2");
+	}
+	
+	
+	
 	// 2. product list page
 	@RequestMapping(value = "/page/product_list")
 	public ModelAndView product_list() {
@@ -45,8 +53,16 @@ public class PageController {
 	// 5. product detail
 	@RequestMapping(value = "/page/product_detail2")
 	public ModelAndView product_detail2() {
-		return new ModelAndView("/html/product_detail2");
+		return new ModelAndView("/html/product_detail1");
 	}
+	
+	// 5. product detail
+		@RequestMapping(value = "/page/header")
+		public ModelAndView header() {
+			return new ModelAndView("/html/header");
+		}
+	
+	
 	
 	
 	/*
