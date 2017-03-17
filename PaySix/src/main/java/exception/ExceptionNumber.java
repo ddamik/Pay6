@@ -37,4 +37,5 @@ public static final int REGISTE_STORE_SUCCESS = 12001;
 	//	blocko
 	public static final int BITCOIN_SEND_SUCCESS = 40000;
 	public static final int BITCOIN_SEND_fAIL = 40001;
+	public static final String BITCOIN_SNED_ADDRESS = "18jPJKQ29bgvSADwyP7Laks9Mu44mMEeF2";
 }

@@ -37,12 +37,19 @@ public class ReviewController {
 	@ResponseBody
 	@RequestMapping(value="/review/list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
 	public String review_list(
-			@RequestParam("pid") String pid){	
+			@RequestParam("pid") String pid) throws SQLException {	
 		return gson.toJson(reviewService.review_list(pid));
 	}
 	
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/review/more", method=RequestMethod.POST, produces="application/json;text/plain;charset=UTF-8")
+	public String review_more(HttpServletRequest request) throws SQLException {	
+		String pid = request.getParameter("pid");
+		String seqid = request.getParameter("seqid");
+		System.out.println(pid + " / " + seqid);
+		return gson.toJson(reviewService.review_more(pid, seqid));
+	}
 	
 	
 	

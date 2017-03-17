@@ -29,7 +29,9 @@ public class StoreService {
 	}
 	
 	
-	
+	public StoreVO store_order_info(String sid) throws SQLException {
+		return storeDao.store_order_info(sid);
+	}
 	
 	public int store_registe(String sid, String sname, String saddr, String stel, String simgurl, String rname) throws SQLException {		
 		StoreVO vo = new StoreVO(sid, sname, saddr, stel, simgurl, rname);

@@ -4,6 +4,7 @@
  
 	<!-- 
 		1. store list
+		2. store ordermethod
 	-->
 	
 	<select id="store_list" resultType="StoreVO">
@@ -16,6 +17,17 @@
 			storeinfo
 			
 	</select>
+	
+	<select id="store_order_info" parameterType="String" resultType="StoreVO">
+		select
+			order_method,
+			bitcoin_addr
+		from
+			storeinfo
+		where
+			sid = #{sid}
+	</select>
+	
 	
 	
 	

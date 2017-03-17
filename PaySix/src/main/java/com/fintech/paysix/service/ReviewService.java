@@ -2,6 +2,7 @@ package com.fintech.paysix.service;
 
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -38,8 +39,18 @@ public class ReviewService {
 	}
 
 	// 2. ¸®ºä ¸®½ºÆ®
-	public List<ReviewVO> review_list(String pid) {
+	public List<ReviewVO> review_list(String pid) throws SQLException {
 		return reviewDao.review_list(pid);
+	}
+	
+	
+	
+	//	3. ¸®ºä ´õº¸±â
+	public List<ReviewVO> review_more(String pid, String seqid) throws SQLException {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("pid", pid);
+		map.put("seqid", seqid);
+		return reviewDao.review_more(map);
 	}
 
 	// ·£´ý ¸®ºä µî·Ï

@@ -1,6 +1,7 @@
 package com.fintech.paysix.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class ProductService {
 	@Autowired
 	private ProductDao productDao;
 	
+	@Autowired
+	private StoreService storeService;
 	
 	/*
 	 * 	1. 인기메뉴 Top3
@@ -39,14 +42,19 @@ public class ProductService {
 	
 	
 	//	3. 메뉴 상세보기
-	public ProductVO detail(String pid) throws SQLException{
+	public HashMap<String, Object> detail(String pid) throws SQLException{
 		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		ProductVO product = productDao.detail(pid);
 		if( product != null ) {
 			//	Product 데이터 가져오기 성공.
 			//	조회수 늘리기.
 			int update_vcount = this.vcount_up(pid);
-			if( update_vcount == ExceptionNumber.SQL_UPDATE_SUCCESS ) return product; 
+			if( update_vcount == ExceptionNumber.SQL_UPDATE_SUCCESS ) {
+				map.put("sid", storeService.store_order_info(pid.substring(0, 4)));
+				map.put("product", product);
+				return map; 
+			}
 			else return null;
 		}
 		else return null;

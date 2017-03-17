@@ -1,5 +1,6 @@
 package com.fintech.paysix.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fintech.paysix.payment.Blocko;
 import com.fintech.paysix.service.LogService;
 import com.google.gson.Gson;
+
+import io.blocko.coinstack.exception.CoinStackException;
 
 @Controller
 public class LogController {
@@ -21,7 +25,7 @@ public class LogController {
 	@Autowired
 	private LogService logService;
 	private Gson gson = new Gson();
-	
+	 
 	
 	/*
 	 * 	1. 주문(로그 데이터 생성)
@@ -34,14 +38,15 @@ public class LogController {
 	//	1. 주문(로그 데이터 생성)
 	@ResponseBody
 	@RequestMapping(value="/log/insert", method=RequestMethod.POST, produces="application/json;text/plain;charset=UTF-8")
-	public String insert(HttpServletRequest request) throws SQLException {
+	public String insert(HttpServletRequest request) throws SQLException, IOException, CoinStackException {
 		
 		int tno = Integer.parseInt(request.getParameter("tno"));
 		String pid = request.getParameter("pid");
 		String userid = request.getParameter("userid");
 		String paymethod = request.getParameter("paymethod");
+		String amount = request.getParameter("amount");
 		
-		return gson.toJson(logService.insert(tno, pid, userid, paymethod));
+		return gson.toJson(logService.insert(tno, pid, userid, paymethod, amount));
 	}
 	
 	
@@ -87,6 +92,16 @@ public class LogController {
 	}
 	
 	
+	
+	
+	private Blocko blocko = new Blocko();
+	
+	//	6.	남은 비트코인
+	@ResponseBody
+	@RequestMapping(value="/bitcoin/getBalance", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String bitcoin_getBalance() throws IOException, CoinStackException {	
+		return gson.toJson(blocko.getMyBalance(Blocko.ADDRESS));
+	}
 	
 	
 	

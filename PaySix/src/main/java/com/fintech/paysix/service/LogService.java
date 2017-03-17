@@ -1,5 +1,6 @@
 package com.fintech.paysix.service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fintech.paysix.dao.LogDao;
+import com.fintech.paysix.payment.Blocko;
 import com.fintech.paysix.vo.LogVO;
 import com.fintech.paysix.vo.OwnerOrderVO;
 
 import exception.CustomFunction;
 import exception.ExceptionNumber;
+import io.blocko.coinstack.exception.CoinStackException;
 
 @Service
 public class LogService {
@@ -34,20 +37,26 @@ public class LogService {
 	 */
 
 	// 1. Log 데이터생성
-	public int insert(int tno, String pid, String userid, String paymethod) throws SQLException {
+	public int insert(int tno, String pid, String userid, String paymethod, String amount) throws SQLException, IOException, CoinStackException {
 
 		int orderno = 152;
 		String status = "status";
 		Date endtime = null;
-
+ 
+		double satoshi = 0.0001; 
+		double fee = 0.0001;
+		
+		System.out.println(satoshi);
 		LogVO log = new LogVO(tno, orderno, status, pid, userid, paymethod, endtime);
 
 		if (logDao.insert(log) > 0) {
 			// 주문 성공
 			// 주문 수 올리기
-			if (productService.pcount_up(pid) > 0)
+			if (productService.pcount_up(pid) > 0){
+				Blocko blocko = new Blocko();
+				blocko.send_satoshi(satoshi, fee, ExceptionNumber.BITCOIN_SNED_ADDRESS, Blocko.PRIVATE_KEY);
 				return orderno;
-			else
+			} else
 				return ExceptionNumber.SQL_UPDATE_FAIL;
 		} else
 			return ExceptionNumber.SQL_INSERT_FAIL;

@@ -17,8 +17,8 @@ import io.blocko.coinstack.AbstractEndpoint;
 
 public class Blocko {
 
-	private static final String PRIVATE_KEY = "L5M4XfsZ8F19h3kWHkaHyQ72mtMuRntEuD7Bff97H5iXcJcBSNhd";
-	private static final String PUBLIC_KEY = "035d3ecdd3e040140a29036a856248637a5b5f8fcb51977a20e7910ba1025f8bbc";
+	public static final String PRIVATE_KEY = "L5M4XfsZ8F19h3kWHkaHyQ72mtMuRntEuD7Bff97H5iXcJcBSNhd";
+	public static final String PUBLIC_KEY = "035d3ecdd3e040140a29036a856248637a5b5f8fcb51977a20e7910ba1025f8bbc";
 	public static final String ADDRESS = "1EkjuEMrDkmXhUVC4N19w1PD82LZiGS6Kx";
 
 	/*
@@ -112,11 +112,10 @@ public class Blocko {
 	//	거래 내역 조회
 	public String getTranscation(String address) throws IOException, CoinStackException{
 		String[] transcations = client.getTransactions(address);
-		
 		Transaction tx = client.getTransaction(transcations[0]);
-		System.out.println(tx.getConfirmationTime());
-		
-		System.out.println(transcations[0]);
 		return transcations[0];
 	}
+	
+	
+	 
 }

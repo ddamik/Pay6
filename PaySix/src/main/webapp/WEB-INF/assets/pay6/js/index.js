@@ -1,6 +1,6 @@
 $(document).ready(function() {
+	setInterval(function() {
+		location.href = "/page/store_list";
+	}, 3000);
 
-	$("#btn_start").click(function(){
-		location.href="/page/store_list";
-	});
 });

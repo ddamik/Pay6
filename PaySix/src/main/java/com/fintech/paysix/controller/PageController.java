@@ -41,6 +41,36 @@ public class PageController {
 		return new ModelAndView("/html/product_detail");
 	}
 
+	
+	// 5. product detail
+	@RequestMapping(value = "/page/product_detail2")
+	public ModelAndView product_detail2() {
+		return new ModelAndView("/html/product_detail2");
+	}
+	
+	
+	/*
+	 * 1. onwer index
+	 * 
+	 * 
+	 */
+
+	// 5. product detail
+	@RequestMapping(value = "/page/owner_index")
+	public ModelAndView owner_index() {
+		return new ModelAndView("/html/owner/owner_index");
+	}
+
+	// 5. product detail
+		@RequestMapping(value = "/drop")
+		public ModelAndView drop() {
+			return new ModelAndView("/html/order/drop");
+		}
+		
+		
+		
+		
+		
 	/*
 	 * iamport
 	 */

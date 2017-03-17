@@ -41,4 +41,24 @@
 		where
 			pid = #{pid}		
 	</select>
+	
+	
+	<!-- 리뷰 5개 -->
+	<select id="review_more" parameterType="hashmap" resultType="ReviewVO">
+		select
+			seqid,
+			pid,
+			title,
+			contents,
+			editor,
+			intime,
+			expyn
+		from
+			review
+		where
+			pid = #{pid}	
+		and 
+			seqid > #{seqid}
+		limit 3;
+	</select>
 </mapper>

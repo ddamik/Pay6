@@ -19,26 +19,32 @@ public class StoreController {
 	@Autowired
 	private StoreService storeService;
 	private Gson gson = new Gson();
-	
+
 	@ResponseBody
-	@RequestMapping(value="/store/list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	@RequestMapping(value = "/store/list", method = RequestMethod.GET, produces = "application/json;text/plain;charset=UTF-8")
 	public String store_list(HttpServletRequest request) throws SQLException {
 		return gson.toJson(storeService.store_list());
 	}
-	
-	
-	
+
 	@ResponseBody
-	@RequestMapping(value="/store/registe", method=RequestMethod.POST)
+	@RequestMapping(value = "/store/order_info", method = RequestMethod.GET, produces = "application/json;text/plain;charset=UTF-8")
+	public String store_order_info(HttpServletRequest request) throws SQLException {
+		String sid = request.getParameter("sid");
+		return gson.toJson(storeService.store_order_info(sid));
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/store/registe", method = RequestMethod.POST, produces = "application/json;text/plain;charset=UTF-8")
 	public String store_registe(HttpServletRequest request) throws SQLException {
-		
+
 		String sid = request.getParameter("sid");
 		String sname = request.getParameter("sname");
 		String saddr = request.getParameter("saddr");
 		String stel = request.getParameter("stel");
 		String simgurl = request.getParameter("simgurl");
 		String rname = request.getParameter("rname");
-		
+
 		return gson.toJson(storeService.store_registe(sid, sname, saddr, stel, simgurl, rname));
 	}
+
 }

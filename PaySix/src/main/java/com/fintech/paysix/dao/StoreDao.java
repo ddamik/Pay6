@@ -25,6 +25,10 @@ public class StoreDao {
 	}
 	
 	
+	public StoreVO store_order_info(String sid) throws SQLException {
+		return session.selectOne("StoreMapper.store_order_info", sid);
+	}
+	
 	
 	public int store_registe(StoreVO store) throws SQLException {
 		return session.insert("StoreMapper.registe_store", store);
