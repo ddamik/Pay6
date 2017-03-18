@@ -3380,7 +3380,7 @@ body.is-loading #banner>.inner {
 
 @media screen and (max-width: 736px) {
 	#wrapper {
-		padding-top: 2.75em;
+		padding-top: 3.25em;
 	}
 }
 
@@ -3671,4 +3671,6 @@ body.is-menu-visible #menu .inner {
 .text-distance {
 	font-size: 13px;
 }
-
+.cursor{
+	cursor: pointer;
+}

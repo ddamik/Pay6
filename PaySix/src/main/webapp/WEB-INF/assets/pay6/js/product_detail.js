@@ -16,6 +16,8 @@ var strPaymethod = "";
 
 $(document).ready(function() {
 	
+	$("#pay6Header").load("/page/header");
+	
 	
 	var strPid = pid + "";
 	sid = strPid.substr(0, 4);
@@ -38,13 +40,13 @@ $(document).ready(function() {
 							if( data.sid.order_method == both_order ){
 								str += "<li><a id='btn_table_order' class='button'>Table 주문</a></li>"
 								+ "<li><a id='btn_takeout_order' class='button'>Take-out 주문</a></li>"
-								+ "<li><a href='#footer-wrapper' class='button alt icon fa-comment'>comments</a></li>"; 
+								+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>"; 
 							}else if( data.sid.order_method == only_take_out ){
 								str += "<li><a id='btn_takeout_order' class='button'>Take-out 주문</a></li>"
-									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comment'>comments</a></li>";								
+									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>";								
 							}else if( data.sid.order_method == only_table ){
 								str += "<li><a id='btn_table_order' class='button'>Table 주문</a></li>"
-									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comment'>comments</a></li>";
+									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>";
 							}
 					str += "</ul>"
 						+ "</footer>";

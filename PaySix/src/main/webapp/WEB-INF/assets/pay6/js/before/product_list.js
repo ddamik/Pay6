@@ -5,30 +5,37 @@ $(document).ready(function(){
 	
 //	var tmp = document.location.search.split("=");
 //	var sid = tmp[1].split("&");
-	
+	$("#pay6Header").load("/page/header");
 	$.ajax({
 		url: '/product/popular_list?sid=' + sid
 	}).done(function(data){
 		if( data == null ){
 			var str = "<div class='4u 12u(mobile)'>상품이 없습니다.</div>";		
 		}else{
-			$.each(data, function(index, product){				
+			$.each(data, function(index, product){
 				
-				var url = "../images/productinfo/" + product.pid + ".jpg";
-				var str = "<div class='6u 12u(mobile)'>"
-							+ "<article class='item'>"
-								+ "<a href='#' onclick='product_detail(" + product.pid + ");' class='image fit'><img src='" + url + "' alt=''/></a>"
-								+ "<header>"
-									+ "<span class='product-pname'>" + product.pName + "</span>"
-									+ "<span class='product-price'>&nbsp;&nbsp;&nbsp;[ " + numberWithCommas(product.pprice) + " ]</span>"
-								+ "</header>"
-								+ "<div class=''>"
-									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-credit-card'></i> " + product.pCount + "</div>"
-									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-mail-reply-all'></i> " + product.rCount + "</div>"
-									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-thumbs-o-up'></i> " + product.vCount + "</div>"
-								+ "</div>"								
-							+ "</article>"							
-						+ "</div>";		
+				console.log(product.pid);
+				
+				var str = "<div class='4u 12u(mobile)'>"
+							
+							+ "<article class='box style2'>"
+
+								+ "<a href='#' onclick='product_detail(" + product.pid + ");' class='image featured'><img src='../images/productinfo/" + product.pid + ".jpg' alt='' /></a>"
+							
+								+ "<h3><a href='#' onclick='product_detail(" + product.pid + ");'>" + product.pName + "</a></h3>"
+								+ "<p>" + numberWithCommas(product.pprice) + "</p>"
+								
+								+ "<div class='custom-height'>"
+									+ "<div class='6u float-left'>"
+										+ "<span>구매 수: " + product.pCount + "</span>"
+									+ "</div>"
+									+ "<div class='6u float-left'>"
+										+ "<span>리뷰 수: " + product.rCount + "</span>"
+									+ "</div>"
+								+ "</div>"
+								
+							+ "</article>"
+						+ "</div>";			
 				$("#product_list").append(str);
 			});
 		}	

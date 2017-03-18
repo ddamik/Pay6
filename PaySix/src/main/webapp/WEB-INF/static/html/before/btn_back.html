@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+
+
+</head>
+<style>
+@media screen and (max-width: 736px) {
+	body.navPanel-visible #page-wrapper {
+		-moz-transform: translateX(275px);
+		-webkit-transform: translateX(275px);
+		-ms-transform: translateX(275px);
+		transform: translateX(275px);
+	}
+	#titleBar {
+		-moz-backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-moz-transition: -moz-transform 0.5s ease;
+		-webkit-transition: -webkit-transform 0.5s ease;
+		-ms-transition: -ms-transform 0.5s ease;
+		transition: transform 0.5s ease;
+		display: block;
+		height: 44px;
+		left: 0;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 10001;
+		background: none;
+	}
+	#titleBar .toggle {
+		width: 80px;
+		height: 60px;
+	}
+	#titleBar .toggle:before {
+		font-family: FontAwesome;
+		text-decoration: none;
+		font-style: normal;
+		font-weight: normal;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		content: '\f0a8';
+		display: block;
+		position: absolute;
+		left: 10px;
+		top: 10px;
+		width: 50px;
+		height: 40px;
+		line-height: 40px;
+		font-size: 23px;
+		color: #fff;
+		text-align: center;
+		background: rgba(150, 150, 150, 0.75);
+		border-radius: 5px;
+	}
+	#titleBar .toggle:active:before {
+		background-color: #969696;
+	}
+}
+
+#navPanel, #titleBar {
+	display: none;
+}
+</style>
+<body>
+
+	<!-- Header -->
+	<div id="page-wrapper">
+		
+	</div>
+</body>
+</html>

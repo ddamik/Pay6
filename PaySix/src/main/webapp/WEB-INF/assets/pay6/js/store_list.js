@@ -20,7 +20,7 @@ $(document).ready(function(){
 							+ "</span>"
 							+ "<header class='major'>"
 								+ "<h3>"
-									+ "<a onclick='product_list(" + store.sid + ");' class='link'>" + store.sname + "</a>"
+									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.sname + "</a>"
 									+ "<a class='text-distance'>&nbsp;&nbsp;현재 위치로부터 00m</a>"
 								+ "</h3>"
 								+ "<p>" + store.saddr + "</p>"

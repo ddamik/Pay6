@@ -62,7 +62,11 @@ public class PageController {
 			return new ModelAndView("/html/header");
 		}
 	
-	
+		// 5. product detail
+		@RequestMapping(value = "/page/btn_back")
+		public ModelAndView btn_back() {
+			return new ModelAndView("/html/btn_back");
+		}	
 	
 	
 	/*
