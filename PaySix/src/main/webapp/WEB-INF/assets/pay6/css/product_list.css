@@ -2084,9 +2084,9 @@ input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:ac
 		font-weight: normal;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		content: '\f0c9';
+		content: '\f0a8';
 		color: #fff;
-		font-size: 18px;
+		font-size: 23px;
 		line-height: 2.25em;
 		background: rgba(128, 136, 144, 0.5);
 		border-radius: 0.35em;
@@ -2095,9 +2095,9 @@ input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:ac
 		left: 0.5em;
 		top: 0.5em;
 		display: block;
-		width: 3.25em;
-		height: 2.25em;
-		line-height: 2.25em;
+		width: 50px;
+		height: 40px;
+		line-height: 40px;
 	}
 	body.header-visible #main {
 		-moz-transform: translateX(275px);
@@ -2209,4 +2209,7 @@ input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:ac
 	font-size: 20px;
 	font-weight: bold;
 	color: blue;
+}
+.store-name{
+	font-weight: bold;
 }

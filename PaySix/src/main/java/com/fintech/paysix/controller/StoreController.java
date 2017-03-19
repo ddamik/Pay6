@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fintech.paysix.service.StoreService;
@@ -33,6 +34,13 @@ public class StoreController {
 		return gson.toJson(storeService.store_order_info(sid));
 	}
 
+
+	@ResponseBody
+	@RequestMapping(value = "/store/get_name", method = RequestMethod.GET, produces = "application/json;text/plain;charset=UTF-8")
+	public String store_get_name(@RequestParam("sid") String sid) throws SQLException {		
+		return gson.toJson(storeService.get_store_name(sid));
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/store/registe", method = RequestMethod.POST, produces = "application/json;text/plain;charset=UTF-8")
 	public String store_registe(HttpServletRequest request) throws SQLException {

@@ -4216,3 +4216,13 @@
 	#pay6 a:active {
 		background: #484848;
 }
+
+.text-no-margin{
+	font-size: 20px !important;
+	font-weight: bold !important;
+	margin-bottom: 0 !important;
+}
+.text-title{
+	font-size: 20px !important;
+	font-weight: bold !important;	
+}

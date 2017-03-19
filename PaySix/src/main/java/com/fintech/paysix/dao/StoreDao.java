@@ -30,6 +30,10 @@ public class StoreDao {
 	}
 	
 	
+	public StoreVO get_store_name(String sid) throws SQLException{
+		return session.selectOne("StoreMapper.get_store_name", sid);
+	}
+	
 	public int store_registe(StoreVO store) throws SQLException {
 		return session.insert("StoreMapper.registe_store", store);
 	}

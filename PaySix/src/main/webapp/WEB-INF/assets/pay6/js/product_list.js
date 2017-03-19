@@ -5,6 +5,17 @@ $(document).ready(function(){
 	
 //	var tmp = document.location.search.split("=");
 //	var sid = tmp[1].split("&");
+
+	$.ajax({
+		url: '/store/get_name?sid=' + sid
+	}).done(function(store){
+		if( store == null ){
+			console.log('null store name');		
+		}else{
+			$("#store_name").text(store.sname);
+		}
+	});
+	
 	
 	$.ajax({
 		url: '/product/popular_list?sid=' + sid
@@ -57,6 +68,10 @@ $(document).ready(function(){
 	});	
 });
 
+
+function back(){
+	location.href = "/page/store_list";
+}
 
 function product_detail(pid){
 	location.href="/page/product_detail?pid=" + pid;

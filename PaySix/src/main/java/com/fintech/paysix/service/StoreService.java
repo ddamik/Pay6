@@ -41,6 +41,9 @@ public class StoreService {
 		return storeDao.store_order_info(sid);
 	}
 	
+	public StoreVO get_store_name(String sid) throws SQLException{
+		return storeDao.get_store_name(sid);
+	}
 	public int store_registe(String sid, String sname, String saddr, String stel, String simgurl, String rname) throws SQLException {		
 		StoreVO vo = new StoreVO(sid, sname, saddr, stel, simgurl, rname);
 		if( storeDao.store_registe(vo) > 0 ) return ExceptionNumber.REGISTE_STORE_SUCCESS;

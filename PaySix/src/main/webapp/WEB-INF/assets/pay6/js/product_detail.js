@@ -15,13 +15,21 @@ var amount = "";
 var strPaymethod = "";
 
 $(document).ready(function() {
-	
-	$("#pay6Header").load("/page/header");
-	
-	
+		
 	var strPid = pid + "";
 	sid = strPid.substr(0, 4);
 	amount = "";
+	
+	$.ajax({
+		url: '/store/get_name?sid=' + sid
+	}).done(function(store){
+		if( store == null ){
+			console.log('null store name');		
+		}else{
+			$("#store_name").text(store.sname);
+		}
+	});
+	
 	
 	$.ajax({
 		url: '/product/detail?pid=' + pid

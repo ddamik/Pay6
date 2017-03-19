@@ -29,7 +29,14 @@
 	</select>
 	
 	
-	
+	<select id="get_store_name" parameterType="String" resultType="StoreVO">
+		select
+			sname
+		from
+			storeinfo
+		where
+			sid = #{sid}
+	</select>
 	
 	<insert id="registe_store" parameterType="StoreVO">
 		insert
