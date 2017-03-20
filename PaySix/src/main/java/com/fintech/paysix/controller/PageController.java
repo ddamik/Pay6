@@ -17,14 +17,6 @@ public class PageController {
 		return new ModelAndView("/html/store_list");
 	}
 
-	
-	@RequestMapping(value = "/page/store_list2")
-	public ModelAndView store_list2() {
-		return new ModelAndView("/html/store_list2");
-	}
-	
-	
-	
 	// 2. product list page
 	@RequestMapping(value = "/page/product_list")
 	public ModelAndView product_list() {
@@ -37,60 +29,46 @@ public class PageController {
 		return new ModelAndView("/html/order");
 	}
 
-	// 4. owner page
-	@RequestMapping(value = "/page/owner")
-	public ModelAndView owner() {
-		return new ModelAndView("/html/owner");
-	}
-
 	// 5. product detail
 	@RequestMapping(value = "/page/product_detail")
 	public ModelAndView product_detail() {
 		return new ModelAndView("/html/product_detail");
 	}
 
-	
-	// 5. product detail
-	@RequestMapping(value = "/page/product_detail2")
-	public ModelAndView product_detail2() {
-		return new ModelAndView("/html/product_detail1");
+	// 6. product detail
+	@RequestMapping(value = "/page/header")
+	public ModelAndView header() {
+		return new ModelAndView("/html/header");
 	}
-	
-	// 5. product detail
-		@RequestMapping(value = "/page/header")
-		public ModelAndView header() {
-			return new ModelAndView("/html/header");
-		}
-	
-		// 5. product detail
-		@RequestMapping(value = "/page/btn_back")
-		public ModelAndView btn_back() {
-			return new ModelAndView("/html/btn_back");
-		}	
-	
-	
+
 	/*
 	 * 1. onwer index
 	 * 
 	 * 
 	 */
 
-	// 5. product detail
-	@RequestMapping(value = "/page/owner_index")
+	// 1. index
+	@RequestMapping(value = "/page/owner/index")
 	public ModelAndView owner_index() {
 		return new ModelAndView("/html/owner/owner_index");
 	}
 
-	// 5. product detail
-		@RequestMapping(value = "/drop")
-		public ModelAndView drop() {
-			return new ModelAndView("/html/order/drop");
-		}
-		
-		
-		
-		
-		
+	// 2. owner page
+	@RequestMapping(value = "/page/owner/order_list")
+	public ModelAndView owner_order_list() {
+		return new ModelAndView("/html/owner/order_list");
+	}
+
+	// 3. owner page
+	@RequestMapping(value = "/page/owner/chart")
+	public ModelAndView owner_data_chart() {
+		return new ModelAndView("/html/owner/chart");
+	}	
+	
+	
+	
+	
+	
 	/*
 	 * iamport
 	 */
@@ -103,5 +81,25 @@ public class PageController {
 	@RequestMapping(value = "/kakao/complete")
 	public ModelAndView kakao_complete() {
 		return new ModelAndView("/html/kakao/kakao_complete");
+	}
+
+	/*
+	 * Temp Page
+	 */
+	// 5. product detail
+	@RequestMapping(value = "/page/btn_back")
+	public ModelAndView btn_back() {
+		return new ModelAndView("/html/btn_back");
+	}
+
+	// 5. product detail
+	@RequestMapping(value = "/page/product_detail2")
+	public ModelAndView product_detail2() {
+		return new ModelAndView("/html/product_detail1");
+	}
+
+	@RequestMapping(value = "/page/store_list2")
+	public ModelAndView store_list2() {
+		return new ModelAndView("/html/store_list2");
 	}
 }

@@ -63,7 +63,7 @@ public class LogService {
 	}
 
 	// 2. Onwer Order List
-	public List<OwnerOrderVO> owner_order_list(String sid) throws SQLException {
+	public List<OwnerOrderVO> owner_order_list(String sid, String seqid) throws SQLException {
 
 		/*
 		 * result status 1, 2 ÇÕÄ£ °ª
@@ -72,16 +72,18 @@ public class LogService {
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("sid", sid);
+		map.put("seqid", seqid);
 		map.put("status", "1");
+		
 
 		for (OwnerOrderVO vo : logDao.owner_order_list(map)) {
 			result.add(vo);
 		}
 
-		map.put("status", "2");
-		for (OwnerOrderVO vo : logDao.owner_order_list(map)) {
-			result.add(vo);
-		}
+//		map.put("status", "2");
+//		for (OwnerOrderVO vo : logDao.owner_order_list(map)) {
+//			result.add(vo);
+//		}
 
 		return result;
 	}

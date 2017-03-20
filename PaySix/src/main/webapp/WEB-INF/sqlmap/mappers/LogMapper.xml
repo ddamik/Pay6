@@ -50,11 +50,12 @@
 		where
 			log.pid = productinfo.pid
 		and 
-			date(log.ordertime) = date(now())
-		and 
 			log.status = #{status}
 		and
 			productinfo.sid = #{sid}
+		and 
+			log.seqid > #{seqid}
+		limit 15;
 	</select>
 	
 	<!-- 2. join table -->

@@ -2213,3 +2213,15 @@ input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:ac
 .store-name{
 	font-weight: bold;
 }
+
+ .all-list-title{
+ 	font-size: 20px;
+ 	font-weight: bold;
+ 	margin: 0 10px 0 10px;
+ 	text-align: center;
+ }
+ 
+ 
+ .gap{
+ 	height: 30px;
+ }

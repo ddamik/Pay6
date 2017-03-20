@@ -55,7 +55,8 @@ public class LogController {
 	@RequestMapping(value="/log/owner/order_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
 	public String owner_list(HttpServletRequest request) throws SQLException {
 		String sid = request.getParameter("sid");
-		return gson.toJson(logService.owner_order_list(sid));
+		String seqid = request.getParameter("seqid");
+		return gson.toJson(logService.owner_order_list(sid, seqid));
 	}
 	
 	

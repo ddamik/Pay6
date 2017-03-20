@@ -27,7 +27,7 @@ $(document).ready(function(){
 				
 				var url = "../images/productinfo/" + product.pid + ".jpg";
 				var str = "<div class='6u 12u(mobile)'>"
-							+ "<article class='item'>"
+							+ "<article class='top3-box style2 item'>"
 								+ "<a href='#' onclick='product_detail(" + product.pid + ");' class='image fit'><img src='" + url + "' alt=''/></a>"
 								+ "<header>"
 									+ "<span class='product-pname'>" + product.pName + "</span>"
@@ -35,7 +35,7 @@ $(document).ready(function(){
 								+ "</header>"
 								+ "<div class=''>"
 									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-credit-card'></i> " + product.pCount + "</div>"
-									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-mail-reply-all'></i> " + product.rCount + "</div>"
+									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-comments-o'></i> " + product.rCount + "</div>"
 									+ "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-thumbs-o-up'></i> " + product.vCount + "</div>"
 								+ "</div>"								
 							+ "</article>"							
@@ -54,14 +54,17 @@ $(document).ready(function(){
 		}else{
 			$.each(data, function(index, product){
 				
-				var pprice = numberWithCommas(product.pprice);
-				
-				var str = "<a href='#' onclick='product_detail(" + product.pid + ");'>"
-						+ "<section class='box custom-height'>"
-						+ "<div class='8u text-left float-left'><span>" + product.pName + "</span></div>"
-						+ "<div class='4u text-right float-left'><span>" + pprice + "</span></div>"
-						+ "</section>"
-						+ "</a>";
+				var pprice = numberWithCommas(product.pprice);				
+				var str = "<div class='12u 12u(mobile)'>"
+							+ "<article class='item'>"
+								+ "<a onclick='product_detail(" + product.pid + ");'>"
+								+ "<div class='box style2'>"
+									+ "<div class='8u text-left float-left'><span>" + product.pName + "</span></div>"
+									+ "<div class='4u text-right float-left'><span>" + pprice + "</span></div>"
+								+ "</div>"
+								+ "</a>"
+							+ "</article>"
+						+ "</div>";
 				$("#all_list").append(str);
 			});
 		}	
