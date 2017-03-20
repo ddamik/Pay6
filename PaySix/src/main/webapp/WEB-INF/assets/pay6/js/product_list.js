@@ -5,7 +5,17 @@ $(document).ready(function(){
 	
 //	var tmp = document.location.search.split("=");
 //	var sid = tmp[1].split("&");
-
+	
+	var	$window = $(window),
+	$body = $('body');
+	
+	// Toggle.
+	$('<div id="headerToggle">' +
+			'<a onclick="back();" class="toggle"></a>' +
+		'</div>'
+	).appendTo($body);
+	
+	
 	$.ajax({
 		url: '/store/get_name?sid=' + sid
 	}).done(function(store){
