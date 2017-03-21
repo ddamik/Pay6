@@ -43,6 +43,7 @@
 			log.tno as tno,        
 	        log.status as status,
 	        log.ordertime as ordertime,
+	        log.endtime as endtime,
 	        productinfo.pname as pname
 		from
 			log,
@@ -65,6 +66,7 @@
 		<result property="orderno" column="orderno"/>
 		<result property="status" column="status"/>
 		<result property="ordertime" column="ordertime"/>
+		<result property="endtime" column="endtime"/>
 		<result property="pname" column="pname"/>
 	</resultMap>
 	
@@ -77,7 +79,8 @@
 		update
 			log
 		set
-			status = "2"
+			status = "2",
+			endtime = current_timestamp()
 		where
 			seqid = #{seqid}
 	</update>
@@ -202,6 +205,18 @@
 			#{ordertime}		
 		)		
 	</insert>
+	
+	
+	<select id="order_number" parameterType="String" resultType="LogVO">
+		select 
+			count(*) as etc1
+		from 
+			log 
+		where 
+			mid(pid, 1, 4) = #{pid}
+		 and 
+		 	status = "1";
+	</select>
 	
 
 </mapper>

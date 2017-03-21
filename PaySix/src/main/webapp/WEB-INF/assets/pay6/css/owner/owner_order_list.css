@@ -2282,30 +2282,24 @@ body.is-loading #header.alt {
 	font-size: 20px !important;
 	font-weight: bold;
 }
-.order{
-	float: left;
+.order{	
 	width: 25%;
 }
 
 .log-orderno{
-	width: 15%;
-	float: left;
+	width: 10%;	
 }
 .log-tno{
-	width: 20%;
-	float: left;
+	width: 22%;	
 }
 .log-pname{
-	width: 30%;
-	float: left;
+	width: 23%;	
 }
 .log-status{
-	width: 20%;
-	float: left;
+	width: 30%;	
 }
 .log-button{
-	width: 15%;
-	float: left;
+	width: 15%;	
 }
 .custom-size{
 	 

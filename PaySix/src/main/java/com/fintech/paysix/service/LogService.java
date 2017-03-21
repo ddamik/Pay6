@@ -37,24 +37,26 @@ public class LogService {
 	 */
 
 	// 1. Log 데이터생성
-	public int insert(int tno, String pid, String userid, String paymethod, String amount) throws SQLException, IOException, CoinStackException {
+	public int insert(int tno, String pid, String userid, String paymethod, String amount)
+			throws SQLException, IOException, CoinStackException {
 
 		int orderno = 152;
 		String status = "status";
 		Date endtime = null;
- 
-		double satoshi = 0.0001; 
+
+		double satoshi = 0.0001;
 		double fee = 0.0001;
-		
+
 		System.out.println(satoshi);
 		LogVO log = new LogVO(tno, orderno, status, pid, userid, paymethod, endtime);
 
 		if (logDao.insert(log) > 0) {
 			// 주문 성공
 			// 주문 수 올리기
-			if (productService.pcount_up(pid) > 0){
-//				Blocko blocko = new Blocko();
-//				blocko.send_satoshi(satoshi, fee, ExceptionNumber.BITCOIN_SNED_ADDRESS, Blocko.PRIVATE_KEY);
+			if (productService.pcount_up(pid) > 0) {
+				// Blocko blocko = new Blocko();
+				// blocko.send_satoshi(satoshi, fee,
+				// ExceptionNumber.BITCOIN_SNED_ADDRESS, Blocko.PRIVATE_KEY);
 				return orderno;
 			} else
 				return ExceptionNumber.SQL_UPDATE_FAIL;
@@ -63,7 +65,7 @@ public class LogService {
 	}
 
 	// 2. Onwer Order List
-	public List<OwnerOrderVO> owner_order_list(String sid, String seqid) throws SQLException {
+	public List<OwnerOrderVO> order_list_ordertime(String sid, String seqid) throws SQLException {
 
 		/*
 		 * result status 1, 2 합친 값
@@ -74,17 +76,29 @@ public class LogService {
 		map.put("sid", sid);
 		map.put("seqid", seqid);
 		map.put("status", "1");
-		
 
 		for (OwnerOrderVO vo : logDao.owner_order_list(map)) {
 			result.add(vo);
 		}
+		return result;
+	}
 
-//		map.put("status", "2");
-//		for (OwnerOrderVO vo : logDao.owner_order_list(map)) {
-//			result.add(vo);
-//		}
+	// 2. Onwer Order List
+	public List<OwnerOrderVO> order_list_endtime(String sid, String seqid) throws SQLException {
 
+		/*
+		 * result status 1, 2 합친 값
+		 */
+		List<OwnerOrderVO> result = new ArrayList<OwnerOrderVO>();
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("sid", sid);
+		map.put("seqid", seqid);
+
+		map.put("status", "2");
+		for (OwnerOrderVO vo : logDao.owner_order_list(map)) {
+			result.add(vo);
+		}
 		return result;
 	}
 
@@ -154,12 +168,10 @@ public class LogService {
 
 	}
 
-	
-	public LogVO best_product(String sid){
-		return logDao.best_product(sid); 
+	public LogVO best_product(String sid) {
+		return logDao.best_product(sid);
 	}
-	
-	
+
 	// Random Data
 	public void randomData() throws SQLException, ParseException {
 
@@ -238,14 +250,19 @@ public class LogService {
 
 			minute = random.nextInt(60);
 			String strMinute = String.valueOf(minute);
-			
+
 			yester += ":" + strMinute + ":00";
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date ordertime = new Date();
 			ordertime = transFormat.parse(yester);
 
 			vo = new LogVO(tno, orderno, status, pid, userid, paymethod, ordertime, null);
-			if( logDao.insert_random(vo) > 0 ) productService.pcount_up(pid);
+			if (logDao.insert_random(vo) > 0)
+				productService.pcount_up(pid);
 		}
+	}
+
+	public LogVO order_number(String pid) throws SQLException {
+		return logDao.order_number(pid);
 	}
 }

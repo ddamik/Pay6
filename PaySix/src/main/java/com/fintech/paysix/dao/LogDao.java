@@ -72,7 +72,9 @@ public class LogDao {
 	}
 	
 	
-	
+	public LogVO order_number(String pid) throws SQLException{
+		return session.selectOne("LogMapper.order_number", pid);
+	}
 	
 	
 	

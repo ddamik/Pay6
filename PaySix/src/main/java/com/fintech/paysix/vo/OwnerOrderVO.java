@@ -9,6 +9,7 @@ public class OwnerOrderVO {
 	private int tno;
 	private String status;
 	private Date ordertime;
+	private Date endtime;
 	private String pname;
 
 	public OwnerOrderVO() {
@@ -31,6 +32,17 @@ public class OwnerOrderVO {
 		this.tno = tno;
 		this.status = status;
 		this.ordertime = ordertime;
+		this.pname = pname;
+	}
+
+	public OwnerOrderVO(int seqid, int orderno, int tno, String status, Date ordertime, Date endtime, String pname) {
+		super();
+		this.seqid = seqid;
+		this.orderno = orderno;
+		this.tno = tno;
+		this.status = status;
+		this.ordertime = ordertime;
+		this.endtime = endtime;
 		this.pname = pname;
 	}
 
@@ -82,10 +94,18 @@ public class OwnerOrderVO {
 		this.ordertime = ordertime;
 	}
 
+	public Date getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(Date endtime) {
+		this.endtime = endtime;
+	}
+
 	@Override
 	public String toString() {
 		return "OwnerOrderVO [seqid=" + seqid + ", orderno=" + orderno + ", tno=" + tno + ", status=" + status
-				+ ", ordertime=" + ordertime + ", pname=" + pname + "]";
+				+ ", ordertime=" + ordertime + ", endtime=" + endtime + ", pname=" + pname + "]";
 	}
 
 }

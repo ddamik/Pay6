@@ -220,8 +220,12 @@ function server_payment(tno, method){
 			'amount': amount
 		},
 		success: function(data){
-			alert("결제가 완료되었습니다.");
-			location.reload();
+			$.ajax({
+				url: '/log/order/num?pid=' + pid
+			}).done(function(data) {
+				alert("결제가 완료되었습니다.\n대기번호는 " + 152 + "번이며, " + 10 + "분 소요예정입니다.");
+				location.reload();
+			});
 		},
 		error: function(xhr, status, error){
 			

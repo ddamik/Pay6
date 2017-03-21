@@ -52,14 +52,21 @@ public class LogController {
 	
 	//	2. 사업자( 주문 리스트 )
 	@ResponseBody
-	@RequestMapping(value="/log/owner/order_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
-	public String owner_list(HttpServletRequest request) throws SQLException {
+	@RequestMapping(value="/log/owner/order_list/ordertime", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String owner_list_ordertime(HttpServletRequest request) throws SQLException {
 		String sid = request.getParameter("sid");
 		String seqid = request.getParameter("seqid");
-		return gson.toJson(logService.owner_order_list(sid, seqid));
+		return gson.toJson(logService.order_list_ordertime(sid, seqid));
 	}
 	
-	
+	//	2. 사업자( 주문 리스트 )
+	@ResponseBody
+	@RequestMapping(value="/log/owner/order_list/endtime", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String owner_list_endtime(HttpServletRequest request) throws SQLException {
+		String sid = request.getParameter("sid");
+		String seqid = request.getParameter("seqid");
+		return gson.toJson(logService.order_list_endtime(sid, seqid));
+	}
 
 	
 	//	3. 결제상태 변경
@@ -92,7 +99,14 @@ public class LogController {
 		return gson.toJson(logService.sales_rate_fromMidNight(sid));
 	}
 	
-	
+	//	6. 남은 주문량
+	@ResponseBody
+	@RequestMapping(value="/log/order/num", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String order_num(
+			@RequestParam("pid") String pid) throws SQLException{
+		System.out.println(pid);
+		return gson.toJson(logService.order_number(pid));
+	}
 	
 	
 	private Blocko blocko = new Blocko();

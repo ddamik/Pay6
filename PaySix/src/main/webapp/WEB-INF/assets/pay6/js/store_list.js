@@ -34,10 +34,8 @@ function update_list(obj){
 							+ "<header class='major'>"
 								+ "<h3>"
 									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.etc2 + "</a>"
-									+ "<a class='text-distance'>&nbsp;&nbsp;현재 위치로부터 00m</a>"
 								+ "</h3>"
-								+ "<p>" + store.sname + "</p>"
-								+ "<p>" + store.saddr + "</p>"
+								+ "<p><span class='store-name'>" + store.sname + "</span>&nbsp;&nbsp;현재 위치로부터 00m</p>"
 								
 							+ "</header>"
 						+ "</article>";
