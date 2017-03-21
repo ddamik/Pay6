@@ -16,6 +16,11 @@ var strPaymethod = "";
 
 $(document).ready(function() {
 		
+	$("#tx_credit").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	$("#tx_nh").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	$("#tx_bitcoin").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	$("#tx_coupon").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	
 	var strPid = pid + "";
 	sid = strPid.substr(0, 4);
 	amount = "";
@@ -59,8 +64,24 @@ $(document).ready(function() {
 					str += "</ul>"
 						+ "</footer>";
 			 $("#product_detail").append(str);
-			 $("#btn_table_order").click(function(){ strPaymethod="0"; paymethod("[ Table ]"); });
-			 $("#btn_takeout_order").click(function(){ strPaymethod="1"; paymethod("[ Take-Out ]"); });
+			 $("#btn_table_order").click(function(){ 
+				 strPaymethod="0"; 
+				 paymethod("[ Table ]");
+
+				 $("#credit-order").css('display', 'none');
+				 $("#nh-order").css('display', 'none');
+				 $("#bitcoin-order").css('display', 'none');
+				 $("#coupon-order").css('display', 'none');
+			 });
+			 $("#btn_takeout_order").click(function(){ 
+				 strPaymethod="1"; 
+				 paymethod("[ Take-Out ]");
+				 
+				 $("#credit-order").css('display', 'none');
+				 $("#nh-order").css('display', 'none');
+				 $("#bitcoin-order").css('display', 'none');
+				 $("#coupon-order").css('display', 'none');
+			 });
 			 $("#btn_more_review").click(function(){ review_more(); });
 	});
 	
@@ -70,7 +91,15 @@ $(document).ready(function() {
 	$("#bitcoin-order").css('display', 'none');
 	$("#coupon-order").css('display', 'none');
 	
+	var strTable = "테이블 번호를 입력하세요.";
+	var strTakeOut = "휴대전화 번호를 입력하세요.";
+	var table_order = "0";
+	var take_out_order = "1";
+	 
 	$("#credit").click(function(){
+		if( strPaymethod == table_order ) $("#tx_credit").attr("placeholder", strTable);
+		else $("#tx_credit").attr("placeholder", strTakeOut);		
+		
 		$("#credit_amount").text("결제 금액: " + numberWithCommas(amount));
 		$("#credit-order").css('display', 'block');
 		$("#nh-order").css('display', 'none');
@@ -78,6 +107,9 @@ $(document).ready(function() {
 		$("#coupon-order").css('display', 'none');
 	});
 	$("#nh-api").click(function(){
+		if( strPaymethod == table_order ) $("#tx_nh").attr("placeholder", strTable);
+		else $("#tx_nh").attr("placeholder", strTakeOut);
+		
 		$("#nh_amount").text("결제 금액: " + numberWithCommas(amount));
 		$("#credit-order").css('display', 'none');
 		$("#nh-order").css('display', 'block');
@@ -85,6 +117,9 @@ $(document).ready(function() {
 		$("#coupon-order").css('display', 'none');
 	});
 	$("#bitcoin").click(function(){
+		if( strPaymethod == table_order ) $("#tx_bitcoin").attr("placeholder", strTable);
+		else $("#tx_bitcoin").attr("placeholder", strTakeOut);
+		
 		$("#bitcoin_amount").text("결제 금액: " + numberWithCommas(amount));
 		$("#credit-order").css('display', 'none');
 		$("#nh-order").css('display', 'none');
@@ -92,29 +127,17 @@ $(document).ready(function() {
 		$("#coupon-order").css('display', 'none');
 	});
 	$("#coupon").click(function(){
-		alert("준비중입니다.");
-		/*
+		if( strPaymethod == table_order ) $("#tx_coupon").attr("placeholder", strTable);
+		else $("#tx_coupon").attr("placeholder", strTakeOut);
+		
 		$("#coupon_amount").text("결제 금액: " + numberWithCommas(amount));
 		$("#pay_amount").text(amount);
 		$("#credit-order").css('display', 'none');
 		$("#nh-order").css('display', 'none');
 		$("#bitcoin-order").css('display', 'none');
 		$("#coupon-order").css('display', 'block');
-		*/
 	});
-	
-	$("#bitcoin_payment").click(function(){
-		bitcoin_payment();
-	});
-	
-	//	내 satoshi 잔액
-	$.ajax({
-		url: '/bitcoin/getBalance'
-	}).done(function(data){
-		$("#remain_btc").text(numberWithCommasSatoshi(data));
-	});
-	
-	
+      	
 	//	리뷰 리스트
 	init_review();
 
@@ -166,6 +189,48 @@ function order(position){
 	//	location.href="/page/order?pid=" + pid + "?position=" + position;
 }
 
+
+function payment_method(obj){
+	var credit = "credit_payment";
+	var nh = "nh_payment";
+	var bitcoin = "bitcoin_payment";
+	var coupon = "coupon_payment";
+ 
+	var tno = $("#tx_nh").val();
+	
+	if( obj == credit ) tno = $("#tx_credit").val();
+	else if( obj == nh ) tno = $("#tx_nh").val();
+	else if( obj == bitcoin ) tno = $("#tx_bitcoin").val();
+	else tno = $("#tx_coupon").val();
+	
+	var method = obj.substr(0, obj.length-8);
+	server_payment(tno, method);
+}
+function server_payment(tno, method){
+	
+	var userid = "이승호";
+	$.ajax({
+		url: '/log/insert',
+		type: 'post',
+		data:{
+			'tno': tno, 
+			'pid': pid,
+			'userid': userid,
+			'paymethod': method,
+			'amount': amount
+		},
+		success: function(data){
+			alert("결제가 완료되었습니다.");
+			location.reload();
+		},
+		error: function(xhr, status, error){
+			
+		}
+	});
+}
+
+
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " won";
 }
@@ -186,29 +251,4 @@ function dateToYYYYMMDD(intime){
 
 function back(){
 	location.href = "/page/product_list?sid=" + sid;
-}
-
-function bitcoin_payment(){
-	
-	var tno = "0";
-	var userid = "이승호";
-	
-	$.ajax({
-		url: '/log/insert',
-		type: 'post',
-		data:{
-			'tno': tno, 
-			'pid': pid,
-			'userid': userid,
-			'paymethod': strPaymethod,
-			'amount': amount
-		},
-		success: function(data){
-			alert("결제가 완료되었습니다.");
-			location.reload();
-		},
-		error: function(xhr, status, error){
-			
-		}
-	});
 }

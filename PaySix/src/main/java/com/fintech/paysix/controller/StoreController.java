@@ -23,8 +23,10 @@ public class StoreController {
 
 	@ResponseBody
 	@RequestMapping(value = "/store/list", method = RequestMethod.GET, produces = "application/json;text/plain;charset=UTF-8")
-	public String store_list(HttpServletRequest request) throws SQLException {
-		return gson.toJson(storeService.store_list());
+	public String store_list(
+			@RequestParam("category") String category) throws SQLException {
+		System.out.println(category);
+		return gson.toJson(storeService.store_list(category));
 	}
 
 	@ResponseBody

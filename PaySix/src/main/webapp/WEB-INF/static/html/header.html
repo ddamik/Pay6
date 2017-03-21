@@ -1,9 +1,85 @@
 
-	<head>
+<head>
 
-		<meta charset="utf-8" />
-		</head>
+<meta charset="utf-8" />
+</head>
 <style>
+ 
+
+#pay6-nav .nav-logo .text-address {
+	-moz-transition: background-color 0.2s ease-in-out, color 0.2s
+		ease-in-out;
+	-webkit-transition: background-color 0.2s ease-in-out, color 0.2s
+		ease-in-out;
+	-ms-transition: background-color 0.2s ease-in-out, color 0.2s
+		ease-in-out;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	color: #ffffff;
+	display: inline-block;
+	line-height: 1.65em;
+	margin-right: 0.325em;
+	padding: 0 0.125em 0 0.375em;
+}
+
+#pay6-nav {
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	background-color: #2a2f4a;
+	box-shadow: 0 0 0.25em 0 rgba(0, 0, 0, 0.15);
+	cursor: default;
+	font-weight: 600;
+	height: 3.25em;
+	left: 0;
+	letter-spacing: 0.25em;
+	line-height: 3.25em;
+	margin: 0;
+
+	text-transform: uppercase;
+	top: 0;
+	width: 100%;
+	z-index: 10000;
+}
+
+#pay6-nav .nav-logo {
+	border: 0;
+	display: inline-block;
+	font-size: 0.8em;
+	height: inherit;
+	line-height: inherit;
+	float: left;
+}
+
+#pay6-nav .nav-logo strong {
+	-moz-transition: background-color 0.2s ease-in-out, color 0.2s
+		ease-in-out;
+	-webkit-transition: background-color 0.2s ease-in-out, color 0.2s
+		ease-in-out;
+	-ms-transition: background-color 0.2s ease-in-out, color 0.2s
+		ease-in-out;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	color: #242943;
+	display: inline-block;
+	line-height: 1.65em;
+	margin-right: 1.65em;
+	padding: 0 0.125em 0 0.375em;
+}
+
+#pay6-nav .nav-logo:hover strong {
+	background-color: #9bf1ff;
+}
+
+#pay6-nav .nav-logo:active strong {
+	background-color: #53e3fb;
+}
+
+@media screen and (max-width: 480px) {
+	#pay6-nav .nav-logo span {
+		display: none;
+	}
+}
+
 .pay6-header {
 	position: fixed;
 }
@@ -84,23 +160,46 @@
 		display: none;
 	}
 }
-.text-title{
+
+.text-title {
 	width: 30% !important;
 }
-.text-address{
+
+.text-address {
 	width: 70% !important;
 	text-align: right;
-
 }
-.background-address{
-	background-color: #242943 !important;
-	color:  #ffffff !important;
+
+.background-address {
+	background-color: #2a2f4a !important;
+	color: #ffffff !important;
+}
+
+.padding-header {
+	padding-top: 3.25em;
+}
+
+.total-header {
+	height: 6.5em;
+}
+.category{
+	width: 25%;
+	text-align: center;
+	color: #ffffff !important;
+	
 }
 </style>
 
 
 <!-- Header -->
+<div id="pay6-nav" class="pay6-nav">
+	<a id='korean' onclick='update_list(this.id);' class="nav-logo category">한식</a> 
+	<a id='chinese' onclick='update_list(this.id);' class="nav-logo category">중식</a>  
+	<a id='west' onclick='update_list(this.id);' class="nav-logo category">양식</a>
+	<a id='cafe' onclick='update_list(this.id);' class="nav-logo category">카페</a>	  
+</div>
 <header id="pay6-header" class="pay6-header">
 	<a class="logo text-title"><strong>PAY6</strong> <span>Fintech Academy</span></a> 
 	<a class="logo text-address"><strong class='background-address'>서울특별시 송파구 방이동</strong></a>
 </header>
+

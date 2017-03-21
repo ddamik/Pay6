@@ -64,12 +64,11 @@
 												<h5 class="payment-title">
 													<span id='credit_amount' class='pay-font'></span>
 													<hr class='padding-custom-5'>
-													<span class='btc-font'>잔액: 654,000</span>
 												</h5>
 											</header>
 											<footer>
-												<input type='text'>
-												<a class='button order-button'>결제</a>
+												<input id='tx_credit' type='text'>
+												<a id='credit_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
 											</footer>
 										</div>
 									</div>
@@ -86,11 +85,11 @@
 												<h5 class="payment-title">
 													<span id='nh_amount' class='pay-font'></span>
 													<hr class='padding-custom-5'>
-													<span class='btc-font'>잔액: 654,000</span>
 												</h5>
 											</header>
 											<footer>
-												<a class='button order-button'>결제</a>
+												<input id='tx_nh' type='text'>
+												<a id='nh_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
 											</footer>
 										</div>
 									</div>
@@ -105,14 +104,13 @@
 										<div class="order-box">
 											<header>
 												<h5 class="payment-title">
-													<span id='bitcoin_amount' class='pay-font'></span> <span
-														class='satoshi-font'>(000 satoshi)</span>
+													<span id='bitcoin_amount' class='pay-font'></span> 
 													<hr class='padding-custom-5'>
-													<span id='remain_btc' class='btc-font'></span>
 												</h5>
 											</header>
 											<footer>
-												<a id='bitcoin_payment' class='button order-button'>결제</a>
+												<input id='tx_bitcoin' type='text'>
+												<a id='bitcoin_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
 											</footer>
 										</div>
 									</div>
@@ -129,11 +127,11 @@
 												<h5 class="payment-title">
 													<span id='coupon_amount' class='pay-font'></span>
 													<hr class='padding-custom-5'>
-													<span class='btc-font'>잔액: 654,000</span>
 												</h5>
 											</header>
 											<footer>
-												<a class='button order-button'>결제</a>
+												<input id='tx_coupon' type='text'>
+												<a id='coupon_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
 											</footer>
 										</div>
 									</div>

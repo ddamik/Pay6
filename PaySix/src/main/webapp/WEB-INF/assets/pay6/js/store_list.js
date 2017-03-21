@@ -1,12 +1,25 @@
+var category = "";
+var cafe = "cafe";
+var korean = "korean";
+var chinese = "chinese";
+var west = "west";
 
 $(document).ready(function(){
 
 	$("#pay6Header").load("/page/header");
 	
+	category = korean;
+	update_list(category);
 	
+});
+
+function update_list(obj){
+	
+	// category = obj;
+	$("#one").empty();
 	
 	$.ajax({
-		url: '/store/list'
+		url: '/store/list?category=' + category
 	}).done(function(data){
 		if( data == null ){
 			alert("등록된 상점이 없습니다.");
@@ -20,10 +33,12 @@ $(document).ready(function(){
 							+ "</span>"
 							+ "<header class='major'>"
 								+ "<h3>"
-									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.sname + "</a>"
+									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.etc2 + "</a>"
 									+ "<a class='text-distance'>&nbsp;&nbsp;현재 위치로부터 00m</a>"
 								+ "</h3>"
+								+ "<p>" + store.sname + "</p>"
 								+ "<p>" + store.saddr + "</p>"
+								
 							+ "</header>"
 						+ "</article>";
 				$("#one").append(str);
@@ -48,7 +63,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-});
+}
 
 function product_list(sid){
 	location.href="/page/product_list?sid=" + sid;

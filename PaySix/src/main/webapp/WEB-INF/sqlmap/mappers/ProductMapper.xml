@@ -9,7 +9,14 @@
 		4. 주문 수 올리기
 		5. 조회 수 올리기 
 	-->
-
+<select id="product_detail" parameterType="String" resultType="ProductVO">
+	select
+		pname
+	from
+		productinfo
+	where
+		pid = #{pid}
+</select>
 
 	<!-- 1. 인기메뉴 Top3 -->
 	<select id="popular_list" parameterType="String" resultType="ProductVO">

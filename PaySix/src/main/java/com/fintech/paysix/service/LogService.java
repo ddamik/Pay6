@@ -53,8 +53,8 @@ public class LogService {
 			// 주문 성공
 			// 주문 수 올리기
 			if (productService.pcount_up(pid) > 0){
-				Blocko blocko = new Blocko();
-				blocko.send_satoshi(satoshi, fee, ExceptionNumber.BITCOIN_SNED_ADDRESS, Blocko.PRIVATE_KEY);
+//				Blocko blocko = new Blocko();
+//				blocko.send_satoshi(satoshi, fee, ExceptionNumber.BITCOIN_SNED_ADDRESS, Blocko.PRIVATE_KEY);
 				return orderno;
 			} else
 				return ExceptionNumber.SQL_UPDATE_FAIL;
@@ -163,11 +163,23 @@ public class LogService {
 	// Random Data
 	public void randomData() throws SQLException, ParseException {
 
-		String sid[] = new String[4];
+		String sid[] = new String[16];
 		sid[0] = "1001";
 		sid[1] = "1002";
 		sid[2] = "1003";
 		sid[3] = "1004";
+		sid[4] = "1005";
+		sid[5] = "1006";
+		sid[6] = "1007";
+		sid[7] = "1008";
+		sid[8] = "1009";
+		sid[9] = "1010";
+		sid[10] = "1011";
+		sid[11] = "1012";
+		sid[12] = "1013";
+		sid[13] = "1014";
+		sid[14] = "1015";
+		sid[15] = "1016";
 
 		String arrPid[] = new String[3];
 		arrPid[0] = "0001";

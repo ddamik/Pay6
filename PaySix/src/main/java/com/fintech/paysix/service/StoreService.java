@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fintech.paysix.dao.StoreDao;
+import com.fintech.paysix.vo.LogVO;
+import com.fintech.paysix.vo.ProductVO;
 import com.fintech.paysix.vo.StoreVO;
 
 import exception.ExceptionNumber;
@@ -22,16 +24,21 @@ public class StoreService {
 	@Autowired
 	private LogService logService;
 	
+	@Autowired
+	private ProductService productService;
 	/*
 	 * 	1. store list
 	 */
 	
 	
 	// 1. store list
-	public List<StoreVO> store_list() throws SQLException {
-		List<StoreVO> list = storeDao.store_list();		
+	public List<StoreVO> store_list(String s_category) throws SQLException {
+		List<StoreVO> list = storeDao.store_list(s_category);
+		LogVO product;
 		for (StoreVO vo : list) {
-			vo.setEtc1(logService.best_product(vo.getSid()).getPid());
+			product = logService.best_product(vo.getSid());
+			vo.setEtc1(product.getPid());
+			vo.setEtc2(productService.product_detail(product.getPid()).getpName());
 		}
 		return list;
 	}

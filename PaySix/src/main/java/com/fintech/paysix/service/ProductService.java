@@ -29,6 +29,9 @@ public class ProductService {
 	 *  5. 조회 수 올리기
 	 */
 	
+	public ProductVO product_detail(String pid) throws SQLException{
+		return productDao.product_detail(pid);
+	}
 	//	1. 인기메뉴 Top3
 	public List<ProductVO> popular_list(String sid) throws SQLException{
 		return productDao.popular_list(sid);

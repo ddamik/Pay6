@@ -915,6 +915,9 @@ body.is-loading * {
 input, textarea, select {
 	font-family: 'Source Sans Pro';
 	font-weight: 300;
+	width: 100%;
+	font-size: 15px;
+	text-align: center;
 	color: #5d5d5d;
 }
 
