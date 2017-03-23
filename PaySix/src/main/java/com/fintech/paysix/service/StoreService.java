@@ -33,9 +33,16 @@ public class StoreService {
 	
 	// 1. store list
 	public List<StoreVO> store_list(String s_category) throws SQLException {
-		List<StoreVO> list = storeDao.store_list(s_category);
+		List<StoreVO> list;
+		
+		if( s_category.equals("all")) list = storeDao.store_list_all(); 
+		else list = storeDao.store_list(s_category);
+		
 		LogVO product;
+		
+		
 		for (StoreVO vo : list) {
+			System.out.println("List: " + vo.getSid());
 			product = logService.best_product(vo.getSid());
 			vo.setEtc1(product.getPid());
 			vo.setEtc2(productService.product_detail(product.getPid()).getpName());

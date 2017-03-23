@@ -65,16 +65,11 @@ $(document).ready(function(){
 			$.each(data, function(index, product){
 				
 				var pprice = numberWithCommas(product.pprice);				
-				var str = "<div class='12u 12u(mobile)'>"
-							+ "<article class='item'>"
-								+ "<a onclick='product_detail(" + product.pid + ");'>"
-								+ "<div class='box style2'>"
-									+ "<div class='8u text-left float-left'><span>" + product.pName + "</span></div>"
-									+ "<div class='4u text-right float-left'><span>" + pprice + "</span></div>"
-								+ "</div>"
-								+ "</a>"
-							+ "</article>"
-						+ "</div>";
+				var str = "<tr class='item box style2 td-cursor'>" 
+								+ "<td><a onclick='product_detail(" + product.pid + ");'><span>" + product.pName + "</span></a></td>"
+								+ "<td><a onclick='product_detail(" + product.pid + ");'><span class='price'>" + pprice + "</span></a></td>"
+							+ "</a>" 
+							+ "</tr>";
 				$("#all_list").append(str);
 			});
 		}	

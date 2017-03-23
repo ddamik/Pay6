@@ -41,7 +41,7 @@ public class LogService {
 			throws SQLException, IOException, CoinStackException {
 
 		int orderno = 152;
-		String status = "status";
+		String status = "1";
 		Date endtime = null;
 
 		double satoshi = 0.0001;
@@ -188,10 +188,10 @@ public class LogService {
 		sid[9] = "1010";
 		sid[10] = "1011";
 		sid[11] = "1012";
-		sid[12] = "1013";
-		sid[13] = "1014";
-		sid[14] = "1015";
-		sid[15] = "1016";
+//		sid[12] = "1013";
+//		sid[13] = "1014";
+//		sid[14] = "1015";
+//		sid[15] = "1016";
 
 		String arrPid[] = new String[3];
 		arrPid[0] = "0001";
@@ -236,7 +236,7 @@ public class LogService {
 			tno = random.nextInt(15);
 			orderno++;
 
-			ranSid = random.nextInt(4);
+			ranSid = random.nextInt(9) + 3;
 			ranPid = random.nextInt(3);
 			pid = sid[ranSid] + arrPid[ranPid];
 

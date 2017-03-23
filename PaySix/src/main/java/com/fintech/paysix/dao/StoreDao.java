@@ -19,6 +19,10 @@ public class StoreDao {
 	 * 	1. store list
 	 */
 	
+	
+	public List<StoreVO> store_list_all() throws SQLException{
+		return session.selectList("StoreMapper.store_list_all");
+	}
 	// 1. store list
 	public List<StoreVO> store_list(String s_category) throws SQLException {
 		return session.selectList("StoreMapper.store_list", s_category);

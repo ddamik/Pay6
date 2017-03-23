@@ -7,6 +7,17 @@
 		2. store ordermethod
 	-->
 	
+	<select id="store_list_all" resultType="StoreVO">
+		select
+			sid,
+			sname,
+			saddr,
+			simgurl
+		from
+			storeinfo
+	</select>
+	
+	
 	<select id="store_list" parameterType="String" resultType="StoreVO">
 		select
 			sid,

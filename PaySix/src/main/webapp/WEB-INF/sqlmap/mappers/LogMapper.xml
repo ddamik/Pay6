@@ -56,7 +56,7 @@
 			productinfo.sid = #{sid}
 		and 
 			log.seqid > #{seqid}
-		limit 15;
+		limit 10;
 	</select>
 	
 	<!-- 2. join table -->

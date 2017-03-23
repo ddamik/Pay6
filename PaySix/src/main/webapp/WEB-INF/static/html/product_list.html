@@ -19,7 +19,6 @@
 		<meta property="og:url" content="http://sample-env.qvaudrsyer.ap-northeast-2.elasticbeanstalk.com/">
 		
 		<link rel="stylesheet" href="../assets/pay6/css/product_list.css" />
-		<link rel="stylesheet" href="../assets/pay6/css/product_list_miniport.css" />
 		
 		<script src="../assets/pay6/js/jquery.min.js"></script>
 		<script src="../assets/pay6/js/product_list.js"></script>
@@ -48,7 +47,16 @@
 						<span class="all-list-title">모든 메뉴</span>
 					</h2>
 					<div>
-						<div id='all_list' class="row">
+						<table id='all_list' class="table table-bordered table-striped">
+							<thead>
+								<tr class='tr-head'>
+									<th>상품명</th>
+									<th>가격</th>
+								</tr>
+							</thead>
+							<tbody id="order_list">
+							</tbody>
+						</table>
 						</div>
 					</div>
 				</div>

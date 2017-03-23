@@ -1,21 +1,19 @@
 var category = "";
-var cafe = "cafe";
+var west = "west";
 var korean = "korean";
 var chinese = "chinese";
-var west = "west";
+var all = "all";
 
 $(document).ready(function(){
 
-	$("#pay6Header").load("/page/header");
-	
-	category = korean;
+	category = all;
 	update_list(category);
 	
 });
 
 function update_list(obj){
 	
-	// category = obj;
+	category = obj;
 	$("#one").empty();
 	
 	$.ajax({
@@ -26,7 +24,8 @@ function update_list(obj){
 		}else{
 			$.each(data, function(index, store){			
 
-				var url = "../images/productinfo/" + store.etc1 + ".jpg";				
+				var url = "../images/productinfo/" + store.etc1 + ".jpg";
+				console.log(url);
 				var str = "<article>"
 							+ "<span class='image'>"
 								+ "<img src='" + url + "' alt=''/>"
