@@ -1,30 +1,45 @@
-var category = "";
-var west = "west";
-var korean = "korean";
-var chinese = "chinese";
+var s_category = "";
+var s_province = "";
 var all = "all";
+
+var tmp = document.location.search.split("=");
+var sid = tmp[1].split("&");
 
 $(document).ready(function(){
 
-	category = all;
-	update_list(category);
+	$.ajax({
+		url: '/market/get_market_province?sid=' + sid
+	}).done(function(data) {
+		$("#market_name").text("◀ " + data.sname);
+		s_province = data.s_province;
+		
+		$("#market_name").click(function(){
+			location.href = "/page/market_list";
+		});
+		s_category = all;
+		update_list(s_category);
+		console.log(s_province);
+		console.log(sid);
+	});
+	
+
 	
 });
 
 function update_list(obj){
 	
-	category = obj;
+	s_category = obj;
 	$("#one").empty();
 	
 	$.ajax({
-		url: '/store/list?category=' + category
+		url: '/market/store_list_category?s_province=' + s_province + '&s_category=' + s_category + '&sid=' + sid
 	}).done(function(data){
 		if( data == null ){
 			alert("등록된 상점이 없습니다.");
 		}else{
 			$.each(data, function(index, store){			
 
-				var url = "../images/productinfo/" + store.etc1 + ".jpg";
+				var url = "../images/storeinfo/" + store.sid + ".jpg";
 				console.log(url);
 				var str = "<article>"
 							+ "<span class='image'>"
@@ -32,9 +47,9 @@ function update_list(obj){
 							+ "</span>"
 							+ "<header class='major'>"
 								+ "<h3>"
-									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.etc2 + "</a>"
+									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.sname + "</a>"
 								+ "</h3>"
-								+ "<p><span class='store-name'>" + store.sname + "</span>&nbsp;&nbsp;현재 위치로부터 00m</p>"
+								+ "<p><span class='store-name'></span>&nbsp;&nbsp;현재 위치로부터 00m</p>"
 								
 							+ "</header>"
 						+ "</article>";
@@ -62,6 +77,6 @@ function update_list(obj){
 	});
 }
 
-function product_list(sid){
-	location.href="/page/product_list?sid=" + sid;
+function product_list(ssid){
+	location.href="/page/product_list?sid=" + ssid + "&mid=" + sid;
 }

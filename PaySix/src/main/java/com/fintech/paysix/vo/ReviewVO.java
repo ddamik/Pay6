@@ -12,6 +12,8 @@ public class ReviewVO {
 	private Date intime; // ¿€º∫¿œΩ√
 	private String expyn; // ƒ¡≈Ÿ√˜≥Î√‚ø©∫‰
 
+	private int hackaton;
+
 	public ReviewVO() {
 		super();
 	}
@@ -33,6 +35,19 @@ public class ReviewVO {
 		this.editor = editor;
 		this.intime = intime;
 		this.expyn = expyn;
+	}
+
+	public ReviewVO(int seqid, String pid, String title, String contents, String editor, Date intime, String expyn,
+			int hackaton) {
+		super();
+		this.seqid = seqid;
+		this.pid = pid;
+		this.title = title;
+		this.contents = contents;
+		this.editor = editor;
+		this.intime = intime;
+		this.expyn = expyn;
+		this.hackaton = hackaton;
 	}
 
 	public int getSeqid() {
@@ -91,10 +106,18 @@ public class ReviewVO {
 		this.expyn = expyn;
 	}
 
+	public int getHackaton() {
+		return hackaton;
+	}
+
+	public void setHackaton(int hackaton) {
+		this.hackaton = hackaton;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewVO [seqid=" + seqid + ", pid=" + pid + ", title=" + title + ", contents=" + contents + ", editor="
-				+ editor + ", intime=" + intime + ", expyn=" + expyn + "]";
+				+ editor + ", intime=" + intime + ", expyn=" + expyn + ", hackaton=" + hackaton + "]";
 	}
 
 }

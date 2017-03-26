@@ -15,6 +15,7 @@ public class LogVO {
 	private Date endtime; // 贸府 矫埃
 	private int etc1; // 何啊 1 default: 0
 	private int etc2; // 何啊 2 default: 0
+	private int hackaton;
 
 	public LogVO() {
 		super();
@@ -31,7 +32,6 @@ public class LogVO {
 		this.endtime = endtime;
 	}
 
-	
 	public LogVO(int tno, int orderno, String status, String pid, String userid, String paymethod, Date ordertime,
 			Date endtime) {
 		super();
@@ -59,6 +59,23 @@ public class LogVO {
 		this.endtime = endtime;
 		this.etc1 = etc1;
 		this.etc2 = etc2;
+	}
+
+	public LogVO(int seqid, int tno, int orderno, String status, String pid, String userid, String paymethod,
+			Date ordertime, Date endtime, int etc1, int etc2, int hackaton) {
+		super();
+		this.seqid = seqid;
+		this.tno = tno;
+		this.orderno = orderno;
+		this.status = status;
+		this.pid = pid;
+		this.userid = userid;
+		this.paymethod = paymethod;
+		this.ordertime = ordertime;
+		this.endtime = endtime;
+		this.etc1 = etc1;
+		this.etc2 = etc2;
+		this.hackaton = hackaton;
 	}
 
 	public int getSeqid() {
@@ -149,11 +166,19 @@ public class LogVO {
 		this.etc2 = etc2;
 	}
 
+	public int getHackaton() {
+		return hackaton;
+	}
+
+	public void setHackaton(int hackaton) {
+		this.hackaton = hackaton;
+	}
+
 	@Override
 	public String toString() {
 		return "LogVO [seqid=" + seqid + ", tno=" + tno + ", orderno=" + orderno + ", status=" + status + ", pid=" + pid
 				+ ", userid=" + userid + ", paymethod=" + paymethod + ", ordertime=" + ordertime + ", endtime="
-				+ endtime + ", etc1=" + etc1 + ", etc2=" + etc2 + "]";
+				+ endtime + ", etc1=" + etc1 + ", etc2=" + etc2 + ", hackaton=" + hackaton + "]";
 	}
 
 }

@@ -3,8 +3,11 @@
 <mapper namespace="StoreMapper">
  
 	<!-- 
-		1. store list
-		2. store ordermethod
+		STORE
+		1. store list_all
+		2. store list ( category )
+		3. store ordermethod
+		4. store name
 	-->
 	
 	<select id="store_list_all" resultType="StoreVO">
@@ -15,9 +18,14 @@
 			simgurl
 		from
 			storeinfo
+		where
+			market = 0
+		and
+			hackaton = 0
 	</select>
 	
 	
+	<!-- 2. store list ( category ) -->
 	<select id="store_list" parameterType="String" resultType="StoreVO">
 		select
 			sid,
@@ -28,9 +36,13 @@
 			storeinfo
 		where
 			s_category = #{s_category}
-			
+		and
+			market = 0
+		and
+			hackaton = 0
 	</select>
 	
+	<!--  -->
 	<select id="store_order_info" parameterType="String" resultType="StoreVO">
 		select
 			order_method,
@@ -41,7 +53,7 @@
 			sid = #{sid}
 	</select>
 	
-	
+	<!-- 4. store name -->
 	<select id="get_store_name" parameterType="String" resultType="StoreVO">
 		select
 			sname
@@ -49,7 +61,113 @@
 			storeinfo
 		where
 			sid = #{sid}
+		
 	</select>
+	
+	
+	
+	
+	
+	<!-- 
+		1. market list all
+		2. market list province
+	-->
+	
+	<!-- market list all -->
+	<select id="market_list" resultType="StoreVO">
+		select
+			sid,
+			sname,
+			saddr,
+			simgurl,
+			s_province
+		from
+			storeinfo
+		where
+			hackaton = 1
+		and
+			market = 1
+	</select>
+			
+	<!-- 2. market list province -->
+	<select id="market_list_province" parameterType="String" resultType="StoreVO">
+		select
+			sid,
+			sname,
+			saddr,
+			simgurl,
+			s_province
+		from
+			storeinfo
+		where
+			hackaton = 1
+		and
+			market = 1
+		and
+			s_province = #{s_province}
+	</select>	   
+	
+	
+	<!-- market store list -->
+	<select id="market_store_list_all" parameterType="hashmap" resultType="StoreVO">
+		select
+			sid,
+			sname,
+			saddr,
+			simgurl,
+			s_province
+		from
+			storeinfo
+		where
+			hackaton = 1
+		and
+			market = 0
+		and
+			s_province = #{s_province}
+		and
+			etc1 = #{sid}
+	</select>	   
+	
+	<!-- hackaton store list category -->
+	<select id="market_store_list_category" parameterType="hashmap" resultType="StoreVO">
+		select
+			sid,
+			sname,
+			saddr,
+			simgurl,
+			s_province
+		from
+			storeinfo
+		where
+			hackaton = 1
+		and
+			market = 0
+		and
+			s_province = #{s_province}
+		and
+			s_category = #{s_category}
+		and
+			etc1 = #{sid}
+	</select>	   	
+	
+	
+	<!-- hackaton store list category -->
+	<select id="get_market_province" parameterType="String" resultType="StoreVO">
+		select
+			s_province,
+			sname
+		from
+			storeinfo
+		where
+			hackaton = 1
+		and
+			market = 1
+		and
+			sid = #{sid}
+	</select>	  	
+	
+	
+	
 	
 	<insert id="registe_store" parameterType="StoreVO">
 		insert
@@ -69,6 +187,34 @@
 			#{stel},
 			#{simgurl},
 			#{rname}
+		)
+	</insert>
+	
+	
+	<insert id="registe_market" parameterType="StoreVO">
+		insert
+			into
+		storeinfo(
+			sid,
+			sname,
+			saddr,
+			stel,
+			simgurl,
+			rname,
+			s_province,
+			hackaton,
+			market
+		)
+		values(
+			#{sid},
+			#{sname},
+			#{saddr},
+			#{stel},
+			#{simgurl},
+			#{rname},
+			#{s_province},
+			#{hackaton},
+			#{market}
 		)
 	</insert>
 </mapper>

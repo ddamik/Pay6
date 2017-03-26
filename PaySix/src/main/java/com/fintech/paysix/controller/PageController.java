@@ -8,7 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class PageController {
 
 	/*
-	 * 1. store list page 2. product list page 3. order page 4. owner page
+	 * 1. store list page 
+	 * 2. product list page 
+	 * 3. order page 
+	 * 4. product detail
 	 */
 
 	// 1. store list page
@@ -29,18 +32,21 @@ public class PageController {
 		return new ModelAndView("/html/order");
 	}
 
-	// 5. product detail
+	// 4. product detail
 	@RequestMapping(value = "/page/product_detail")
 	public ModelAndView product_detail() {
 		return new ModelAndView("/html/product_detail");
 	}
 
-	// 6. product detail
-	@RequestMapping(value = "/page/header")
-	public ModelAndView header() {
-		return new ModelAndView("/html/header");
+
+	// 5. market_list
+	@RequestMapping(value = "/page/market_list")
+	public ModelAndView market_list() {
+		return new ModelAndView("/html/market_list");
 	}
 
+	
+	
 	/*
 	 * 1. onwer index
 	 * 

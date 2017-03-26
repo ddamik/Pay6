@@ -2270,6 +2270,8 @@ ol.default li {
 }
 .order-button{
 	padding: 1px 0px !important;
+	width: 100% !important;
+	text-align: center !important;
 }
 .pay-font{
 	text-align: right;
@@ -2300,4 +2302,12 @@ ol.default li {
 	width: 100%;
 	margin-bottom: 5px;
 	border-radius: 5px;
+}
+.payment-onnuri{
+	width: 23%;
+	margin-bottom: 5px;
+	border-radius: 5px;	
+}
+.align-center{
+	align: center;
 }

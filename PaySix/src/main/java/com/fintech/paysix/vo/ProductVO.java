@@ -11,6 +11,7 @@ public class ProductVO {
 	private int vCount; // 조회수 default: 0
 	private int pCount; // 구매수 default: 0
 	private String sId; // 매장번호
+	private int hackaton;
 
 	// insert into productinfo(pid, pName, price, pimgurl, sid)
 	// values("10010001", "제육볶음", 6000,
@@ -33,6 +34,20 @@ public class ProductVO {
 		this.sId = sId;
 	}
 
+	public ProductVO(String pid, String pName, int pprice, String pImgUrl, int rCount, int vCount, int pCount,
+			String sId, int hackaton) {
+		super();
+		this.pid = pid;
+		this.pName = pName;
+		this.pprice = pprice;
+		this.pImgUrl = pImgUrl;
+		this.rCount = rCount;
+		this.vCount = vCount;
+		this.pCount = pCount;
+		this.sId = sId;
+		this.hackaton = hackaton;
+	}
+
 	public String getPid() {
 		return pid;
 	}
@@ -48,8 +63,6 @@ public class ProductVO {
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-
-	 
 
 	public int getPprice() {
 		return pprice;
@@ -99,10 +112,19 @@ public class ProductVO {
 		this.sId = sId;
 	}
 
+	public int getHackaton() {
+		return hackaton;
+	}
+
+	public void setHackaton(int hackaton) {
+		this.hackaton = hackaton;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductVO [pid=" + pid + ", pName=" + pName + ", pprice=" + pprice + ", pImgUrl=" + pImgUrl + ", rCount="
-				+ rCount + ", vCount=" + vCount + ", pCount=" + pCount + ", sId=" + sId + "]";
+		return "ProductVO [pid=" + pid + ", pName=" + pName + ", pprice=" + pprice + ", pImgUrl=" + pImgUrl
+				+ ", rCount=" + rCount + ", vCount=" + vCount + ", pCount=" + pCount + ", sId=" + sId + ", hackaton="
+				+ hackaton + "]";
 	}
 
 }

@@ -21,6 +21,8 @@ public class StoreVO {
 	private String s_category;
 	private String etc1;
 	private String etc2;
+	private int hackaton;
+	private int market;
 
 	public StoreVO() {
 		super();
@@ -34,6 +36,19 @@ public class StoreVO {
 		this.stel = stel;
 		this.simgurl = simgurl;
 		this.rname = rname;
+	}
+ 
+
+	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String s_province, int hackaton, int market) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.saddr = saddr;
+		this.stel = stel;
+		this.simgurl = simgurl;
+		this.s_province = s_province;
+		this.hackaton = hackaton;
+		this.market = market;
 	}
 
 	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime) {
@@ -98,6 +113,53 @@ public class StoreVO {
 		this.s_category = s_category;
 		this.etc1 = etc1;
 		this.etc2 = etc2;
+	}
+
+	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
+			String order_method, String bitcoin_addr, double s_lat, double s_lon, double s_distance, String s_province,
+			String s_category, String etc1, String etc2, int hackaton) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.saddr = saddr;
+		this.stel = stel;
+		this.simgurl = simgurl;
+		this.rname = rname;
+		this.intime = intime;
+		this.order_method = order_method;
+		this.bitcoin_addr = bitcoin_addr;
+		this.s_lat = s_lat;
+		this.s_lon = s_lon;
+		this.s_distance = s_distance;
+		this.s_province = s_province;
+		this.s_category = s_category;
+		this.etc1 = etc1;
+		this.etc2 = etc2;
+		this.hackaton = hackaton;
+	}
+
+	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
+			String order_method, String bitcoin_addr, double s_lat, double s_lon, double s_distance, String s_province,
+			String s_category, String etc1, String etc2, int hackaton, int market) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.saddr = saddr;
+		this.stel = stel;
+		this.simgurl = simgurl;
+		this.rname = rname;
+		this.intime = intime;
+		this.order_method = order_method;
+		this.bitcoin_addr = bitcoin_addr;
+		this.s_lat = s_lat;
+		this.s_lon = s_lon;
+		this.s_distance = s_distance;
+		this.s_province = s_province;
+		this.s_category = s_category;
+		this.etc1 = etc1;
+		this.etc2 = etc2;
+		this.hackaton = hackaton;
+		this.market = market;
 	}
 
 	public String getSid() {
@@ -228,13 +290,29 @@ public class StoreVO {
 		this.s_category = s_category;
 	}
 
+	public int getHackaton() {
+		return hackaton;
+	}
+
+	public void setHackaton(int hackaton) {
+		this.hackaton = hackaton;
+	}
+
+	public int getMarket() {
+		return market;
+	}
+
+	public void setMarket(int market) {
+		this.market = market;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreVO [sid=" + sid + ", sname=" + sname + ", saddr=" + saddr + ", stel=" + stel + ", simgurl="
 				+ simgurl + ", rname=" + rname + ", intime=" + intime + ", order_method=" + order_method
 				+ ", bitcoin_addr=" + bitcoin_addr + ", s_lat=" + s_lat + ", s_lon=" + s_lon + ", s_distance="
 				+ s_distance + ", s_province=" + s_province + ", s_category=" + s_category + ", etc1=" + etc1
-				+ ", etc2=" + etc2 + "]";
+				+ ", etc2=" + etc2 + ", hackaton=" + hackaton + ", market=" + market + "]";
 	}
 
 }

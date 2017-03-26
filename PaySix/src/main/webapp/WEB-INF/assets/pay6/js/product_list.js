@@ -1,11 +1,11 @@
 var tmp = document.location.search.split("=");
-var sid = tmp[1].split("&");
+var s_tmp = tmp[1].split("&");
+var sid = s_tmp[0].split(",");
+var mid = tmp[2];
+
 
 $(document).ready(function(){
-	
-//	var tmp = document.location.search.split("=");
-//	var sid = tmp[1].split("&");
-	
+ 
 	var	$window = $(window),
 	$body = $('body');
 	
@@ -78,11 +78,11 @@ $(document).ready(function(){
 
 
 function back(){
-	location.href = "/page/store_list";
+	location.href = "/page/store_list?sid=" + mid;
 }
 
 function product_detail(pid){
-	location.href="/page/product_detail?pid=" + pid;
+	location.href="/page/product_detail?pid=" + pid + "&mid=" + mid;
 }
 
 

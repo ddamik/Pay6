@@ -3934,11 +3934,11 @@ body.is-menu-visible #menu .inner {
 }
 
 .text-title {
-	width: 30% !important;
+	width: 40% !important;
 }
 
 .text-address {
-	width: 70% !important;
+	width: 60% !important;
 	text-align: right;
 }
 
