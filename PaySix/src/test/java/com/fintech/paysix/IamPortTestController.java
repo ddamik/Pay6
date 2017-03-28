@@ -13,6 +13,7 @@ public class IamPortTestController {
     @Test
     public void testCreateUser() throws Exception {
         System.out.println("Test");
+        System.out.println("Start");
     }
     
 }
