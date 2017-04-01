@@ -1,152 +1,59 @@
 var tmp = document.location.search.split("=");
-var pid = tmp[1].split("&");
-
-var table_order = 100;
-var take_out_order = 101;
-
-var both_order = "0";
-var only_take_out = "1";
-var only_table = "2";
-
-var seqid = 0;
-var sid = "";
-
-var amount = "";
-var strPaymethod = "";
+var tmp2 = tmp[1].split("&");
+var store_seq = tmp2[0];
+var product_seq = tmp[2];
 
 $(document).ready(function() {
 		
-	$("#tx_credit").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
-	$("#tx_nh").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
-	$("#tx_bitcoin").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
-	$("#tx_coupon").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	  
+	var IMP = window.IMP;
+	IMP.init('imp96588755')
+ 
 	
-	var strPid = pid + "";
-	sid = strPid.substr(0, 4);
-	amount = "";
-	
-	$.ajax({
-		url: '/store/get_name?sid=' + sid
-	}).done(function(store){
-		if( store == null ){
-			console.log('null store name');		
-		}else{
-			$("#store_name").text(store.sname);
-		}
-	});
-	
+	var dataForm = "";
+	dataForm += "store_seq=" + store_seq;
+	dataForm += "&product_seq=" + product_seq;
 	
 	$.ajax({
-		url: '/product/detail?pid=' + pid
+		url: '/product/detail',
+		type: 'get',
+		data: dataForm
 	}).done(function(data){
-		amount = data.product.pprice;
-		var url = "../images/productinfo/" + data.product.pid + ".jpg";
-		var str = "<a href='#' class='image featured'>"
+		$("#store_name").text(data.store.store_name);
+		
+		var url = "../images/productinfo/" + data.product.product_etc1 + ".jpg";
+		var str = "<a class='image featured'>"
 					+ "<img src=" + url + " alt='' /></a>"
 					+ "<header>"
-						+ "<span class='product_title'>" + data.product.pName + "</span>"
-						+ "<span class='product_price'>&nbsp;&nbsp;[ " + numberWithCommas(data.product.pprice) + " ]</span>"
+						+ "<span class='product_title'>" + data.product.product_name + "</span>"
+						+ "<span class='product_price'>&nbsp;&nbsp;[ " + numberWithCommas(data.product.product_price) + " ]</span>"
 					+ "</header>"
 					+ "<p></p>"
 					+ "<footer>"
-						+ "<ul class='actions'>";
-							if( data.sid.order_method == both_order ){
-								str += "<li><a id='btn_table_order' class='button'>Table 주문</a></li>"
-								+ "<li><a id='btn_takeout_order' class='button'>Take-out 주문</a></li>"
-								+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>"; 
-							}else if( data.sid.order_method == only_take_out ){
-								str += "<li><a id='btn_takeout_order' class='button'>Take-out 주문</a></li>"
-									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>";								
-							}else if( data.sid.order_method == only_table ){
-								str += "<li><a id='btn_table_order' class='button'>Table 주문</a></li>"
-									+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>";
-							}
-					str += "</ul>"
-						+ "</footer>";
-			 $("#product_detail").append(str);
-			 $("#btn_table_order").click(function(){ 
-				 strPaymethod="0"; 
-				 paymethod("[ Table ]");
-
-				 $("#credit-order").css('display', 'none');
-				 $("#nh-order").css('display', 'none');
-				 $("#bitcoin-order").css('display', 'none');
-				 $("#coupon-order").css('display', 'none');
-			 });
-			 $("#btn_takeout_order").click(function(){ 
-				 strPaymethod="1"; 
-				 paymethod("[ Take-Out ]");
-				 
-				 $("#credit-order").css('display', 'none');
-				 $("#nh-order").css('display', 'none');
-				 $("#bitcoin-order").css('display', 'none');
-				 $("#coupon-order").css('display', 'none');
-			 });
-			 $("#btn_more_review").click(function(){ review_more(); });
+						+ "<ul class='actions'>"
+							+ "<li><a id='btn_payment' class='button'>결제하기</a></li>"
+							+ "<li><a href='#footer-wrapper' class='button alt icon fa-comments'>comments</a></li>"
+						+ "</ul>"
+					+ "</footer>";
+		$("#product_detail").append(str);
+		$("#btn_payment").click(function(){
+			payment();
+		});
 	});
 	
-
-	$("#credit-order").css('display', 'none');
-	$("#nh-order").css('display', 'none');
-	$("#bitcoin-order").css('display', 'none');
-	$("#coupon-order").css('display', 'none');
 	
-	var strTable = "테이블 번호를 입력하세요.";
-	var strTakeOut = "휴대전화 번호를 입력하세요.";
-	var table_order = "0";
-	var take_out_order = "1";
+	$("#btn_registe_review").click(function(){
+		
+	});
 	 
-	$("#credit").click(function(){
-		if( strPaymethod == table_order ) $("#tx_credit").attr("placeholder", strTable);
-		else $("#tx_credit").attr("placeholder", strTakeOut);		
-		
-		$("#credit_amount").text("결제 금액: " + numberWithCommas(amount));
-		$("#credit-order").css('display', 'block');
-		$("#nh-order").css('display', 'none');
-		$("#bitcoin-order").css('display', 'none');
-		$("#coupon-order").css('display', 'none');
-	});
-	$("#nh-api").click(function(){
-		if( strPaymethod == table_order ) $("#tx_nh").attr("placeholder", strTable);
-		else $("#tx_nh").attr("placeholder", strTakeOut);
-		
-		$("#nh_amount").text("결제 금액: " + numberWithCommas(amount));
-		$("#credit-order").css('display', 'none');
-		$("#nh-order").css('display', 'block');
-		$("#bitcoin-order").css('display', 'none');
-		$("#coupon-order").css('display', 'none');
-	});
-	$("#bitcoin").click(function(){
-		if( strPaymethod == table_order ) $("#tx_bitcoin").attr("placeholder", strTable);
-		else $("#tx_bitcoin").attr("placeholder", strTakeOut);
-		
-		$("#bitcoin_amount").text("결제 금액: " + numberWithCommas(amount));
-		$("#credit-order").css('display', 'none');
-		$("#nh-order").css('display', 'none');
-		$("#bitcoin-order").css('display', 'block');
-		$("#coupon-order").css('display', 'none');
-	});
-	$("#coupon").click(function(){
-		if( strPaymethod == table_order ) $("#tx_coupon").attr("placeholder", strTable);
-		else $("#tx_coupon").attr("placeholder", strTakeOut);
-		
-		$("#coupon_amount").text("결제 금액: " + numberWithCommas(amount));
-		$("#pay_amount").text(amount);
-		$("#credit-order").css('display', 'none');
-		$("#nh-order").css('display', 'none');
-		$("#bitcoin-order").css('display', 'none');
-		$("#coupon-order").css('display', 'block');
-	});
-      	
-	//	리뷰 리스트
-	init_review();
-
+	
 });
 
 
 function init_review(){
 	review_more();
 }
+
 
 function review_more(){
 
@@ -179,10 +86,53 @@ function review_more(){
 }
 
 
-function paymethod(method){
-	$("#paymethod").text(method);
-	$("#header-wrapper").css('display', 'block');
-	location.href="#header-wrapper";
+function payment(){
+	
+	IMP.request_pay({
+	    pg : 'kakao',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 1100,
+//	    buyer_email : 'iamport@siot.do',
+//	    buyer_name : '구매자이름',
+	    buyer_tel : '010-3329-7859',
+//	    buyer_addr : '서울특별시 강남구 삼성동',
+//	    buyer_postcode : '123-456',
+	    kakaoOpenApp : true
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	jQuery.ajax({
+	    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid
+		    		//기타 필요한 데이터가 있으면 추가 전달
+	    		}
+	    	}).done(function(data) {
+	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	    		if ( everythings_fine ) {
+	    			var msg = '결제가 완료되었습니다.';
+	    			msg += '\n고유ID : ' + rsp.imp_uid;
+	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	    			msg += '\결제 금액 : ' + rsp.paid_amount;
+	    			msg += '카드 승인번호 : ' + rsp.apply_num;
+	    			
+	    			alert(msg);
+	    		} else {
+	    			//[3] 아직 제대로 결제가 되지 않았습니다.
+	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	    		}
+	    	});
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        
+	        alert(msg);
+	    }
+	});
 }
 
 function order(position){
@@ -206,6 +156,8 @@ function payment_method(obj){
 	var method = obj.substr(0, obj.length-8);
 	server_payment(tno, method);
 }
+
+
 function server_payment(tno, method){
 	
 	var userid = "이승호";
@@ -234,14 +186,10 @@ function server_payment(tno, method){
 }
 
 
-
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " won";
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";
 }
-
-function numberWithCommasSatoshi(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " satoshi";
-}
+ 
 
 function dateToYYYYMMDD(intime){
 	var date = new Date(intime);
@@ -254,5 +202,5 @@ function dateToYYYYMMDD(intime){
 
 
 function back(){
-	location.href = "/page/product_list?sid=" + sid;
+	location.href = "/page/product?sq=" + store_seq;
 }

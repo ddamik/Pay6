@@ -4,97 +4,71 @@ import java.util.Date;
 
 public class ReviewVO {
 
-	private int seqid; // 일련번호
-	private String pid; // 상품번호
-	private String title; // 리뷰제목
-	private String contents; // 리뷰내용
-	private String editor; // 작성자
-	private Date intime; // 작성일시
-	private String expyn; // 컨텐츠노출여뷰
+	private int review_seq;
+	private int review_product_fk;
+	private int review_user_fk;
+	private Date review_savetime;
+	private String review_contents;
 
 	public ReviewVO() {
 		super();
 	}
 
-	public ReviewVO(String pid, String title, String contents, String editor) {
+	public ReviewVO(int review_seq, int review_product_fk, int review_user_fk, Date review_savetime,
+			String review_contents) {
 		super();
-		this.pid = pid;
-		this.title = title;
-		this.contents = contents;
-		this.editor = editor;
+		this.review_seq = review_seq;
+		this.review_product_fk = review_product_fk;
+		this.review_user_fk = review_user_fk;
+		this.review_savetime = review_savetime;
+		this.review_contents = review_contents;
 	}
 
-	public ReviewVO(int seqid, String pid, String title, String contents, String editor, Date intime, String expyn) {
-		super();
-		this.seqid = seqid;
-		this.pid = pid;
-		this.title = title;
-		this.contents = contents;
-		this.editor = editor;
-		this.intime = intime;
-		this.expyn = expyn;
+	public int getReview_seq() {
+		return review_seq;
 	}
 
-	public int getSeqid() {
-		return seqid;
+	public void setReview_seq(int review_seq) {
+		this.review_seq = review_seq;
 	}
 
-	public void setSeqid(int seqid) {
-		this.seqid = seqid;
+	public int getReview_product_fk() {
+		return review_product_fk;
 	}
 
-	public String getPid() {
-		return pid;
+	public void setReview_product_fk(int review_product_fk) {
+		this.review_product_fk = review_product_fk;
 	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
+	public int getReview_user_fk() {
+		return review_user_fk;
 	}
 
-	public String getTitle() {
-		return title;
+	public void setReview_user_fk(int review_user_fk) {
+		this.review_user_fk = review_user_fk;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public Date getReview_savetime() {
+		return review_savetime;
 	}
 
-	public String getContents() {
-		return contents;
+	public void setReview_savetime(Date review_savetime) {
+		this.review_savetime = review_savetime;
 	}
 
-	public void setContents(String contents) {
-		this.contents = contents;
+	public String getReview_contents() {
+		return review_contents;
 	}
 
-	public String getEditor() {
-		return editor;
-	}
-
-	public void setEditor(String editor) {
-		this.editor = editor;
-	}
-
-	public Date getIntime() {
-		return intime;
-	}
-
-	public void setIntime(Date intime) {
-		this.intime = intime;
-	}
-
-	public String getExpyn() {
-		return expyn;
-	}
-
-	public void setExpyn(String expyn) {
-		this.expyn = expyn;
+	public void setReview_contents(String review_contents) {
+		this.review_contents = review_contents;
 	}
 
 	@Override
 	public String toString() {
-		return "ReviewVO [seqid=" + seqid + ", pid=" + pid + ", title=" + title + ", contents=" + contents + ", editor="
-				+ editor + ", intime=" + intime + ", expyn=" + expyn + "]";
+		return "ReviewVO [review_seq=" + review_seq + ", review_product_fk=" + review_product_fk + ", review_user_fk="
+				+ review_user_fk + ", review_savetime=" + review_savetime + ", review_contents=" + review_contents
+				+ "]";
 	}
 
 }

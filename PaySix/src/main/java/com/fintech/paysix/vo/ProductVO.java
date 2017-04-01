@@ -2,107 +2,124 @@ package com.fintech.paysix.vo;
 
 public class ProductVO {
 
-	private String pid; // 상품번호 string 형태의 int / 1001 + 0001 / 앞에 숫자 4개는 store
-						// id + 뒤에 숫자 4개는 메뉴 id
-	private String pName; // 상품명
-	private int pprice; // 상품가격
-	private String pImgUrl; // 상품이미지
-	private int rCount; // 리뷰수 default: 0
-	private int vCount; // 조회수 default: 0
-	private int pCount; // 구매수 default: 0
-	private String sId; // 매장번호
-
-	// insert into productinfo(pid, pName, price, pimgurl, sid)
-	// values("10010001", "제육볶음", 6000,
-	// "C:\Users\Lee\Desktop\Fintech\img\10010001.jpg");
+	private int product_seq;
+	private int product_store_fk;
+	private String product_name;
+	private int product_price;
+	private int product_review_cnt;
+	private int product_purchase_cnt;
+	private int product_view_cnt;
+	private String product_contents;
+	private String product_etc1;
+	private String product_etc2;
 
 	public ProductVO() {
 		super();
 	}
 
-	public ProductVO(String pid, String pName, int pprice, String pImgUrl, int rCount, int vCount, int pCount,
-			String sId) {
+	public ProductVO(int product_seq, int product_store_fk, String product_name, int product_price,
+			int product_review_cnt, int product_purchase_cnt, int product_view_cnt, String product_contents,
+			String product_etc1, String product_etc2) {
 		super();
-		this.pid = pid;
-		this.pName = pName;
-		this.pprice = pprice;
-		this.pImgUrl = pImgUrl;
-		this.rCount = rCount;
-		this.vCount = vCount;
-		this.pCount = pCount;
-		this.sId = sId;
+		this.product_seq = product_seq;
+		this.product_store_fk = product_store_fk;
+		this.product_name = product_name;
+		this.product_price = product_price;
+		this.product_review_cnt = product_review_cnt;
+		this.product_purchase_cnt = product_purchase_cnt;
+		this.product_view_cnt = product_view_cnt;
+		this.product_contents = product_contents;
+		this.product_etc1 = product_etc1;
+		this.product_etc2 = product_etc2;
 	}
 
-	public String getPid() {
-		return pid;
+	public int getProduct_seq() {
+		return product_seq;
 	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setProduct_seq(int product_seq) {
+		this.product_seq = product_seq;
 	}
 
-	public String getpName() {
-		return pName;
+	public int getProduct_store_fk() {
+		return product_store_fk;
 	}
 
-	public void setpName(String pName) {
-		this.pName = pName;
+	public void setProduct_store_fk(int product_store_fk) {
+		this.product_store_fk = product_store_fk;
 	}
 
-	 
-
-	public int getPprice() {
-		return pprice;
+	public String getProduct_name() {
+		return product_name;
 	}
 
-	public void setPprice(int pprice) {
-		this.pprice = pprice;
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 
-	public String getpImgUrl() {
-		return pImgUrl;
+	public int getProduct_price() {
+		return product_price;
 	}
 
-	public void setpImgUrl(String pImgUrl) {
-		this.pImgUrl = pImgUrl;
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
 	}
 
-	public int getrCount() {
-		return rCount;
+	public int getProduct_review_cnt() {
+		return product_review_cnt;
 	}
 
-	public void setrCount(int rCount) {
-		this.rCount = rCount;
+	public void setProduct_review_cnt(int product_review_cnt) {
+		this.product_review_cnt = product_review_cnt;
 	}
 
-	public int getvCount() {
-		return vCount;
+	public int getProduct_purchase_cnt() {
+		return product_purchase_cnt;
 	}
 
-	public void setvCount(int vCount) {
-		this.vCount = vCount;
+	public void setProduct_purchase_cnt(int product_purchase_cnt) {
+		this.product_purchase_cnt = product_purchase_cnt;
 	}
 
-	public int getpCount() {
-		return pCount;
+	public int getProduct_view_cnt() {
+		return product_view_cnt;
 	}
 
-	public void setpCount(int pCount) {
-		this.pCount = pCount;
+	public void setProduct_view_cnt(int product_view_cnt) {
+		this.product_view_cnt = product_view_cnt;
 	}
 
-	public String getsId() {
-		return sId;
+	public String getProduct_contents() {
+		return product_contents;
 	}
 
-	public void setsId(String sId) {
-		this.sId = sId;
+	public void setProduct_contents(String product_contents) {
+		this.product_contents = product_contents;
+	}
+
+	public String getProduct_etc1() {
+		return product_etc1;
+	}
+
+	public void setProduct_etc1(String product_etc1) {
+		this.product_etc1 = product_etc1;
+	}
+
+	public String getProduct_etc2() {
+		return product_etc2;
+	}
+
+	public void setProduct_etc2(String product_etc2) {
+		this.product_etc2 = product_etc2;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductVO [pid=" + pid + ", pName=" + pName + ", pprice=" + pprice + ", pImgUrl=" + pImgUrl + ", rCount="
-				+ rCount + ", vCount=" + vCount + ", pCount=" + pCount + ", sId=" + sId + "]";
+		return "ProductVO [product_seq=" + product_seq + ", product_store_fk=" + product_store_fk + ", product_name="
+				+ product_name + ", product_price=" + product_price + ", product_review_cnt=" + product_review_cnt
+				+ ", product_purchase_cnt=" + product_purchase_cnt + ", product_view_cnt=" + product_view_cnt
+				+ ", product_contents=" + product_contents + ", product_etc1=" + product_etc1 + ", product_etc2="
+				+ product_etc2 + "]";
 	}
 
 }

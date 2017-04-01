@@ -20,36 +20,45 @@ public class ProductController {
 	private Gson gson = new Gson();
 	
 	
-	/*
-	 * 	1. popular_menu, top3
+	/**
+	 * 	[	Product	]
+	 * 
+	 * 	1. product list
+	 * 	2. product detail[order]
 	 */
 	
-	
-	//	1. popular_menu
+	//	1. product list
 	@ResponseBody
-	@RequestMapping(value="/product/popular_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
-	public String popular_menu(
-			@RequestParam("sid") String sid) throws SQLException {
-		return gson.toJson(productService.popular_list(sid));
+	@RequestMapping(value="/product/list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String productList(
+			@RequestParam("store_seq") int store_seq) throws SQLException {		
+		return gson.toJson(productService.productList(store_seq));
+	}
+	
+	//	2. product detail[order]
+	@ResponseBody
+	@RequestMapping(value="/product/detail", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")	
+	public String productDetail(
+			@RequestParam("store_seq") int store_seq,
+			@RequestParam("product_seq") int product_seq) throws SQLException {		
+		return gson.toJson(productService.productDetail(store_seq, product_seq));
 	}
 	
 	
 	
-	//	2. menu
-	@ResponseBody
-	@RequestMapping(value="/product/all_list", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
-	public String menu_list(
-			@RequestParam("sid") String sid) throws SQLException {
-		return gson.toJson(productService.all_list(sid));
-	}
 	
-
 	
-	//	3. detail
+	/**
+	 * 
+	 * 	Create Random Product 
+	 * @param product_store_fk
+	 * @return
+	 * @throws SQLException
+	 */
 	@ResponseBody
-	@RequestMapping(value="/product/detail", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
-	public String detail(
-			@RequestParam("pid") String pid) throws SQLException {
-		return gson.toJson(productService.detail(pid));
+	@RequestMapping(value="/product/create", method=RequestMethod.GET, produces="application/json;text/plain;charset=UTF-8")
+	public String productCreate(
+			@RequestParam("product_store_fk") int product_store_fk) throws SQLException {		
+		return gson.toJson(productService.createProduct(product_store_fk));
 	}
 }

@@ -15,30 +15,26 @@ public class StoreDao {
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	/*
-	 * 	1. store list
+	 
+	
+	/**
+	 * 	1. store all
+	 * 	2. store category
 	 */
 	
 	
-	public List<StoreVO> store_list_all() throws SQLException{
-		return session.selectList("StoreMapper.store_list_all");
-	}
-	// 1. store list
-	public List<StoreVO> store_list(String s_category) throws SQLException {
-		return session.selectList("StoreMapper.store_list", s_category);
+	//	1. store all
+	public List<StoreVO> storeAll() throws SQLException {
+		return session.selectList("StoreMapper.store_all");
 	}
 	
-	
-	public StoreVO store_order_info(String sid) throws SQLException {
-		return session.selectOne("StoreMapper.store_order_info", sid);
+	//	2. store category
+	public List<StoreVO> storeCategory(String store_category) throws SQLException {
+		return session.selectList("StoreMapper.store_category", store_category);
 	}
 	
-	
-	public StoreVO get_store_name(String sid) throws SQLException{
-		return session.selectOne("StoreMapper.get_store_name", sid);
-	}
-	
-	public int store_registe(StoreVO store) throws SQLException {
-		return session.insert("StoreMapper.registe_store", store);
+	//	3. store name
+	public StoreVO storeName(int store_seq) throws SQLException {
+		return session.selectOne("StoreMapper.store_name", store_seq);
 	}
 }

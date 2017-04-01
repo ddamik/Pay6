@@ -19,6 +19,8 @@
 		<script src="../assets/pay6/js/jquery.min.js"></script>
 		<script src="../assets/pay6/js/product_detail.js"></script>
 	
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 	
 	</head>
 	<body class="homepage">
@@ -41,104 +43,8 @@
 								<section id='product_detail' class="box"></section>
 							</div>
 						</section>
-					</div>
-	
-					<!-- Payment -->
-					<div id="header-wrapper" class='payment-area'>
-						<header>
-							<h2 class='font-paymethod'>
-								<a id='paymethod'></a>
-							</h2>
-						</header>
-						<section id="intro" class="container">
-							<div class="row">
-								<div id='credit' class="3u 12u(mobile)">
-									<i class="payment icon featured fa-credit-card"></i>
-									<header>
-										<h3>간편결제</h3>
-									</header>
-									<hr>
-									<div id='credit-order'>
-										<div class="order-box">
-											<header>
-												<h5 class="payment-title">
-													<span id='credit_amount' class='pay-font'></span>
-													<hr class='padding-custom-5'>
-												</h5>
-											</header>
-											<footer>
-												<input class='payment-input' id='tx_credit' type='text'>
-												<a id='credit_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
-											</footer>
-										</div>
-									</div>
-								</div>
-								<div id='nh-api' class="3u 12u(mobile)">
-									<i class="payment icon featured alt fa-won"></i>
-									<header>
-										<h3>농협 간편결제</h3>
-									</header>
-									<hr>
-									<div id='nh-order'>
-										<div class="order-box">
-											<header>
-												<h5 class="payment-title">
-													<span id='nh_amount' class='pay-font'></span>
-													<hr class='padding-custom-5'>
-												</h5>
-											</header>
-											<footer>
-												<input class='payment-input' id='tx_nh' type='text'>
-												<a id='nh_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
-											</footer>
-										</div>
-									</div>
-								</div>
-								<div id='bitcoin' class="3u 12u(mobile)">
-									<i class="payment icon featured fa-bitcoin"></i>
-									<header>
-										<h3>비트코인</h3>
-									</header>
-									<hr>
-									<div id='bitcoin-order'>
-										<div class="order-box">
-											<header>
-												<h5 class="payment-title">
-													<span id='bitcoin_amount' class='pay-font'></span> 
-													<hr class='padding-custom-5'>
-												</h5>
-											</header>
-											<footer>
-												<input class='payment-input' id='tx_bitcoin' type='text'>
-												<a id='bitcoin_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
-											</footer>
-										</div>
-									</div>
-								</div>
-								<div id='coupon' class="3u 12u(mobile)">
-									<i class="payment icon featured alt fa-barcode"></i>
-									<header>
-										<h3>전자식권</h3>
-									</header>
-									<hr>
-									<div id='coupon-order'>
-										<div class="order-box">
-											<header>
-												<h5 class="payment-title">
-													<span id='coupon_amount' class='pay-font'></span>
-													<hr class='padding-custom-5'>
-												</h5>
-											</header>
-											<footer>
-												<input class='payment-input' id='tx_coupon' type='text'>
-												<a id='coupon_payment' onclick='payment_method(this.id);' class='button order-button'>결제</a>
-											</footer>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
+					</div>	
+					
 				</div>
 			</div>
 	
@@ -151,6 +57,10 @@
 							<section>
 								<header>
 									<h2>Reviews</h2>
+									<div>
+										<input class='review-input' type='text'> 
+										<button id='btn_registe_review' class='review-button'>확인</button>
+									</div>
 								</header>
 								<ul id='reviews'></ul>
 							</section>
@@ -161,6 +71,8 @@
 					</div>
 				</section>
 			</div>
+			
+			
 		</div>
 	</body>
 </html>

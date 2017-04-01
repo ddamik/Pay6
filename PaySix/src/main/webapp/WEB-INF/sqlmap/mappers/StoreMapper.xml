@@ -4,71 +4,58 @@
  
 	<!-- 
 		1. store list
-		2. store ordermethod
+		2. store category
 	-->
 	
-	<select id="store_list_all" resultType="StoreVO">
+	<!-- 1. store list -->
+	<select id="store_all" resultType="StoreVO">
 		select
-			sid,
-			sname,
-			saddr,
-			simgurl
+			store_seq,
+			store_name,
+			store_province,
+			store_city,
+			store_village,
+			store_category,
+			store_tel,
+			store_latitude,
+			store_longitude
 		from
-			storeinfo
+			store_tb
 	</select>
 	
 	
-	<select id="store_list" parameterType="String" resultType="StoreVO">
+	<!-- 2. store category -->
+	<select id="store_category" parameterType="String" resultType="StoreVO">
 		select
-			sid,
-			sname,
-			saddr,
-			simgurl
+			store_seq,
+			store_name,
+			store_province,
+			store_city,
+			store_village,
+			store_category,
+			store_tel,
+			store_latitude,
+			store_longitude
 		from
-			storeinfo
+			store_tb
 		where
-			s_category = #{s_category}
-			
-	</select>
+			store_category = #{store_category}
+	</select>	
 	
-	<select id="store_order_info" parameterType="String" resultType="StoreVO">
+	<!-- 3. store name -->
+	<select id="store_name" parameterType="int" resultType="StoreVO">
 		select
-			order_method,
-			bitcoin_addr
+			store_name,
+			store_category,
+			store_province,
+			store_city,
+			store_village,
+			store_tel,
+			store_latitude,
+			store_longitude
 		from
-			storeinfo
+			store_tb
 		where
-			sid = #{sid}
+			store_seq = #{store_seq}
 	</select>
-	
-	
-	<select id="get_store_name" parameterType="String" resultType="StoreVO">
-		select
-			sname
-		from
-			storeinfo
-		where
-			sid = #{sid}
-	</select>
-	
-	<insert id="registe_store" parameterType="StoreVO">
-		insert
-			into
-		storeinfo(
-			sid,
-			sname,
-			saddr,
-			stel,
-			simgurl,
-			rname
-		)
-		values(
-			#{sid},
-			#{sname},
-			#{saddr},
-			#{stel},
-			#{simgurl},
-			#{rname}
-		)
-	</insert>
 </mapper>

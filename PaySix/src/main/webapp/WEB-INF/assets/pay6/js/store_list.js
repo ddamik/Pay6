@@ -1,53 +1,57 @@
-var category = "";
-var west = "west";
-var korean = "korean";
-var chinese = "chinese";
-var all = "all";
-
 $(document).ready(function(){
 
-	category = all;
-	update_list(category);
+	var store_category = "all";
+	update_list(store_category);
 	
 });
 
-function update_list(obj){
+function update_list(store_category){
+		
+	$("#store_list").empty();
 	
-	category = obj;
-	$("#one").empty();
-	
+	var dataForm = "";
+	dataForm += "store_category=" + store_category
 	$.ajax({
-		url: '/store/list?category=' + category
+		url: '/store/list',
+		type: 'get',
+		data:{
+			'store_category': store_category
+		}			
 	}).done(function(data){
+		console.log(data);
 		if( data == null ){
 			alert("등록된 상점이 없습니다.");
 		}else{
-			$.each(data, function(index, store){			
-
-				var url = "../images/productinfo/" + store.etc1 + ".jpg";
-				console.log(url);
+			$.each(data, function(index, store){
+				
+				/**
+				 * 	Store Information
+				 */
+				var url = "../images/storeinfo/" + store.store_etc1 + ".jpg";
 				var str = "<article>"
 							+ "<span class='image'>"
 								+ "<img src='" + url + "' alt=''/>"
 							+ "</span>"
 							+ "<header class='major'>"
 								+ "<h3>"
-									+ "<a onclick='product_list(" + store.sid + ");' class='link cursor'>" + store.etc2 + "</a>"
+									+ "<a onclick='product_list(" + store.store_seq + ");' class='link cursor'>" + store.store_name + "</a>"
 								+ "</h3>"
-								+ "<p><span class='store-name'>" + store.sname + "</span>&nbsp;&nbsp;현재 위치로부터 00m</p>"
-								
+								+ "<p><span class='store-name'>" + store.store_province + " " + store.store_city + " " + store.store_village + "</span></p>"								
 							+ "</header>"
 						+ "</article>";
-				$("#one").append(str);
+				$("#store_list").append(str);
 				
+				
+				/**
+				 * 	Store Image
+				 */
 				var $tiles = $('.tiles > article');
 				$tiles.each(function() {
-
 					// <span><img>를 사용한다.
 					var $this = $(this),
 						$image = $this.find('.image'), $img = $image.find('img'),
 						$link = $this.find('.link'), x;
-
+					
 						// Set image.
 						$this.css('background-image', 'url(' + $img.attr('src') + ')');
 
@@ -56,12 +60,13 @@ function update_list(obj){
 
 						// Hide original.
 						$image.hide();
-				});	// tiles				
+				});	// tiles			
+				
 			});
 		}
 	});
 }
 
-function product_list(sid){
-	location.href="/page/product_list?sid=" + sid;
+function product_list(store_seq){
+	location.href="/page/product?sq=" + store_seq;
 }
