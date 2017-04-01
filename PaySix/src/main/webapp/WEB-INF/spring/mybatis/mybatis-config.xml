@@ -10,8 +10,7 @@
 		<typeAlias type="com.fintech.paysix.vo.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.fintech.paysix.vo.StoreVO" alias="StoreVO"/>
 		<typeAlias type="com.fintech.paysix.vo.OwnerOrderVO" alias="OwnerOrderVO"/>
-		<typeAlias type="com.fintech.paysix.vo.TestVO" alias="TestVO"/>
-		<typeAlias type="com.fintech.paysix.vo.OrderVO" alias="OrderVO"/>				
+		<typeAlias type="com.fintech.paysix.vo.TestVO" alias="TestVO"/>				
 	</typeAliases>
 	
     <typeHandlers>
