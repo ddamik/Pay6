@@ -16,6 +16,11 @@
 	</properties>
 	<dependencies>
 
+
+		<!-- RestTemplate --> 
+
+
+
 		<dependency>
 			<groupId>io.blocko</groupId>
 			<artifactId>coinstack</artifactId>
@@ -32,14 +37,15 @@
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>retrofit</artifactId>
-			<version>2.1.0</version>
+			<version>2.0.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>converter-gson</artifactId>
-			<version>2.1.0</version>
+			<version>2.0.2</version>
 		</dependency>
+
 
 		<!-- [ Gson ] -->
 		<dependency>
