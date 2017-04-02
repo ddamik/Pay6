@@ -1,6 +1,7 @@
 package com.fintech.paysix.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,52 +17,18 @@ public class ProductDao {
 	private SqlSessionTemplate session;
 	
 	
-	
-	/*
-	 * 	1. 인기메뉴 Top3
-	 *  2. Top3 제외 메뉴
-	 *  3. 메뉴 상세보기
-	 *  4. 결제 수 올리기
-	 *  5. 조회 수 올리기
-	 */
-	
-	public ProductVO product_detail(String pid) throws SQLException{
-		return session.selectOne("ProductMapper.product_detail", pid);
+	//	1. product list	
+	public List<ProductVO> productList(int product_store_fk) throws SQLException {
+		return session.selectList("ProductMapper.product_all", product_store_fk);
 	}
 	
-	// 1. 인기메뉴 Top3
-	public List<ProductVO> popular_list(String sid) throws SQLException {
-		return session.selectList("ProductMapper.popular_list", sid);
+	//	2. insert product
+	public int insertProduct(ProductVO product) throws SQLException {
+		return session.insert("ProductMapper.product_insert", product);
 	}
 	
-	
-	// 2. Top3 제외 메뉴
-	public List<ProductVO> all_list(String sid) throws SQLException {
-		return session.selectList("ProductMapper.all_list", sid);
+	//	3. product detail
+	public ProductVO productDetail(HashMap<String, String> map) throws SQLException {
+		return session.selectOne("ProductMapper.product_detail", map);
 	}
-	
-	
-	// 3. 메뉴 상세보기
-	public ProductVO detail(String pid) throws SQLException{
-		return session.selectOne("ProductMapper.detail", pid);
-	}
-	
-	
-	
-	// 4. 결제 수 올리기
-	public int pcount_up(String pid) throws SQLException {
-		return session.update("ProductMapper.pcount_up", pid);
-	}
-	
-	
-	
-	// 5. 조회 수 올리기
-	public int vcount_up(String pid) throws SQLException {
-		return session.update("ProductMapper.vcount_up", pid);
-	}	
-	
-	// 6. 리뷰 수 올리기
-	public int rcount_up(String pid) throws SQLException {
-		return session.update("ProductMapper.rcount_up", pid);
-	}		
 }

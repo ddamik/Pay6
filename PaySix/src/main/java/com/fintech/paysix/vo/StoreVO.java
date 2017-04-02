@@ -1,318 +1,166 @@
 package com.fintech.paysix.vo;
 
-import java.util.Date;
-
 public class StoreVO {
 
-	private String sid; // 업체번호
-	private String sname; // 업체명
-	private String saddr; // 업체주소
-	private String stel; // 업체전화
-	private String simgurl; // 업체대표이미지
-	private String rname; // 등록자명
-	private Date intime; // 작성일시 default: current_timestamp
-	private String order_method; // 주문방법: "0": 테이블 + 테이크아웃 / "1": 테이블만 / "2":
-									// 테이크 아웃만
-	private String bitcoin_addr; // 비트코인 주소
-	private double s_lat;
-	private double s_lon;
-	private double s_distance;
-	private String s_province;
-	private String s_category;
-	private String etc1;
-	private String etc2;
-	private int hackaton;
-	private int market;
+	private int store_seq;
+	private String store_name;
+	private String store_province;
+	private String store_city;
+	private String store_village;
+	private String store_category;
+	private int store_user_fk;
+	private String store_tel;
+	private String store_bank;
+	private String store_account;
+	private double store_latitude;
+	private double store_longitude;
+	private String store_etc1;
+	private String store_etc2;
 
 	public StoreVO() {
 		super();
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname) {
+	public StoreVO(int store_seq, String store_name, String store_province, String store_city, String store_village,
+			String store_category, int store_user_fk, String store_tel, String store_bank, String store_account,
+			double store_latitude, double store_longitude, String store_etc1, String store_etc2) {
 		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-	}
- 
-
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String s_province, int hackaton, int market) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.s_province = s_province;
-		this.hackaton = hackaton;
-		this.market = market;
+		this.store_seq = store_seq;
+		this.store_name = store_name;
+		this.store_province = store_province;
+		this.store_city = store_city;
+		this.store_village = store_village;
+		this.store_category = store_category;
+		this.store_user_fk = store_user_fk;
+		this.store_tel = store_tel;
+		this.store_bank = store_bank;
+		this.store_account = store_account;
+		this.store_latitude = store_latitude;
+		this.store_longitude = store_longitude;
+		this.store_etc1 = store_etc1;
+		this.store_etc2 = store_etc2;
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-		this.intime = intime;
+	public int getStore_seq() {
+		return store_seq;
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
-			String order_method, String bitcoin_addr) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-		this.intime = intime;
-		this.order_method = order_method;
-		this.bitcoin_addr = bitcoin_addr;
+	public void setStore_seq(int store_seq) {
+		this.store_seq = store_seq;
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
-			String order_method, String bitcoin_addr, double s_lat, double s_lon, double s_distance) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-		this.intime = intime;
-		this.order_method = order_method;
-		this.bitcoin_addr = bitcoin_addr;
-		this.s_lat = s_lat;
-		this.s_lon = s_lon;
-		this.s_distance = s_distance;
+	public String getStore_name() {
+		return store_name;
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
-			String order_method, String bitcoin_addr, double s_lat, double s_lon, double s_distance, String s_province,
-			String s_category, String etc1, String etc2) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-		this.intime = intime;
-		this.order_method = order_method;
-		this.bitcoin_addr = bitcoin_addr;
-		this.s_lat = s_lat;
-		this.s_lon = s_lon;
-		this.s_distance = s_distance;
-		this.s_province = s_province;
-		this.s_category = s_category;
-		this.etc1 = etc1;
-		this.etc2 = etc2;
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
-			String order_method, String bitcoin_addr, double s_lat, double s_lon, double s_distance, String s_province,
-			String s_category, String etc1, String etc2, int hackaton) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-		this.intime = intime;
-		this.order_method = order_method;
-		this.bitcoin_addr = bitcoin_addr;
-		this.s_lat = s_lat;
-		this.s_lon = s_lon;
-		this.s_distance = s_distance;
-		this.s_province = s_province;
-		this.s_category = s_category;
-		this.etc1 = etc1;
-		this.etc2 = etc2;
-		this.hackaton = hackaton;
+	public String getStore_province() {
+		return store_province;
 	}
 
-	public StoreVO(String sid, String sname, String saddr, String stel, String simgurl, String rname, Date intime,
-			String order_method, String bitcoin_addr, double s_lat, double s_lon, double s_distance, String s_province,
-			String s_category, String etc1, String etc2, int hackaton, int market) {
-		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.saddr = saddr;
-		this.stel = stel;
-		this.simgurl = simgurl;
-		this.rname = rname;
-		this.intime = intime;
-		this.order_method = order_method;
-		this.bitcoin_addr = bitcoin_addr;
-		this.s_lat = s_lat;
-		this.s_lon = s_lon;
-		this.s_distance = s_distance;
-		this.s_province = s_province;
-		this.s_category = s_category;
-		this.etc1 = etc1;
-		this.etc2 = etc2;
-		this.hackaton = hackaton;
-		this.market = market;
+	public void setStore_province(String store_province) {
+		this.store_province = store_province;
 	}
 
-	public String getSid() {
-		return sid;
+	public String getStore_city() {
+		return store_city;
 	}
 
-	public void setSid(String sid) {
-		this.sid = sid;
+	public void setStore_city(String store_city) {
+		this.store_city = store_city;
 	}
 
-	public String getSname() {
-		return sname;
+	public String getStore_village() {
+		return store_village;
 	}
 
-	public void setSname(String sname) {
-		this.sname = sname;
+	public void setStore_village(String store_village) {
+		this.store_village = store_village;
 	}
 
-	public String getSaddr() {
-		return saddr;
+	public String getStore_category() {
+		return store_category;
 	}
 
-	public void setSaddr(String saddr) {
-		this.saddr = saddr;
+	public void setStore_category(String store_category) {
+		this.store_category = store_category;
 	}
 
-	public String getStel() {
-		return stel;
+	public int getStore_user_fk() {
+		return store_user_fk;
 	}
 
-	public void setStel(String stel) {
-		this.stel = stel;
+	public void setStore_user_fk(int store_user_fk) {
+		this.store_user_fk = store_user_fk;
 	}
 
-	public String getSimgurl() {
-		return simgurl;
+	public String getStore_tel() {
+		return store_tel;
 	}
 
-	public void setSimgurl(String simgurl) {
-		this.simgurl = simgurl;
+	public void setStore_tel(String store_tel) {
+		this.store_tel = store_tel;
 	}
 
-	public String getRname() {
-		return rname;
+	public String getStore_bank() {
+		return store_bank;
 	}
 
-	public void setRname(String rname) {
-		this.rname = rname;
+	public void setStore_bank(String store_bank) {
+		this.store_bank = store_bank;
 	}
 
-	public Date getIntime() {
-		return intime;
+	public String getStore_account() {
+		return store_account;
 	}
 
-	public void setIntime(Date intime) {
-		this.intime = intime;
+	public void setStore_account(String store_account) {
+		this.store_account = store_account;
 	}
 
-	public String getOrder_method() {
-		return order_method;
+	public double getStore_latitude() {
+		return store_latitude;
 	}
 
-	public void setOrder_method(String order_method) {
-		this.order_method = order_method;
+	public void setStore_latitude(double store_latitude) {
+		this.store_latitude = store_latitude;
 	}
 
-	public String getBitcoin_addr() {
-		return bitcoin_addr;
+	public double getStore_longitude() {
+		return store_longitude;
 	}
 
-	public void setBitcoin_addr(String bitcoin_addr) {
-		this.bitcoin_addr = bitcoin_addr;
+	public void setStore_longitude(double store_longitude) {
+		this.store_longitude = store_longitude;
 	}
 
-	public double getS_lat() {
-		return s_lat;
+	public String getStore_etc1() {
+		return store_etc1;
 	}
 
-	public void setS_lat(double s_lat) {
-		this.s_lat = s_lat;
+	public void setStore_etc1(String store_etc1) {
+		this.store_etc1 = store_etc1;
 	}
 
-	public double getS_lon() {
-		return s_lon;
+	public String getStore_etc2() {
+		return store_etc2;
 	}
 
-	public void setS_lon(double s_lon) {
-		this.s_lon = s_lon;
-	}
-
-	public double getS_distance() {
-		return s_distance;
-	}
-
-	public void setS_distance(double s_distance) {
-		this.s_distance = s_distance;
-	}
-
-	public String getEtc1() {
-		return etc1;
-	}
-
-	public void setEtc1(String etc1) {
-		this.etc1 = etc1;
-	}
-
-	public String getEtc2() {
-		return etc2;
-	}
-
-	public void setEtc2(String etc2) {
-		this.etc2 = etc2;
-	}
-
-	public String getS_province() {
-		return s_province;
-	}
-
-	public void setS_province(String s_province) {
-		this.s_province = s_province;
-	}
-
-	public String getS_category() {
-		return s_category;
-	}
-
-	public void setS_category(String s_category) {
-		this.s_category = s_category;
-	}
-
-	public int getHackaton() {
-		return hackaton;
-	}
-
-	public void setHackaton(int hackaton) {
-		this.hackaton = hackaton;
-	}
-
-	public int getMarket() {
-		return market;
-	}
-
-	public void setMarket(int market) {
-		this.market = market;
+	public void setStore_etc2(String store_etc2) {
+		this.store_etc2 = store_etc2;
 	}
 
 	@Override
 	public String toString() {
-		return "StoreVO [sid=" + sid + ", sname=" + sname + ", saddr=" + saddr + ", stel=" + stel + ", simgurl="
-				+ simgurl + ", rname=" + rname + ", intime=" + intime + ", order_method=" + order_method
-				+ ", bitcoin_addr=" + bitcoin_addr + ", s_lat=" + s_lat + ", s_lon=" + s_lon + ", s_distance="
-				+ s_distance + ", s_province=" + s_province + ", s_category=" + s_category + ", etc1=" + etc1
-				+ ", etc2=" + etc2 + ", hackaton=" + hackaton + ", market=" + market + "]";
+		return "StoreVO [store_seq=" + store_seq + ", store_name=" + store_name + ", store_province=" + store_province
+				+ ", store_city=" + store_city + ", store_village=" + store_village + ", store_category="
+				+ store_category + ", store_user_fk=" + store_user_fk + ", store_tel=" + store_tel + ", store_bank="
+				+ store_bank + ", store_account=" + store_account + ", store_latitude=" + store_latitude
+				+ ", store_longitude=" + store_longitude + ", store_etc1=" + store_etc1 + ", store_etc2=" + store_etc2
+				+ "]";
 	}
 
 }

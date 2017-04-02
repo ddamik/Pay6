@@ -1,113 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductMapper">
+ 
 
 	<!-- 
-		1. 인기메뉴 Top3 
-		2. Top3 제외한 메뉴
-		3. 메뉴 상세보기
-		4. 주문 수 올리기
-		5. 조회 수 올리기 
+		1. product all
+		2. insert product
+		3. product detail[order]
 	-->
-<select id="product_detail" parameterType="String" resultType="ProductVO">
-	select
-		pname
-	from
-		productinfo
-	where
-		pid = #{pid}
-</select>
-
-	<!-- 1. 인기메뉴 Top3 -->
-	<select id="popular_list" parameterType="String" resultType="ProductVO">
-		select
-			pid,
-			pname,
-			pprice,
-			pimgurl,
-			pcount,
-			rcount
+	
+	<!-- 1. product all -->
+ 	<select id="product_all" parameterType="int" resultType="ProductVO">
+ 		select
+ 			product_seq,
+ 			product_name,
+ 			product_price,
+ 			product_review_cnt,
+ 			product_purchase_cnt,
+ 			product_view_cnt,
+ 			product_contents,
+ 			product_etc1
 		from
-			productinfo
+			product_tb
 		where
-			sid = #{sid}
+			product_store_fk = #{product_store_fk}
 		order by
-			pcount DESC
-		limit 3
-	</select>
-
-
-
-	<!-- 2. 모든메뉴(Front에서 Top3 메뉴 제외하기) -->
-	<select id="all_list" parameterType="String" resultType="ProductVO">
-		select
-			pid,
-			pname,
-			pprice,
-			pimgurl,
-			pcount,
-			rcount
+			product_purchase_cnt ASC;
+ 	</select>
+ 	
+ 	<!-- 2. insert product -->
+ 	<insert id="product_insert" parameterType="ProductVO">
+ 		insert
+ 			into
+		product_tb(
+			product_store_fk,
+			product_name,
+			product_price,
+			product_etc1
+		)
+		values(
+			#{product_store_fk},
+			#{product_name},
+			#{product_price},
+			#{product_etc1}
+		)			
+ 	</insert>
+ 	
+ 	<!-- 3. product detail[order] -->
+ 	<select id="product_detail" parameterType="hashmap" resultType="ProductVO">
+ 		select
+ 			product_seq,
+			product_store_fk,
+			product_name,
+			product_price,
+			product_review_cnt,
+			product_purchase_cnt,
+			product_view_cnt,
+			product_contents,
+			product_etc1
 		from
-			productinfo
+			product_tb
 		where
-			sid = #{sid}
-		order by
-			pcount DESC
-	</select>
-
-
-
-
-	<!-- 3. 메뉴 상세보기 -->
-	<select id="detail" parameterType="String" resultType="ProductVO">
-		select
-			pid,
-			pname,
-			pprice,
-			pimgurl,
-			rcount,
-			vcount,
-			pcount
-		from
-			productinfo
-		where
-			pid = #{pid}
-	</select>
-	
-	
-	
-	
-	<!-- 4. 주문 수 올리기  -->
-	<update id="pcount_up" parameterType="String">
-		update
-			productinfo
-		set
-			pcount = pcount + 1
-		where
-			pid = #{pid}
-	</update>
-	
-	
-	
-	
-	<!-- 5. 조회 수 올리기 -->
-	<update id="vcount_up" parameterType="String">
-		update
-			productinfo
-		set
-			vcount = vcount + 1
-		where
-			pid = #{pid}
-	</update>	
-	
-	
-	<!-- 6. 리뷰 수 올리기 -->
-	<update id="rcount_up" parameterType="String">
-		update
-			productinfo
-		set
-			rcount = rcount + 1
-		where
-			pid = #{pid}
-	</update>		
+			product_store_fk = #{product_store_fk}
+		and
+			product_seq = #{product_seq}
+ 	</select>
 </mapper>

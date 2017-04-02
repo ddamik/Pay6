@@ -5,12 +5,13 @@
     
     <!-- Mapping Mapper -->
    	<typeAliases>
-		<typeAlias type="com.fintech.paysix.vo.LogVO" alias="LogVO"/>
+		<typeAlias type="com.fintech.paysix.vo.ImgVO" alias="ImgVO"/>
+		<typeAlias type="com.fintech.paysix.vo.OrderVO" alias="OrderVO"/>
 		<typeAlias type="com.fintech.paysix.vo.ProductVO" alias="ProductVO"/>
 		<typeAlias type="com.fintech.paysix.vo.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.fintech.paysix.vo.StoreVO" alias="StoreVO"/>
-		<typeAlias type="com.fintech.paysix.vo.OwnerOrderVO" alias="OwnerOrderVO"/>
-		<typeAlias type="com.fintech.paysix.vo.TestVO" alias="TestVO"/>				
+		<typeAlias type="com.fintech.paysix.vo.UserVO" alias="UserVO"/>
+				
 	</typeAliases>
 	
     <typeHandlers>

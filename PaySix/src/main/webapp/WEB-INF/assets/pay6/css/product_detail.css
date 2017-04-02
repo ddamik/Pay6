@@ -1962,8 +1962,7 @@ ol.default li {
 		padding: 0.65em 0 0.65em 0 !important;
 		width: 100%;
 		text-align: center;
-		font-size: 1.25em;
-		margin: 0.25em 0 0.25em 0;
+		font-size: 1.25em;		
 	}
 	input[type="button"].icon, input[type="submit"].icon, input[type="reset"].icon,
 		button.icon, .button.icon {
@@ -2298,10 +2297,20 @@ ol.default li {
 	margin: 0em 0 1em 0;
 }
 
-.payment-input{
-	width: 100%;
+.review-input{
+	width: 80%;
 	margin-bottom: 5px;
 	border-radius: 5px;
+	float: left;
+	text-align: left;
+}
+.review-button{
+	width: 15%;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	padding: 0px !important;
+	line-height: 1.75em;
+	margin-left: 5px;
 }
 .payment-onnuri{
 	width: 23%;
