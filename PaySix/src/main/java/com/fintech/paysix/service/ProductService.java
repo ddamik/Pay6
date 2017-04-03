@@ -53,6 +53,9 @@ public class ProductService {
 		map.put("product_store_fk", String.valueOf(product_store_fk));
 		map.put("product_seq", String.valueOf(product_seq));
 		
+		//	update view cnt
+		this.updateViewCnt(map);
+		
 		StoreVO store = storeService.storeName(product_store_fk);
 		ProductVO product = productDao.productDetail(map);
 		
@@ -60,6 +63,21 @@ public class ProductService {
 		result.put("store", store);
 		result.put("product", product);
 		return result;
+	}
+	
+	//	4. update view_cnt
+	public int updateViewCnt(HashMap<String, String> map){		
+		return productDao.updateViewCnt(map);
+	}
+	
+	//	5. update purchase cnt
+	public int updatePurchaseCnt(HashMap<String, String> map){
+		return productDao.updatePurchaseCnt(map);
+	}
+	
+	//	6. update review cnt
+	public int updateReviewCnt(HashMap<String, String> map){
+		return productDao.updateReviewCnt(map);
 	}
 	
 	

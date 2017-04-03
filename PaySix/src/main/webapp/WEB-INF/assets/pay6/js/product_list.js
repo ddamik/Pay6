@@ -30,7 +30,7 @@ $(document).ready(function(){
 		$("#store_name").text(data.store.store_name);
 		
 		$.each(data.productList, function(index, product){
-			
+			console.log("[ index ]: " + index + " / " + product.product_name);
 			if( index < 3 ){
 				var url = "../images/productinfo/" + product.product_etc1 + ".jpg";
 	            var str = "<div class='6u 12u(mobile)'>"
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	                        + "<div class=''>"
 	                           + "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-credit-card'></i> " + product.product_purchase_cnt + "</div>"
 	                           + "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-comments-o'></i> " + product.product_review_cnt + "</div>"
-	                           + "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-thumbs-o-up'></i> " + product.product_view_cnt + "</div>"
+	                           + "<div class='background-white product-count 4u 12u(mobile)'><i class='fa fa-eye'></i> " + product.product_view_cnt + "</div>"
 	                        + "</div>"                        
 	                     + "</article>"                     
 	                  + "</div>";      

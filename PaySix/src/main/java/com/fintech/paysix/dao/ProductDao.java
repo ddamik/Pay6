@@ -31,4 +31,19 @@ public class ProductDao {
 	public ProductVO productDetail(HashMap<String, String> map) throws SQLException {
 		return session.selectOne("ProductMapper.product_detail", map);
 	}
+	
+	//	4. update view cnt
+	public int updateViewCnt(HashMap<String, String> map){
+		return session.update("ProductMapper.update_view_cnt", map);
+	}
+	
+	//	5. update purchase cnt
+	public int updatePurchaseCnt(HashMap<String, String> map){
+		return session.update("ProductMapper.update_purchase_cnt", map);
+	}
+	
+	//	6. update review cnt
+	public int updateReviewCnt(HashMap<String, String> map){
+		return session.update("ProductMapper.update_review_cnt", map);
+	}
 }

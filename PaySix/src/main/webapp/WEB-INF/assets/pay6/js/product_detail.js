@@ -3,9 +3,14 @@ var tmp2 = tmp[1].split("&");
 var store_seq = tmp2[0];
 var product_seq = tmp[2];
 
+var amount = 0;
+var user_seq = 0;
+var user_name = "";
+var current_review_seq = 0;
 $(document).ready(function() {
 		
-	  
+	initUser();	
+	
 	var IMP = window.IMP;
 	IMP.init('imp96588755')
  	
@@ -20,6 +25,7 @@ $(document).ready(function() {
 	}).done(function(data){
 		$("#store_name").text(data.store.store_name);
 		
+		amount = data.product.product_price;
 		var url = "../images/productinfo/" + data.product.product_etc1 + ".jpg";
 		var str = "<a class='image featured'>"
 					+ "<img src=" + url + " alt='' /></a>"
@@ -40,17 +46,44 @@ $(document).ready(function() {
 		});
 	});
 	
-	
+	update_reviews();
 
 	$("#btn_registe_review").click(function(){
-		
+		insert_review();
 	});
 });
 
+function initUser(){
+	user_name = "이재익";
+}
  
 
 function payment(){
 	
+	var order_no = 0;
+	var order_store_fk = store_seq;
+	
+	var orderForm = "";
+	orderForm += "order_no=" + order_no;
+	orderForm += "&order_store_fk=" + order_store_fk;
+	orderForm += "&order_product_fk=" + product_seq;
+	orderForm += "&order_product_price=" + amount;
+	orderForm += "&order_user_fk=" + user_seq;
+	
+	
+	console.log("[ OrderForm ]: " + orderForm);
+	$.ajax({
+		url: '/order/payment',
+		type: 'post',
+		data: orderForm		
+	}).done(function(result){
+		if( result > 0 ){
+			alert("결제완료");
+		}else{
+			alert("결제실패");
+		}
+	});
+	/*
 	IMP.request_pay({
 	    pg : 'kakao',
 	    pay_method : 'card',
@@ -96,13 +129,62 @@ function payment(){
 	        alert(msg);
 	    }
 	});
+	*/
+}
+ 
+
+function update_reviews(){
+	
+	var review_seq = 0;
+	var reviewForm = "";
+	reviewForm = "review_seq=" + review_seq;
+	reviewForm += "&review_product_fk=" + product_seq;
+	
+	$.ajax({
+		url: '/review/list',
+		type: 'get',
+		data: reviewForm
+	}).done(function(data){
+		$.each(data, function(index, review){
+			var str = "<tr><td class='review-user'>" + review.review_user_fk + "</td><td class='review-user'>" + dateToYYYYMMDD(review.review_savetime) + "</tr>"
+			+ "<tr><td colspan='2' class='review_contents'>" + review.review_contents + "</td></tr>"
+			+ "<tr><td colspan='2'><hr></td></tr>";			
+			$("#reviews").append(str);
+		});
+	});
 }
 
-function order(position){
-	//	location.href="/page/order?pid=" + pid + "?position=" + position;
+
+function insert_review(){
+	
+	var review_contents = $("#review_contents").val();
+	
+	var reviewForm = "";
+	reviewForm = "review_product_fk=" + product_seq;
+	reviewForm += "&review_user_fk=" + user_seq;
+	reviewForm += "&review_contents=" + review_contents;
+	reviewForm += "&store_seq=" + store_seq;
+	
+	$.ajax({
+		url: '/review/insert',
+		type: 'post',
+		data: reviewForm
+	}).done(function(result){		
+		if(result > 0){
+			var str = "<tr><td class='review-user'>" + user_name + "</td><td class='review-user'>" + dateToYYYYMMDD(new Date()) + "</tr>"
+				+ "<tr><td colspan='2' class='review_contents'>" + review_contents + "</td></tr>"
+				+ "<tr><td colspan='2'><hr></td></tr>";			
+			$("#reviews").prepend(str);
+		}else{
+			alert("댓글등록 실패!!");
+		}
+		$("#review_contents").val("");
+	});
 }
 
  
+
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";
 }
@@ -114,7 +196,7 @@ function dateToYYYYMMDD(intime){
        num = num + '';
        return num.length < 2 ? '0' + num : num;
    }
-   return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+   return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate()) + " " + pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) ;
 }
 
 

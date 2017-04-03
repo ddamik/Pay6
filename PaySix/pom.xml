@@ -14,38 +14,14 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>	<!-- 기본경로 변경 -->
 	</properties>
+
 	<dependencies>
-
-
-		<!-- RestTemplate --> 
-
-
-
+	
 		<dependency>
 			<groupId>io.blocko</groupId>
 			<artifactId>coinstack</artifactId>
 			<version>3.0.23</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.siot.iamport</groupId>
-			<artifactId>iamport-rest-client</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>com.squareup.retrofit2</groupId>
-			<artifactId>retrofit</artifactId>
-			<version>2.0.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.squareup.retrofit2</groupId>
-			<artifactId>converter-gson</artifactId>
-			<version>2.0.2</version>
-		</dependency>
-
 
 		<!-- [ Gson ] -->
 		<dependency>
@@ -91,13 +67,6 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${org.springframework-version}</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -111,12 +80,7 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
+
 
 
 

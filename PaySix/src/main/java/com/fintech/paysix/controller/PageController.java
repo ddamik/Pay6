@@ -10,12 +10,20 @@ public class PageController {
 	/**
 	 * 	[	Page url	]
 	 * 
-	 * 	1. /page/store: 1store list page
+	 * 	0. /: index
+	 * 	1. /page/store: store list page
 	 *	2. /page/product: product list page
 	 *	3. /page/order:	product detail & order 
 	 * 
 	 */
 
+	
+	// 0. index
+	@RequestMapping(value="/")
+	public ModelAndView index(){
+		return new ModelAndView("/html/index");
+	}
+	
 	// 1. store list page
 	@RequestMapping(value = "/page/store")
 	public ModelAndView store_list() {

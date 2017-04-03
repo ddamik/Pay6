@@ -2320,3 +2320,19 @@ ol.default li {
 .align-center{
 	align: center;
 }
+
+
+.review-user{
+	color: #ffffff;
+	font: inherit;	
+	font-size: 100%;
+	font-weight: bold;
+}
+.review_contents{
+	padding-bottom: 5px;
+	color: #ffffff;
+	font: inherit;	
+	font-size: 100%;
+	font-weight: bold;
+	
+}

@@ -22,7 +22,6 @@ public class StoreController {
 	@Autowired
 	private StoreService storeService;
 	private Gson gson = new Gson();
-
 	
 	/**
 	 * 	1. store list

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewMapper">
+ 
+	<!-- 
+		1. insert review
+		2. review list		
+	-->
+	
+	<!-- 1. insert review -->
+	<insert id="insert_review" parameterType="ReviewVO">
+		insert
+			into
+		review_tb(
+			review_product_fk,
+			review_user_fk,
+			review_contents
+		)
+		values(
+			#{review_product_fk},
+			#{review_user_fk},
+			#{review_contents}
+		)
+	</insert>	 
+	
+	
+	<!-- 2. review list -->
+	<select id="review_list" parameterType="ReviewVO" resultType="ReviewVO">
+		select
+			review_seq,
+			review_user_fk,
+			review_savetime,
+			review_contents
+		from
+			review_tb
+		where
+			review_product_fk = #{review_product_fk}
+		and
+			review_seq > #{review_seq}
+		order by
+			review_seq DESC
+		limit 5;
+	</select>
+</mapper>

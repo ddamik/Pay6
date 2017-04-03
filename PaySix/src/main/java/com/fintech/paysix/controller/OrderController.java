@@ -3,32 +3,40 @@ package com.fintech.paysix.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fintech.paysix.service.OrderService;
+import com.google.gson.Gson;
 
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.response.AccessToken;
-import com.siot.IamportRestClient.response.IamportResponse;
+//
+//import com.siot.IamportRestClient.IamportClient;
+//import com.siot.IamportRestClient.response.AccessToken;
+//import com.siot.IamportRestClient.response.IamportResponse;
 
 @Controller
 public class OrderController {
 
+	
+	@Autowired
+	private OrderService orderService;
+	private Gson gson = new Gson();
+	
 	@ResponseBody
 	@RequestMapping(value = "/order/complete", method = RequestMethod.POST, produces = "application/json;text/plain;charset=UTF-8")
 	public String payment(HttpServletRequest request) {
-
-		String test_api_key = "5592113990569795";
-		String test_api_secret = "qLigXLFBK44nVjwFKVGZVK1vpjMAdEGEqYVnJAZuF3SAnog7kX7fH8L7sxIFcojCne06PZBu3t4rSkyd";
-		IamportClient client = new IamportClient(test_api_key, test_api_secret);
-		
-		IamportResponse<AccessToken> auth_response = client.getAuth();
-		System.out.println(auth_response.getResponse());
-		System.out.println(auth_response.getResponse().getToken());
-		
+//
+//		String test_api_key = "5592113990569795";
+//		String test_api_secret = "qLigXLFBK44nVjwFKVGZVK1vpjMAdEGEqYVnJAZuF3SAnog7kX7fH8L7sxIFcojCne06PZBu3t4rSkyd";
+//		IamportClient client = new IamportClient(test_api_key, test_api_secret);
+//		
+//		IamportResponse<AccessToken> auth_response = client.getAuth();
+//		System.out.println(auth_response.getResponse());
+//		System.out.println(auth_response.getResponse().getToken());
+//		
 		
 		//
 		// String imp_uid = request.getParameter("imp_uid");
@@ -110,4 +118,15 @@ public class OrderController {
 		return null;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/order/payment", method = RequestMethod.POST, produces = "application/json;text/plain;charset=UTF-8")
+	public String orderPayment(HttpServletRequest request) throws NumberFormatException {
+		int order_no = Integer.parseInt(request.getParameter("order_no"));
+		int order_store_fk = Integer.parseInt(request.getParameter("order_store_fk"));
+		int order_product_fk = Integer.parseInt(request.getParameter("order_product_fk"));
+		int order_product_price = Integer.parseInt(request.getParameter("order_product_price"));
+		int order_user_fk = Integer.parseInt(request.getParameter("order_user_fk"));
+		
+		return gson.toJson(orderService.orderPayment(order_no, order_store_fk, order_product_fk, order_product_price, order_user_fk));
+	}
 }

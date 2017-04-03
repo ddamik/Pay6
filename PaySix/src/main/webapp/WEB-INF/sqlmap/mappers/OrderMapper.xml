@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderMapper">
+ 
+
+	<!-- 
+		1. insert order
+	-->
+	
+	<insert id="insert_order" parameterType="OrderVO">
+		insert
+			into
+		order_tb(
+			order_no,
+			order_store_fk,
+			order_product_fk,
+			order_product_price,
+			order_user_fk
+		)
+		values(
+			#{order_no},
+			#{order_store_fk},
+			#{order_product_fk},
+			#{order_product_price},
+			#{order_user_fk}
+		)
+	</insert>
+</mapper>
